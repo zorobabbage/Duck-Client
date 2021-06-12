@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nuxt-link-exact-active {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(
+    90deg,
+    #fdc70c 0.21%,
+    #f9ac15 37.48%,
+    #ef6a2b 60.61%,
+    #ed683c 78.59%,
+    #e93e3a 99.06%
+  ) 1;
+}
+
+.gradient-underline::after {
+  transition: border .3s;
+}
