@@ -13,7 +13,3 @@
     #e93e3a 99.06%
   ) 1;
 }
-
-.gradient-underline::after {
-  transition: border .3s;
-}
