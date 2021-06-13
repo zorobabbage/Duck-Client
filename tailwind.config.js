@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   mode: 'jit',
   purge: [
@@ -9,7 +11,15 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        zilliqa: 'rgba(41, 204, 196, 1)',
+        'duck-yellow': '#FDC70C'
+      },
+      fontFamily: {
+        sans: ['Quicksand', ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
   variants: {
     extend: {}
