@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col w-full justify-evenly lg:flex-row">
-    <RoadmapDuck img-src="running-duck-1.png" img-alt="Duck walking">
+    <RoadmapDuck img="running-duck-1.png" alt="Duck walking">
       <template slot="title">
         Q1
       </template>
@@ -8,7 +8,7 @@
         <P>Token mint</P>
       </template>
     </RoadmapDuck>
-    <RoadmapDuck img-src="running-duck-1.png" img-alt="Duck walking" class="mt-8 lg:mt-0">
+    <RoadmapDuck img="running-duck-1.png" alt="Duck walking" class="mt-8 lg:mt-0">
       <template slot="title">
         Q2
       </template>
@@ -19,7 +19,7 @@
         <P>Duck Sniper</P>
       </template>
     </RoadmapDuck>
-    <RoadmapDuck img-src="running-duck-2.png" img-alt="Duck starting to sprint" class="mt-8 lg:mt-0">
+    <RoadmapDuck img="running-duck-2.png" alt="Duck starting to sprint" class="mt-8 lg:mt-0">
       <template slot="title">
         Q3
       </template>
@@ -29,7 +29,7 @@
         <P>ZilLotto</P>
       </template>
     </RoadmapDuck>
-    <RoadmapDuck img-src="running-duck-3.png" img-alt="Duck starting to sprint" class="mt-8 lg:mt-0">
+    <RoadmapDuck img="running-duck-3.png" alt="Duck starting to sprint" class="mt-8 lg:mt-0">
       <template slot="title">
         Q4
       </template>

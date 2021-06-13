@@ -4,9 +4,9 @@
       <slot name="title" />
     </H2>
     <img
-      :src="require(`~/assets/images/${imgSrc}`)"
+      :src="require(`~/assets/images/${img}`)"
       class="w-48"
-      :alt="imgAlt"
+      :alt="alt"
     >
     <div class="flex flex-col items-center">
       <slot name="items" />
@@ -17,11 +17,11 @@
 <script>
 export default {
   props: {
-    imgSrc: {
+    img: {
       type: String,
       required: true
     },
-    imgAlt: {
+    alt: {
       type: String,
       required: true
     }
