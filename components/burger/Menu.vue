@@ -33,6 +33,9 @@
         </div>
         <Socials class="w-full" />
         <div class="flex flex-col justify-between h-full py-8">
+          <BurgerItem to="/#home" @click="show = false">
+            Home
+          </BurgerItem>
           <BurgerItem to="/#new-ducks" @click="show = false">
             Newly Minted Ducks
           </BurgerItem>
