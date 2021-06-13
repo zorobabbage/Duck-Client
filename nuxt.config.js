@@ -23,7 +23,13 @@ export default {
   plugins: ['~/plugins/breakpoint.client.js', '~/plugins/breakpoint.server.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: {
+    dirs: [
+      '~/components',
+      '~/components/sections',
+      '~/components/base'
+    ]
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
