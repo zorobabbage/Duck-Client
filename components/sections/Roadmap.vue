@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col w-full justify-evenly lg:flex-row">
-    <RoadmapDuck img="running-duck-1.png" alt="Duck walking">
+    <RoadmapDuck img="standing-duck.png" alt="Duck walking">
       <template slot="title">
         Q1
       </template>
