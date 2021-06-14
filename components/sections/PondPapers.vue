@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col items-center lg:flex-row lg:justify-evenly">
     <div class="flex flex-col justify-center items-center lg:w-1/3">
-      <Link href="#">
+      <Link target="_blank" href="https://home.duck.community/docs/duck-nfd-pondpaper.pdf">
         <H2>NFDs</H2>
       </Link>
     </div>
