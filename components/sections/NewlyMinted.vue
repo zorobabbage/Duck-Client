@@ -12,7 +12,7 @@
         class="lg:w-48 xl:w-64 2xl:w-80"
       >
     </div>
-    <Link href="#" class="mt-8">
+    <Link target="_blank" href="https://testingtheducks.com/duckstore" class="mt-8">
       Show me some more duckies please
     </Link>
   </section>
