@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar v-if="$breakpoint.is !== 'sm'" />
-    <BurgerMenu v-if="$breakpoint.is === 'sm'" />
+    <NavBar v-if="$breakpoint.is !== 'sm' && $breakpoint.is !== 'md'" />
+    <BurgerMenu v-if="$breakpoint.is === 'sm' || $breakpoint.is === 'md'" />
     <Nuxt />
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   head: {
     bodyAttrs: {
-      class: 'bg-blue-100'
+      class: 'bg-gradient-to-b from-blue-200 to-blue-50'
     }
   }
 }
