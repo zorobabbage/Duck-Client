@@ -3,9 +3,10 @@
     {{ $breakpoint }}
     <Hero id="#home" class="max-w-[2400px]" />
     <NewlyMinted id="#new-ducks" class="mt-12 lg:mt-24" />
-    <WhatTheDuck id="#what-the-duck" class="mt-4 max-w-screen-2xl lg:mt-24" />
-    <Roadmap id="#roadmap" class="max-w-screen-2xl mt-24" />
-    <Tokenomics id="#tokenomics" class="m-4 max-w-screen-2xl mt-24" />
+    <WhatTheDuck id="#what-the-duck" class="mt-4 w-full max-w-screen-2xl lg:mt-24" />
+    <Roadmap id="#roadmap" class="w-full max-w-screen-2xl mt-24" />
+    <Tokenomics id="#tokenomics" class="w-full max-w-screen-2xl mt-24" />
+    <PondPapers id="#pond-papers" class="w-full max-w-screen-2xl mt-24" />
   </div>
 </template>
 
