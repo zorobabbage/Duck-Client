@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col lg:flex-row">
-    <article class="flex flex-col lg:w-1/2">
+    <article class="flex flex-col m-4 lg:w-1/2">
       <H2>Ser pls how many duckos?</H2>
       <P>
         $DUCK has a total supply of 420.69, with a circulating supply of (pull

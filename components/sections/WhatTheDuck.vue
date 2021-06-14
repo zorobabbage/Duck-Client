@@ -7,7 +7,7 @@
       alt="Duck with a question mark"
       class="lg:w-1/2"
     >
-    <article class="flex flex-col items-center justify-center lg:w-1/2">
+    <article class="flex flex-col items-center justify-center lg:m-4 lg:w-1/2">
       <H2 class="self-start">
         What the duck?
       </H2>
