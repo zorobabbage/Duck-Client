@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar v-if="$breakpoint.is !== 'sm' && $breakpoint.is !== 'md'" />
-    <BurgerMenu v-if="$breakpoint.is === 'sm' || $breakpoint.is === 'md'" />
+    <BurgerMenu v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'" />
+    <NavBar v-else />
     <Nuxt />
   </div>
 </template>
@@ -11,6 +11,14 @@ export default {
   head: {
     bodyAttrs: {
       class: 'bg-gradient-to-b from-blue-200 to-blue-50'
+    }
+  },
+  computed: {
+    breakpoint () {
+      if (process.client) {
+        return this.$breakpoint
+      }
+      return { is: '' }
     }
   }
 }
