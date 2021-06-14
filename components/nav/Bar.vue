@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="fixed w-full p-2 bg-gray-100 flex justify-center">
     <NavItem to="/#home">
       Home
     </NavItem>
