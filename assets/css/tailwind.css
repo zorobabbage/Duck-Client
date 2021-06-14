@@ -18,13 +18,14 @@
 .text-duck-gradient {
   background: linear-gradient(
     180deg,
-    #e93e3a 0%,
-    #f7941d 17.71%,
-    #faaa16 22.4%,
-    #fdc70c 28.12%,
-    #ed683c 28.13%,
+    #e93e3a 20%,
+    #ed683c 35%,
+    #f7941d 50%,
+    #faaa16 65%,
+    #fdc70c 80%,
     #fdc70c 100%
   );
+
   color: transparent;
   background-clip: text;
 }
