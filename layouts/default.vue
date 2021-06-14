@@ -10,7 +10,7 @@
 export default {
   head: {
     bodyAttrs: {
-      class: 'bg-gradient-to-b from-blue-200 to-blue-50'
+      class: 'bg-gray-50'
     }
   },
   computed: {
