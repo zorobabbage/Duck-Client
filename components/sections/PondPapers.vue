@@ -16,7 +16,7 @@
       >
       <div class="flex flex-col justify-center items-center lg:w-1/3">
         <H2 class="text-blue-500">
-          Whitepaper soon
+          Whitepaper soon<sup>tm</sup>
         </H2>
       </div>
     </div>

@@ -1,10 +1,9 @@
 <template>
-  <section class="flex flex-col lg:flex-row">
-    <article class="flex flex-col lg:w-1/2">
+  <section class="flex flex-col lg:flex-row lg:items-center lg:justify-evenly">
+    <article class="flex flex-col lg:rounded-3xl lg:p-16 lg:bg-blue-100 lg:max-w-screen-md">
       <H2>Ser pls how many duckos?</H2>
       <P>
-        $DUCK has a total supply of 420.69, with a circulating supply of (pull
-        from Zilstream).
+        $DUCK has a total supply of 420.69, with a circulating supply of 305.
       </P>
       <P class="mt-8">
         The community wallet holds a majority of the non-circulating supply. The
@@ -13,7 +12,7 @@
         giveaways.
       </P>
     </article>
-    <div class="flex flex-col items-center lg:flex-row lg:w-1/2 lg:justify-evenly">
+    <div class="flex flex-col items-center lg:flex-row lg:w-8/12 lg:max-w-screen-lg lg:justify-evenly">
       <TokenomicsDuck img="duck-egg-feet.png" alt="Duck cracking its legs out of the egg">
         Initial supply<br>
         420.69

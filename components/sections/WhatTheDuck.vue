@@ -1,13 +1,13 @@
 <template>
   <section
-    class="flex flex-col justify-evenly lg:flex-row"
+    class="flex flex-col justify-evenly lg:flex-row lg:items-center lg:justify-evenly"
   >
     <img
       src="~/assets/images/question-duck.png"
       alt="Duck with a question mark"
-      class="lg:w-1/2"
+      class="lg:w-8/12 lg:max-w-screen-lg"
     >
-    <article class="flex flex-col items-center justify-center lg:w-1/2">
+    <article class="flex flex-col items-center justify-center py-8 lg:rounded-3xl lg:w-4/12 lg:p-16 lg:bg-blue-200 lg:max-w-screen-md">
       <H2 class="self-start">
         What the duck?
       </H2>

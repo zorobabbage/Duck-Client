@@ -14,7 +14,14 @@ module.exports = {
     extend: {
       colors: {
         zilliqa: 'rgba(41, 204, 196, 1)',
-        'duck-yellow': '#FDC70C'
+        duck: {
+          yellow: '#FDC70C',
+          blue: {
+            light: '#BAE8FA',
+            DEFAULT: '#85D0EF',
+            dark: '#8AD5F4'
+          }
+        }
       },
       fontFamily: {
         sans: ['Quicksand', ...defaultTheme.fontFamily.sans]
