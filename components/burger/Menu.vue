@@ -6,14 +6,14 @@
         v-if="!show"
         src="~/assets/icons/menu.svg"
         alt="Menu"
-        class="w-12"
+        class="w-12 cursor-pointer"
         @click="show = true"
       >
       <img
         v-if="show"
         src="~/assets/icons/x.svg"
         alt="Close"
-        class="w-12"
+        class="w-12 cursor-pointer"
         @click="show = false"
       >
     </div>
@@ -27,7 +27,7 @@
           <img
             src="~/assets/icons/x.svg"
             alt="Close"
-            class="w-12 m-2"
+            class="w-12 m-2 cursor-pointer"
             @click="show = false"
           >
         </div>
