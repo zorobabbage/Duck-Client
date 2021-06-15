@@ -4,10 +4,14 @@
     <div class="w-full flex flex-col justify-evenly mt-16 lg:flex-row">
       <RoadmapDuck img="standing-duck.png" alt="Duck walking">
         <template slot="title">
-          Q1
+          Q2 2021
         </template>
         <template slot="items">
           <P>Token mint</P>
+          <P>NFDs</P>
+          <P>Pool alerts</P>
+          <P>Governance</P>
+          <P>NFD Platform</P>
         </template>
       </RoadmapDuck>
       <RoadmapDuck
@@ -16,13 +20,13 @@
         class="mt-8 lg:mt-0"
       >
         <template slot="title">
-          Q2
+          Q3 2021
         </template>
         <template slot="items">
-          <P>NFDs</P>
-          <P>Duck Sniper</P>
-          <P>Governance</P>
-          <P>NFD Platform</P>
+          <P>Merch</P>
+          <P>ZilLotto</P>
+          <P>Auctions</P>
+          <P>Expand Team</P>
         </template>
       </RoadmapDuck>
       <RoadmapDuck
@@ -31,12 +35,12 @@
         class="mt-8 lg:mt-0"
       >
         <template slot="title">
-          Q3
+          Q4 2021
         </template>
         <template slot="items">
-          <P>Merch</P>
-          <P>ZilLotto</P>
-          <P>Hatchling Charts</P>
+          <P>Charting</P>
+          <P>Limit Orders</P>
+          <P>Deep Duck Render</P>
         </template>
       </RoadmapDuck>
       <RoadmapDuck
@@ -45,11 +49,10 @@
         class="mt-8 lg:mt-0"
       >
         <template slot="title">
-          Q4
+          Q1 2022
         </template>
         <template slot="items">
-          <P>Limit Orders</P>
-          <P>Deep Duck Render</P>
+          <P>Project Z (NDA)</P>
         </template>
       </RoadmapDuck>
     </div>
