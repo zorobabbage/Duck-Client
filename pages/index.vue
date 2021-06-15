@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center max-w-screen-md lg:max-w-none mx-auto">
     <Hero id="home" class="h-screen  max-w-[2400px]" />
-    <NewlyMinted id="new-ducks" class="bg-duck-blue-dark w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16" />
+    <Countdown id="new-ducks" class="bg-duck-blue-dark w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16" />
     <WhatTheDuck
       id="what-the-duck"
       class="w-11/12 py-8"
