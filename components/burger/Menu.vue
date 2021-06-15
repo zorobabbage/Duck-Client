@@ -19,7 +19,7 @@
     </div>
     <transition name="slide">
       <div
-        v-if="show"
+        v-show="show"
         class="flex flex-col w-screen h-screen right-0 top-0 absolute items-center bg-blue-100"
       >
         <div class="flex w-full justify-between">
@@ -77,7 +77,6 @@ export default {
         link.classList.remove('nuxt-link-exact-active')
       })
       const link = document.querySelector(`span > a[href='/${val}']`)
-      console.log(link)
       link.classList.add('nuxt-link-exact-active')
     }
   }
