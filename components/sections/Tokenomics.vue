@@ -4,7 +4,7 @@
       class="flex flex-col lg:w-1/2  lg:rounded-3xl lg:p-16 lg:bg-blue-100 lg:max-w-screen-lg 2xl:w-4/12"
     >
       <H2>Ser pls how many duckos?</H2>
-      <P>
+      <P class="mt-16">
         $DUCK has a total supply of 420.69, with a circulating supply of 305.
       </P>
       <P class="mt-8">
