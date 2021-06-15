@@ -5,9 +5,9 @@
     <img
       src="~/assets/images/question-duck.png"
       alt="Duck with a question mark"
-      class="lg:w-8/12 lg:max-w-screen-lg"
+      class="lg:w-6/12 lg:max-w-screen-lg 2xl:w-8/12"
     >
-    <article class="flex flex-col items-center justify-center py-8 lg:rounded-3xl lg:w-4/12 lg:p-16 lg:bg-blue-200 lg:max-w-screen-md">
+    <article class="flex flex-col items-center justify-center py-8 lg:rounded-3xl lg:w-6/12 lg:p-16 lg:bg-blue-200 lg:max-w-screen-md 2xl:w-4/12">
       <H2 class="self-start">
         What the duck?
       </H2>
