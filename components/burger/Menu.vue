@@ -59,9 +59,26 @@
 
 <script>
 export default {
+  props: {
+    activeLink: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       show: false
+    }
+  },
+  watch: {
+    activeLink (val) {
+      const links = document.querySelectorAll('span > a')
+      links.forEach((link) => {
+        link.classList.remove('nuxt-link-exact-active')
+      })
+      const link = document.querySelector(`span > a[href='/${val}']`)
+      console.log(link)
+      link.classList.add('nuxt-link-exact-active')
     }
   }
 }
