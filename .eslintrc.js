@@ -9,8 +9,7 @@ module.exports = {
   },
   extends: [
     '@nuxtjs',
-    'plugin:nuxt/recommended',
-    'standard'
+    'plugin:nuxt/recommended'
   ],
   plugins: [
   ],
