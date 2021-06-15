@@ -5,10 +5,10 @@
     </H2>
     <img
       :src="require(`~/assets/images/${img}`)"
-      class="w-48"
+      class="mt-16 h-48"
       :alt="alt"
     >
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center mt-8">
       <slot name="items" />
     </div>
   </article>
