@@ -1,6 +1,7 @@
 <template>
-  <section class="flex items-center justify-center">
-    <div class="w-full max-w-screen-2xl flex flex-col justify-evenly lg:flex-row">
+  <section class="flex flex-col items-center justify-center">
+    <H2>Roadmap</H2>
+    <div class="w-full flex flex-col justify-evenly mt-16 lg:flex-row">
       <RoadmapDuck img="standing-duck.png" alt="Duck walking">
         <template slot="title">
           Q1
@@ -19,9 +20,9 @@
         </template>
         <template slot="items">
           <P>NFDs</P>
-          <P>NFD Platform</P>
-          <P>Governance</P>
           <P>Duck Sniper</P>
+          <P>Governance</P>
+          <P>NFD Platform</P>
         </template>
       </RoadmapDuck>
       <RoadmapDuck
@@ -33,9 +34,9 @@
           Q3
         </template>
         <template slot="items">
-          <P>Hatchling Charts</P>
           <P>Merch</P>
           <P>ZilLotto</P>
+          <P>Hatchling Charts</P>
         </template>
       </RoadmapDuck>
       <RoadmapDuck
@@ -47,8 +48,8 @@
           Q4
         </template>
         <template slot="items">
-          <P>Deep Duck Render</P>
           <P>Limit Orders</P>
+          <P>Deep Duck Render</P>
         </template>
       </RoadmapDuck>
     </div>
