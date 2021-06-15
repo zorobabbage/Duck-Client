@@ -1,12 +1,12 @@
 <template>
   <div class="m-2">
-    <div class="flex justify-between">
+    <div v-if="!show" class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-sm">
       <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
       <img
         v-if="!show"
         src="~/assets/icons/menu.svg"
         alt="Menu"
-        class="w-12 cursor-pointer"
+        class="w-12 cursor-pointer mr-4"
         @click="show = true"
       >
       <img
@@ -20,7 +20,7 @@
     <transition name="slide">
       <div
         v-show="show"
-        class="flex flex-col w-screen h-screen right-0 top-0 absolute items-center bg-blue-100"
+        class="flex flex-col w-screen h-screen right-0 top-0 fixed items-center bg-blue-100 bg-opacity-75 backdrop-filter backdrop-blur-md"
       >
         <div class="flex w-full justify-between">
           <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12 m-2">

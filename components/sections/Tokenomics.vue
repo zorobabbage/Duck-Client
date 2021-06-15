@@ -24,8 +24,8 @@
       </P>
       <P class="mt-8">
         The team collectively holds around 10 $DUCK; the majority of which is
-        pooled. Through successfully executed projects five percent of the funds
-        go to $DUCK buy back.
+        pooled. Through successfully executed projects, a percentage of the funds
+        goes towards $DUCK buy back.
       </P>
     </article>
     <div

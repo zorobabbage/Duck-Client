@@ -1,6 +1,7 @@
 <template>
-  <section class="flex items-center justify-center">
-    <div class="flex flex-col items-center w-full max-w-screen-2xl lg:flex-row lg:justify-evenly">
+  <section class="flex flex-col items-center justify-center">
+    <H2>Doccos</H2>
+    <div class="flex flex-col items-center w-full max-w-screen-2xl mt-16 lg:flex-row lg:justify-evenly">
       <div class="flex flex-col justify-center items-center lg:w-1/3">
         <Link
           target="_blank"

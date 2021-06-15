@@ -1,6 +1,6 @@
 <template>
   <span class="p-4">
-    <NuxtLink :to="to"><slot /> </NuxtLink>
+    <NuxtLink :to="to" class="text-lg"><slot /> </NuxtLink>
   </span>
 </template>
 

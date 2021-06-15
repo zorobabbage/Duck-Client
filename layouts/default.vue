@@ -2,6 +2,7 @@
   <div>
     <BurgerMenu :active-link="activeLink" v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'" />
     <NavBar :active-link="activeLink" v-else />
+    <Socials v-if="breakpoint.is !== 'sm' || breakpoint.is !== 'md'" class="fixed right-0 h-screen mr-8" />
     <Nuxt />
   </div>
 </template>
