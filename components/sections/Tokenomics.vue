@@ -8,7 +8,7 @@
         <Link href="https://zilstream.com/tokens/duck" target="_blank">
           $DUCK
         </Link>
-        has a total supply of 420.69, with a circulating supply of 305.
+        has a total supply of 420.69, with a circulating supply of {{ circulatingSupply }}.
       </P>
       <P class="mt-8">
         The
@@ -24,8 +24,8 @@
       </P>
       <P class="mt-8">
         The team collectively holds around 10 $DUCK; the majority of which is
-        pooled. Through successfully executed projects, a percentage of the funds
-        goes towards $DUCK buy back.
+        pooled. Through successfully executed projects, a percentage of the
+        funds goes towards $DUCK buy back.
       </P>
     </article>
     <div
@@ -44,7 +44,7 @@
         alt="Duck cracking the top of the egg"
       >
         Max supply<br>
-        391
+        {{ maxSupply }}
       </TokenomicsDuck>
       <TokenomicsDuck
         class="mt-16 lg:mt-0"
@@ -52,8 +52,28 @@
         alt="Duck cracking its head out of the egg"
       >
         Circulating supply<br>
-        315
+        {{ circulatingSupply }}
       </TokenomicsDuck>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      initialSupply: 420.69,
+      maxSupply: 0,
+      circulatingSupply: 0
+    }
+  },
+  async beforeMount () {
+    const zilStreamInfo = await fetch(
+      'https://api.zilstream.com/tokens/DUCK'
+    ).then(r => r.json())
+
+    this.maxSupply = zilStreamInfo.market_data.max_supply
+    this.circulatingSupply = zilStreamInfo.market_data.current_supply
+  }
+}
+</script>
