@@ -24,6 +24,6 @@
       src="~/assets/images/computer-duck.png"
       alt="Duck with glasses sitting by a computer"
       class="lg:w-1/2"
-    />
+    >
   </section>
 </template>

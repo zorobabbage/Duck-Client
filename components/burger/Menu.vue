@@ -1,6 +1,9 @@
 <template>
   <div class="m-2">
-    <div v-if="!show" class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-sm">
+    <div
+      v-if="!show"
+      class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-sm"
+    >
       <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
       <img
         v-if="!show"
@@ -51,7 +54,7 @@
           <BurgerItem to="/#pond-papers" @click="show = false">
             Pond papers
           </BurgerItem>
-          <CallToAction class="self-center"/>
+          <CallToAction class="self-center" />
         </div>
       </div>
     </transition>

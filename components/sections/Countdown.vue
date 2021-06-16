@@ -4,7 +4,9 @@
       Countdown Until Non-Fungible Ducks' Launch
     </H2>
     <div class="flex flex-col items-center mt-16 lg:flex-row lg:justify-center">
-      <H2 class="font-normal text-center">{{ timeLeft }}</H2>
+      <H2 class="font-normal text-center">
+        {{ timeLeft }}
+      </H2>
     </div>
   </section>
 </template>
@@ -30,9 +32,15 @@ export default {
       const secondsLeft = seconds % 60
 
       const a = daysLeft ? `${days} ${this.endWithS(daysLeft, 'day')}, ` : ''
-      const b = hoursLeft ? `${hoursLeft} ${this.endWithS(hoursLeft, 'hour')}, ` : ''
-      const c = minutesLeft ? `${minutesLeft} ${this.endWithS(minutesLeft, 'minute')}, ` : ''
-      const d = secondsLeft ? `${secondsLeft} ${this.endWithS(secondsLeft, 'second')}` : ''
+      const b = hoursLeft
+        ? `${hoursLeft} ${this.endWithS(hoursLeft, 'hour')}, `
+        : ''
+      const c = minutesLeft
+        ? `${minutesLeft} ${this.endWithS(minutesLeft, 'minute')}, `
+        : ''
+      const d = secondsLeft
+        ? `${secondsLeft} ${this.endWithS(secondsLeft, 'second')}`
+        : ''
 
       return `${a}${b}${c}${d}`
     }
