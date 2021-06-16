@@ -3,8 +3,8 @@
     <NavItem to="/#home">
       Home
     </NavItem>
-    <NavItem to="/#new-ducks">
-      Newly Minted Ducks
+    <NavItem to="/#countdown">
+      Countdown
     </NavItem>
     <NavItem to="/#what-the-duck">
       What the duck?

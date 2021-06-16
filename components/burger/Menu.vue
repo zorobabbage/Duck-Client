@@ -39,8 +39,8 @@
           <BurgerItem to="/#home" @click="show = false">
             Home
           </BurgerItem>
-          <BurgerItem to="/#new-ducks" @click="show = false">
-            Newly Minted Ducks
+          <BurgerItem to="/#countdown" @click="show = false">
+            Countdown
           </BurgerItem>
           <BurgerItem to="/#what-the-duck" @click="show = false">
             What the duck?
