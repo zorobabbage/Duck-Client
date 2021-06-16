@@ -11,7 +11,7 @@
       class="flex flex-col items-center justify-center lg:w-6/12 lg:max-w-screen-md 2xl:w-4/12"
     >
       <article
-        class="flex flex-col justify-center py-8 w-full lg:rounded-3xl  lg:p-16 lg:bg-blue-300"
+        class="flex flex-col justify-center py-8 w-full rounded-3xl  p-16 bg-blue-300"
       >
         <H2 class="self-start">
           Non Fungible Ducks (NFDs)?
@@ -25,7 +25,7 @@
         </P>
       </article>
       <article
-        class="flex flex-col justify-center mt-16 py-8 lg:rounded-3xl  lg:p-16 lg:bg-blue-200"
+        class="flex flex-col justify-center mt-4 lg:mt-16 py-8 rounded-3xl  p-16 bg-blue-200"
       >
         <H2>
           What the duck?
