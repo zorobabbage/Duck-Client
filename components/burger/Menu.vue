@@ -20,7 +20,7 @@
     <transition name="slide">
       <div
         v-show="show"
-        class="flex flex-col w-screen h-screen right-0 top-0 fixed items-center bg-blue-100 bg-opacity-75 backdrop-filter backdrop-blur-md"
+        class="flex flex-col w-screen h-screen right-0 top-0 fixed items-center bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-md"
       >
         <div class="flex w-full justify-between">
           <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12 m-2">
@@ -51,6 +51,7 @@
           <BurgerItem to="/#pond-papers" @click="show = false">
             Pond papers
           </BurgerItem>
+          <CallToAction class="self-center"/>
         </div>
       </div>
     </transition>
