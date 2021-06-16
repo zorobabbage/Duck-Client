@@ -4,7 +4,7 @@
       Countdown Until Non-Fungible Ducks' Launch
     </H2>
     <div class="flex flex-col items-center mt-16 lg:flex-row lg:justify-center">
-      <H2 class="font-normal">{{ timeLeft }}</H2>
+      <H2 class="font-normal text-center">{{ timeLeft }}</H2>
     </div>
   </section>
 </template>
