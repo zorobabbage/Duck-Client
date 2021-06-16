@@ -1,7 +1,9 @@
 <template>
   <section class="flex flex-col items-center justify-center">
     <H2>Roadmap</H2>
-    <div class="w-full flex flex-col justify-evenly mt-16 lg:flex-row">
+    <div
+      class="w-full flex flex-col justify-evenly mt-16 max-w-[2200px] lg:flex-row"
+    >
       <RoadmapDuck img="standing-duck.png" alt="Duck walking">
         <template slot="title">
           Q2 2021
