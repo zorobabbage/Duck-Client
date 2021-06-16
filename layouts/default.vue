@@ -1,9 +1,21 @@
 <template>
   <div>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-RJ4ZEYV2FH"
+    />
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+      dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'G-RJ4ZEYV2FH')
+    </script>
+    <CookieWarning class="bottom-0 w-full fixed mb-4" />
     <div class="fixed right-0 h-screen mr-8 flex items-center justify-center">
-      <Socials
-        v-if="!(breakpoint.is === 'md' || breakpoint.is === 'sm')"
-      />
+      <Socials v-if="!(breakpoint.is === 'md' || breakpoint.is === 'sm')" />
     </div>
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
