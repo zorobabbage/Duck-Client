@@ -1,8 +1,15 @@
 <template>
   <div>
-    <BurgerMenu :active-link="activeLink" v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'" />
-    <NavBar :active-link="activeLink" v-else />
-    <Socials v-if="breakpoint.is !== 'sm' || breakpoint.is !== 'md'" class="fixed right-0 h-screen mr-8" />
+    <div class="fixed right-0 h-screen mr-8 flex items-center justify-center">
+      <Socials
+        v-if="!(breakpoint.is === 'md' || breakpoint.is === 'sm')"
+      />
+    </div>
+    <BurgerMenu
+      v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
+      :active-link="activeLink"
+    />
+    <NavBar v-else :active-link="activeLink" />
     <Nuxt />
   </div>
 </template>
@@ -39,7 +46,7 @@ export default {
 
       const options = {
         rootMargin: '50px 50px',
-        threshold: 1
+        threshold: 0.25
       }
       this.sectionObserver = new IntersectionObserver(
         this.sectionObserverHandler,
