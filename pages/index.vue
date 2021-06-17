@@ -17,7 +17,7 @@
     />
     <Tokenomics id="tokenomics" class="w-11/12 py-8 lg:py-24" />
     <PondPapers
-      id="pond-papers"
+      id="papers"
       class="bg-duck-blue-light w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <Footer />

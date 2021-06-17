@@ -16,8 +16,8 @@
     <NavItem to="/#tokenomics">
       Tokenomics
     </NavItem>
-    <NavItem to="/#pond-papers">
-      Pond papers
+    <NavItem to="/#papers">
+      Papers
     </NavItem>
   </div>
 </template>

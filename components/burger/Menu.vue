@@ -51,8 +51,8 @@
           <BurgerItem to="/#tokenomics" @click="show = false">
             Tokenomics
           </BurgerItem>
-          <BurgerItem to="/#pond-papers" @click="show = false">
-            Pond papers
+          <BurgerItem to="/#papers" @click="show = false">
+            Papers
           </BurgerItem>
           <CallToAction class="self-center" />
         </div>
