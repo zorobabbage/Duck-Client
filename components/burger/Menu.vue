@@ -54,7 +54,14 @@
           <BurgerItem to="/#papers" @click="show = false">
             Papers
           </BurgerItem>
-          <CallToAction class="self-center" />
+          <button
+            v-if="launchDate > currentDate"
+            class="text-l p-4 font-bold bg-duck-yellow dark:bg-yellow-500 rounded-md mt-4 w-56 lg:self-end xl:text-xl xl:w-64 2xl:text-2xl 2xl:w-80"
+            @click="show = false"
+          >
+            <a href="/#countdown">Dapp launching soon</a>
+          </button>
+          <CallToAction v-else />
         </div>
       </div>
     </transition>
@@ -72,6 +79,14 @@ export default {
   data () {
     return {
       show: false
+    }
+  },
+  computed: {
+    currentDate () {
+      return this.$store.state.ducks.currentDate
+    },
+    launchDate () {
+      return this.$store.state.ducks.launchDate
     }
   },
   watch: {
