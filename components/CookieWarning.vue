@@ -34,7 +34,7 @@ export default {
       show: true
     }
   },
-  beforeMount () {
+  mounted () {
     const cookies = localStorage.getItem('cookies')
     if (cookies === 'true') {
       this.show = false
