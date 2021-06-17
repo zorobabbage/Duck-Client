@@ -10,14 +10,14 @@
       <div class="lg:mx-auto mt-4">
         <button
           class="bg-green-400 p-4 px-8 rounded-xl font-bold"
-          value="true"
+          value="1"
           @click="setCookieSettings"
         >
           Ok
         </button>
         <button
           class="bg-red-400 p-4 px-8 rounded-xl font-bold"
-          value="false"
+          value="0"
           @click="setCookieSettings"
         >
           No
@@ -36,7 +36,7 @@ export default {
   },
   mounted () {
     const cookies = localStorage.getItem('cookies')
-    if (cookies === 'true') {
+    if (Number(cookies)) {
       this.show = false
     } else {
       this.show = true
