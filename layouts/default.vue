@@ -36,7 +36,7 @@ export default {
   },
   head: {
     bodyAttrs: {
-      class: 'bg-gray-50'
+      class: 'bg-gray-50 dark:bg-gray-900'
     }
   },
   computed: {
@@ -46,6 +46,9 @@ export default {
       }
       return { is: '' }
     }
+  },
+  beforeMount () {
+    this.$store.dispatch('ducks/fetchDarkmode')
   },
   mounted () {
     this.observeSections()

@@ -2,7 +2,7 @@
   <div class="m-2">
     <div
       v-if="!show"
-      class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-sm"
+      class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 dark:bg-gray-800 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm"
     >
       <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
       <img
@@ -23,7 +23,7 @@
     <transition name="slide">
       <div
         v-show="show"
-        class="flex flex-col w-screen h-screen right-0 top-0 fixed items-center bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-md"
+        class="flex flex-col w-screen h-screen right-0 top-0 fixed items-center bg-gray-100 dark:bg-gray-800 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-md"
       >
         <div class="flex w-full justify-between">
           <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12 m-2">

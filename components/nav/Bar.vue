@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed w-full p-2 bg-gray-100 bg-opacity-75 backdrop-filter backdrop-blur-sm flex justify-center">
-    <NavItem to="/#home">
+  <div class="fixed w-full p-2 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm flex justify-center">
+    <NavItem to="/#home" class="ml-auto">
       Home
     </NavItem>
     <NavItem to="/#countdown">
@@ -19,6 +19,7 @@
     <NavItem to="/#papers">
       Papers
     </NavItem>
+    <ToggleDarkmode class="ml-auto mr-2 self-center" />
   </div>
 </template>
 

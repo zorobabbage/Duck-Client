@@ -1,6 +1,6 @@
 <template>
   <span class="w-full text-center text-lg" @click="$emit('click')">
-    <NuxtLink :to="to"><slot /> </NuxtLink>
+    <NuxtLink :to="to" class="text-gray-900 dark:text-gray-50"><slot /> </NuxtLink>
   </span>
 </template>
 

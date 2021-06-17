@@ -4,21 +4,21 @@
     <Countdown
       v-if="launchDate > currentDate"
       id="countdown"
-      class="bg-duck-blue-dark w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
+      class="bg-duck-blue-dark dark:bg-blue-900 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <NewlyMinted
       v-else
-      class="bg-duck-blue-dark w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
+      class="bg-duck-blue-dark dark:bg-duck-blue-1 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <WhatTheDuck id="what-the-duck" class="w-11/12 py-8" />
     <Roadmap
       id="roadmap"
-      class="bg-duck-blue w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16"
+      class="bg-duck-blue dark:bg-blue-600 w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <Tokenomics id="tokenomics" class="w-11/12 py-8 lg:py-24" />
     <PondPapers
       id="papers"
-      class="bg-duck-blue-light w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16"
+      class="bg-duck-blue-light dark:bg-blue-500 w-11/12 py-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <Footer />
   </div>

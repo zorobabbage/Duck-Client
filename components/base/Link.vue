@@ -1,7 +1,7 @@
 <template>
   <a
     :href="href"
-    class="text-xl text-blue-500 underline lg:text-2xl 2xl:text-3xl font-medium"
+    class="text-xl text-blue-500 dark:text-blue-100 underline lg:text-2xl 2xl:text-3xl font-medium"
   ><slot /></a>
 </template>
 

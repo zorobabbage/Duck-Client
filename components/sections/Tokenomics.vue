@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col lg:flex-row lg:items-center lg:justify-evenly">
     <article
-      class="flex flex-col lg:w-1/2  lg:rounded-3xl lg:p-16 lg:bg-blue-100 lg:max-w-screen-lg 2xl:w-4/12"
+      class="flex flex-col lg:w-1/2 p-8  lg:rounded-3xl lg:p-16 lg:bg-blue-100 lg:dark:bg-blue-800 lg:max-w-screen-lg 2xl:w-4/12"
     >
       <H2>Tokenomics</H2>
       <P class="mt-8">
