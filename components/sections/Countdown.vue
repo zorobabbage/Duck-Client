@@ -13,13 +13,13 @@
 
 <script>
 export default {
-  data () {
-    return {
-      launchDate: Date.UTC(2021, 5, 18, 23),
-      currentDate: Date.now()
-    }
-  },
   computed: {
+    launchDate () {
+      return this.$store.state.ducks.launchDate
+    },
+    currentDate () {
+      return this.$store.state.ducks.currentDate
+    },
     timeLeft () {
       const seconds = Math.floor((this.launchDate - this.currentDate) / 1000)
       const minutes = Math.floor(seconds / 60)
@@ -44,11 +44,6 @@ export default {
 
       return `${a}${b}${c}${d}`
     }
-  },
-  mounted () {
-    setInterval(() => {
-      this.currentDate = Date.now()
-    }, 1000)
   },
   methods: {
     endWithS (num, string) {

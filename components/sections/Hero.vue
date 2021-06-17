@@ -19,10 +19,12 @@
       </P>
 
       <button
+        v-if="launchDate > currentDate"
         class="text-l p-4 font-bold bg-duck-yellow rounded-md mt-4 w-56 lg:self-end xl:text-xl xl:w-64 2xl:text-2xl 2xl:w-80"
       >
         <a href="/#countdown">Dapp launching soon</a>
       </button>
+      <CallToAction v-else />
     </div>
     <img
       src="~/assets/images/computer-duck.png"
@@ -31,3 +33,16 @@
     >
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    currentDate () {
+      return this.$store.state.ducks.currentDate
+    },
+    launchDate () {
+      return this.$store.state.ducks.launchDate
+    }
+  }
+}
+</script>
