@@ -35,7 +35,7 @@ jobs:
         provider: s3
         access_key_id: AKIAYJMEUWBESGPXAIJG
         secret_access_key: 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
-        bucket: home.testingtheducks.community
+        bucket: duck.community
         region: eu-west-2
         skip_cleanup: true
         local_dir: dist
