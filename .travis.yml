@@ -1,0 +1,53 @@
+branches:
+  only:
+    - preproduction
+    - production
+language: node_js
+node_js:
+  - '14'
+install: npm install
+script: npm run generate
+cache: npm
+jobs:
+  include:
+  
+    - stage: deploy-preproduction
+      if: branch = preproduction
+      name: Deploy to home-preproduction S3
+      script: npm run generate
+      deploy:
+        provider: s3
+        access_key_id: AKIAYJMEUWBESGPXAIJG
+        secret_access_key: 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
+        bucket: home.testingtheducks.community
+        region: eu-west-2
+        skip_cleanup: true
+        local_dir: dist
+        acl: public_read
+        'on':
+          branch: preproduction
+          
+    - stage: deploy-production
+      if: branch = production
+      name: Deploy to home-production S3
+      script: npm run generate
+      deploy:
+        provider: s3
+        access_key_id: AKIAYJMEUWBESGPXAIJG
+        secret_access_key: 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
+        bucket: home.testingtheducks.community
+        region: eu-west-2
+        skip_cleanup: true
+        local_dir: dist
+        acl: public_read
+        'on':
+          branch: production
+
+after_success:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
