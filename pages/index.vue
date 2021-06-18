@@ -8,7 +8,7 @@
     />
     <NewlyMinted
       v-else
-      class="bg-duck-blue-dark dark:bg-duck-blue-1 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
+      class="bg-duck-blue-dark dark:bg-blue-900 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
     />
     <WhatTheDuck id="what-the-duck" class="w-11/12 py-8" />
     <Roadmap

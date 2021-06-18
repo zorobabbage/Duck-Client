@@ -1,6 +1,10 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  env: {
+    nfdContract: process.env.NFD_CONTRACT,
+    zilliqaNetwork: process.env.ZILLIQA_NETWORK
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
