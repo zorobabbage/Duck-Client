@@ -5,7 +5,7 @@
     </H2>
     <div class="flex flex-col items-center mt-16 lg:flex-row lg:justify-center">
       <H2 class="font-normal text-center">
-        {{ timeLeft }}
+        Wait until further announcements.
       </H2>
     </div>
   </section>
