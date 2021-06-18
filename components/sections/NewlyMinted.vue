@@ -70,7 +70,7 @@ export default {
       networkStream.subscribe((net) => {
         if (net !== process.env.zilliqaNetwork) {
           this.show = false
-          this.message = 'Please choose main net in your wallet'
+          this.message = `Please choose ${process.env.zilliqaNetwork} in your wallet`
           return
         }
         this.show = true
@@ -78,7 +78,7 @@ export default {
 
       if (window.zilPay.wallet.net !== process.env.zilliqaNetwork) {
         this.show = false
-        this.message = 'Please choose main net in your wallet'
+        this.message = `Please choose ${process.env.zilliqaNetwork} in your wallet`
       } else {
         this.$store.dispatch('ducks/fetchDuckUris')
         this.show = true
