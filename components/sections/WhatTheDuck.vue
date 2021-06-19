@@ -32,7 +32,7 @@
         </H2>
         <P class="mt-2" />
         <P class="mt-4">
-          As a small team of 4 (soon to be 5), our initial goal is to release
+          As a small team of 5, our initial goal is to release
           in-house designed NFTs. This will be followed by the launch of a
           platform through which users can deploy, mint and manage ZRC-1 tokens.
         </P>
