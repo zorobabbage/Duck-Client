@@ -1,6 +1,6 @@
 export const state = () => ({
   currentDate: Date.now(),
-  launchDate: Date.UTC(2021, 5, 20, 2),
+  launchDate: Date.UTC(2021, 5, 19, 3),
   darkmode: undefined,
   duckUris: []
 })
