@@ -39,8 +39,8 @@
           <BurgerItem to="/#home" @click="show = false">
             Home
           </BurgerItem>
-          <BurgerItem to="/#countdown" @click="show = false">
-            Countdown
+          <BurgerItem to="/#newly-minted" @click="show = false">
+            Newly Minted
           </BurgerItem>
           <BurgerItem to="/#what-the-duck" @click="show = false">
             What the duck?
@@ -54,14 +54,7 @@
           <BurgerItem to="/#papers" @click="show = false">
             Papers
           </BurgerItem>
-          <button
-            v-if="launchDate > currentDate"
-            class="text-l p-4 font-bold bg-duck-yellow dark:bg-yellow-500 rounded-md mt-4 w-56 lg:self-end xl:text-xl xl:w-64 2xl:text-2xl 2xl:w-80"
-            @click="show = false"
-          >
-            <a href="/#countdown">Dapp launching soon</a>
-          </button>
-          <CallToAction v-else />
+          <CallToAction />
         </div>
       </div>
     </transition>

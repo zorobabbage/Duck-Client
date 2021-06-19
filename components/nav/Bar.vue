@@ -3,8 +3,8 @@
     <NavItem to="/#home" class="ml-auto">
       Home
     </NavItem>
-    <NavItem to="/#countdown">
-      Countdown
+    <NavItem to="/#newly-minted">
+      Newly Minted
     </NavItem>
     <NavItem to="/#what-the-duck">
       What the duck?
