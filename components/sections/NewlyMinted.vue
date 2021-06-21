@@ -55,7 +55,22 @@ export default {
     }
   },
   mounted () {
-    this.connect()
+    if (window.zilPay === undefined) {
+      this.show = false
+      this.message =
+        'Please install the zilpay extension to show newly minted ducks'
+      return
+    }
+
+    const networkStream = window.zilPay.wallet.observableNetwork()
+    networkStream.subscribe((net) => {
+      if (net !== process.env.zilliqaNetwork) {
+        this.show = false
+        this.message = `Please choose ${process.env.zilliqaNetwork} in your wallet`
+        return
+      }
+      this.show = true
+    })
   },
   methods: {
     connect () {
@@ -65,17 +80,6 @@ export default {
           'Please install the zilpay extension to show newly minted ducks'
         return
       }
-
-      const networkStream = window.zilPay.wallet.observableNetwork()
-      networkStream.subscribe((net) => {
-        if (net !== process.env.zilliqaNetwork) {
-          this.show = false
-          this.message = `Please choose ${process.env.zilliqaNetwork} in your wallet`
-          return
-        }
-        this.show = true
-      })
-
       if (window.zilPay.wallet.net !== process.env.zilliqaNetwork) {
         this.show = false
         this.message = `Please choose ${process.env.zilliqaNetwork} in your wallet`
