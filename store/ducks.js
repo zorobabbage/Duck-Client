@@ -1,3 +1,16 @@
+import { Zilliqa } from '@zilliqa-js/zilliqa'
+
+function getRpcUrl (network) {
+  const rpcUrl =
+    network === 'mainnet'
+      ? 'https://api.zilliqa.com'
+      : 'https://dev-api.zilliqa.com'
+
+  return rpcUrl
+}
+
+const zilliqa = new Zilliqa(getRpcUrl(process.env.zilliqaNetwork))
+
 export const state = () => ({
   currentDate: Date.now(),
   launchDate: Date.UTC(2021, 5, 19, 3),
@@ -48,7 +61,7 @@ export const actions = {
   },
   async fetchDuckUris (context) {
     const tokenUris = (
-      await window.zilPay.blockchain.getSmartContractSubState(
+      await zilliqa.blockchain.getSmartContractSubState(
         process.env.nfdContract,
         'token_uris'
       )
