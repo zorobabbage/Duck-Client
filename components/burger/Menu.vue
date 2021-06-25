@@ -5,20 +5,12 @@
       class="flex justify-between w-full p-2 top-0 left-0 fixed bg-gray-100 dark:bg-gray-800 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm"
     >
       <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
-      <img
+      <IconMenu
         v-if="!show"
-        src="~/assets/icons/menu.svg"
-        alt="Menu"
         class="w-12 cursor-pointer mr-4"
-        @click="show = true"
-      >
-      <img
-        v-if="show"
-        src="~/assets/icons/x.svg"
-        alt="Close"
-        class="w-12 cursor-pointer"
-        @click="show = false"
-      >
+        @click.native="show = true"
+      />
+      <IconX v-if="show" class="w-12 cursor-pointer" @click.native="show = false" />
     </div>
     <transition name="slide">
       <div
@@ -27,12 +19,7 @@
       >
         <div class="flex w-full justify-between">
           <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12 m-2">
-          <img
-            src="~/assets/icons/x.svg"
-            alt="Close"
-            class="w-12 m-2 cursor-pointer"
-            @click="show = false"
-          >
+          <IconX class="w-12 m-2 cursor-pointer" @click.native="show = false" />
         </div>
         <Socials class="w-full" />
         <div class="flex flex-col justify-between h-full py-8">

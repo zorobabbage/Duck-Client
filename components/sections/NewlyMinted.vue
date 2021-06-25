@@ -41,7 +41,15 @@ export default {
       if (duckUris.length <= 5) {
         return duckUris
       }
-      return duckUris.slice(duckUris.length - 5, duckUris.length).reverse()
+      const fiveUris = duckUris
+        .slice(duckUris.length - 5, duckUris.length)
+        .reverse()
+      return fiveUris.map((uri) => {
+        return {
+          uri: uri.uri.replace('gateway.pinata.cloud', 'cloudflare-ipfs.com'),
+          id: uri.id
+        }
+      })
     }
   },
   beforeMount () {
