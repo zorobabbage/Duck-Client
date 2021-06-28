@@ -52,5 +52,8 @@ export default {
         fs: 'empty'
       }
     }
+  },
+  server: {
+    host: '0.0.0.0'
   }
 }
