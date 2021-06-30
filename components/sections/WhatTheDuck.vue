@@ -20,8 +20,8 @@
         <P class="mt-4">
           8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a
           maximum of 2877 zil. $DUCK token holders are able to regenerate their
-          NFDs. As part of the initial launch, NFD buyers will receive a blank
-          duck whose features will revealed in an unveiling event.
+          NFDs. NFD holders can transfer ownership, share and rename their
+          ducks. Additional features may be added as the project progresses.
         </P>
       </article>
       <article
@@ -32,9 +32,9 @@
         </H2>
         <P class="mt-2" />
         <P class="mt-4">
-          As a small team of 5, our initial goal is to release
-          in-house designed NFTs. This will be followed by the launch of a
-          platform through which users can deploy, mint and manage ZRC-1 tokens.
+          As a small team of 5, our initial goal is to release in-house designed
+          NFTs. This will be followed by the launch of a platform through which
+          users can deploy, mint and manage ZRC-1 tokens.
         </P>
       </article>
     </div>
