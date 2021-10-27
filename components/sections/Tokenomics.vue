@@ -8,7 +8,7 @@
         <Link href="https://zilstream.com/tokens/duck" target="_blank">
           $DUCK
         </Link>
-        has a total supply of 420.69, with a circulating supply of {{ circulatingSupply }}.
+        has a total supply of 420.69, with a circulating supply of {{ circulatingSupply.toFixed(2) }}.
       </P>
       <P class="mt-8">
         The
