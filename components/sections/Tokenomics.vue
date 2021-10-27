@@ -8,7 +8,7 @@
         <Link href="https://zilstream.com/tokens/duck" target="_blank">
           $DUCK
         </Link>
-        has a total supply of 420.69, with a circulating supply of {{ circulatingSupply.toFixed(2) }}.
+        has a total supply of 420.69, with a circulating supply of {{ circulatingSupply }}.
       </P>
       <P class="mt-8">
         The
@@ -73,7 +73,7 @@ export default {
     ).then(r => r.json())
 
     this.maxSupply = zilStreamInfo.market_data.max_supply
-    this.circulatingSupply = zilStreamInfo.market_data.current_supply
+    this.circulatingSupply = zilStreamInfo.market_data.current_supply.toFixed(2)
   }
 }
 </script>
