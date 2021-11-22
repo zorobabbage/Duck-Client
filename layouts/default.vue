@@ -13,10 +13,6 @@
 
       gtag('config', 'G-RJ4ZEYV2FH')
     </script>
-    <CookieWarning class="bottom-0 w-full fixed mb-4" />
-    <div class="fixed right-0 h-screen mr-8 flex items-center justify-center">
-      <Socials v-if="!(breakpoint.is === 'md' || breakpoint.is === 'sm')" />
-    </div>
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"

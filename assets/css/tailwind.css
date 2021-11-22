@@ -30,46 +30,13 @@
   background-clip: text !important;
 }
 
-@font-face {
-  font-family: 'Quicksand';
-  font-style: light;
-  font-weight: 300;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Medium.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
 
-@font-face {
-  font-family: 'Quicksand';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Regular.ttf') format('truetype');
+* {
+  font-family: 'Raleway', 'Fira Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
+  box-sizing: border-box;
 }
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: medium;
-  font-weight: 500;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: semi-bold;
-  font-weight: 600;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-SemiBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: bold;
-  font-weight: 700;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Bold.ttf') format('truetype');
-}
-
+ 
 p, h2, h1, button {
   @apply text-gray-900;
   @apply dark:text-gray-50;

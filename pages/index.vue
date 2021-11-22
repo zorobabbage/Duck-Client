@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center max-w-screen-md lg:max-w-none mx-auto">
-    <Hero id="home" class="h-screen  max-w-[2400px] mt-16 lg:mt-0" />
+  <div class="flex flex-col items-center max-w-screen-md lg:max-w-none mx-auto bg-grass-background">
+    <Hero id="home" class="" />
     <NewlyMinted
       id="newly-minted"
       class="bg-duck-blue-dark dark:bg-blue-900 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
