@@ -27,11 +27,6 @@ export const mutations = {
 }
 
 export const actions = {
-  startCurrentDateInterval (context) {
-    setInterval(() => {
-      context.commit('SET_CURRENT_DATE')
-    }, 1000)
-  },
   async fetchDuckUris (context) {
     const tokenUris = (
       await zilliqa.blockchain.getSmartContractSubState(

@@ -16,6 +16,7 @@
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"
+      class="bg-sky"
     />
     <NavBar v-else :active-link="activeLink" />
     <Nuxt />
