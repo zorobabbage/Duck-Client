@@ -9,11 +9,9 @@ function getRpcUrl (network) {
   return rpcUrl
 }
 
-const zilliqa = new Zilliqa(getRpcUrl(process.env.zilliqaNetwork))
+const zilliqa = new Zilliqa(getRpcUrl('mainnet'))
 
 export const state = () => ({
-  currentDate: Date.now(),
-  launchDate: Date.UTC(2021, 5, 19, 3),
   duckUris: []
 })
 
@@ -30,10 +28,11 @@ export const actions = {
   async fetchDuckUris (context) {
     const tokenUris = (
       await zilliqa.blockchain.getSmartContractSubState(
-        process.env.nfdContract,
+        '0x06f70655d4AA5819E711563EB2383655449f24E9',
         'token_uris'
       )
     ).result.token_uris
+    console.log(tokenUris)
     const duckUris = Object.entries(tokenUris).map((entry) => {
       return { id: entry[0], uri: entry[1] }
     })

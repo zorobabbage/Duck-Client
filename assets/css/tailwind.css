@@ -23,7 +23,9 @@
 * {
   font-family: 'Raleway', 'Fira Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
   box-sizing: border-box;
+  touch-action: manipulation;
 }
+
  
 p, h2, h1, button {
   @apply text-gray-900;

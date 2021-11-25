@@ -1,26 +1,29 @@
 <template>
-  <div class="flex flex-col items-center lg:max-w-none mx-auto bg-grass-background">
+  <div class="flex flex-col items-center lg:max-w-none mx-auto bg-grass-background overflow-hidden">
     <Hero id="home" class="" />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 mt-48 container max-w-screen-lg">
+    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-xl">
+      <div class="p-8">
+        <DuckGif/>
+      </div>
       <div class="p-8">
         <h4 class=" font-bold text-4xl">Non Fungible Ducks</h4>
         <p class="mt-5 text-xl text-gray-900">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
           <!--desktop-->
-          <div class="hidden md:flex  gap-1 ml-2">
+          <div class="hidden md:flex ml-2 gap-1">
             <input type="number" v-model="numberOfDucks" class="font-medium  text-2xl h-16 w-24 rounded-2xl  md:text-basecursor-default focus:outline-none text-center bg-gray-200  flex items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
-            <div class="flex-col">
-            <button class="bg-gray-200 rounded-lg h-7 w-7 outline-none focus:outline-none" @click="incrementNumberOfDucks">
-              <svg xmlns="http://www.w3.org/2000/svg" class="p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-            </button>
-            <button class="bg-gray-200 rounded-lg h-7 w-7 outline-none focus:outline-none" @click="decrementNumberOfDucks">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                  </svg>
-            </button>
+            <div class="flex-col gap-1">
+              <div class="">
+                <button class="bg-gray-200 rounded-lg  outline-none focus:outline-none w-7 h-7" @click="incrementNumberOfDucks">
+                  <span class="m-auto text-2xl font-thin">+</span>
+                </button>
+              </div>
+              <div>
+                <button class="bg-gray-200 rounded-lg  outline-none focus:outline-none w-7 h-7 mb-0 mt-auto" @click="decrementNumberOfDucks">
+                  <span class="m-auto text-2xl font-thin">−</span>
+                </button>
+              </div>
             </div>
           </div>
           <!--mobile-->
@@ -28,16 +31,12 @@
                 <input type="number" v-model="numberOfDucks" class="font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
                 <div class="w-16">
                   <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="decrementNumberOfDucks">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="p-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                      </svg>
+                      <span class="m-auto text-4xl font-thin">−</span>
                   </button>
                 </div>
                 <div class="w-16">
                   <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="incrementNumberOfDucks">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="p-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                  </svg>
+                    <span class="m-auto text-4xl font-thin">+</span>
                   </button>
                 </div>
           </div>
@@ -47,11 +46,13 @@
         </div>
       </div>
     </div>
-
+    <div class="max-w-screen-xl mt-24 items-start">
+      <h4 class="text-2xl font-bold ml-0 self-start">Latest Ducks in the pond</h4>
+    </div>
     <NewlyMinted
-      id="newly-minted"
-      class="bg-duck-blue-dark dark:bg-blue-900 w-11/12 p-8 rounded-3xl lg:m-8 lg:p-16"
-    />
+        id="newly-minted"
+        class="mb-24 pl-0 "
+      />
     <Footer />
   </div>
 </template>
