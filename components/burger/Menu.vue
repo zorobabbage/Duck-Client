@@ -1,7 +1,7 @@
-<template class="bg-sky">
-  <div class="p-2">
+<template  >
+  <div class="p-2" :style="{ backgroundColor: navbarColors[$route.path] }">
     <div
-      class="flex justify-between w-full p-2 bg-sky  dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm"
+      class="flex justify-between w-full p-2 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm"
     >
       <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
       <h4 class=" text-4xl font-bold text-black self-center mr-auto ml-3">
@@ -21,14 +21,13 @@
           <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12 m-2">
           <IconX class="w-12 m-2 cursor-pointer" @click.native="show = false" />
         </div>
-        <div class="flex flex-col justify-between h-full py-8">
+        <div class="flex flex-col h-full py-8 gap-y-8">
           <BurgerItem to="/#home" @click="show = false">
             Home
           </BurgerItem>
-          <BurgerItem to="/#newly-minted" @click="show = false">
-            Newly Minted
+          <BurgerItem to="/explore" @click="show = false">
+            Explore
           </BurgerItem>
-          <CallToAction />
         </div>
       </div>
     </transition>
@@ -45,25 +44,11 @@ export default {
   },
   data () {
     return {
-      show: false
-    }
-  },
-  computed: {
-    currentDate () {
-      return this.$store.state.ducks.currentDate
-    },
-    launchDate () {
-      return this.$store.state.ducks.launchDate
-    }
-  },
-  watch: {
-    activeLink (val) {
-      const links = document.querySelectorAll('span > a')
-      links.forEach((link) => {
-        link.classList.remove('nuxt-link-exact-active')
-      })
-      const link = document.querySelector(`span > a[href='/${val}']`)
-      link.classList.add('nuxt-link-exact-active')
+      show: false,
+      navbarColors: {
+        '/': '#90EBD0',
+        '/explore': 'white'
+      }
     }
   }
 }

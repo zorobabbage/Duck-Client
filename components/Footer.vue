@@ -1,5 +1,5 @@
 <template>
-    <div class= "bg-grass-footer w-full">
+    <div class= " w-full">
         <div class="container px-8 md:px-0 mx-auto max-w-screen-xl py-14">
             <div class="flex ">
                 <img src="~/assets/icons/duck.svg" alt="Duck icon" class="mr-2 self-center">

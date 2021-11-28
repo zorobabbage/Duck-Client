@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-hidden">
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-RJ4ZEYV2FH"
@@ -16,7 +16,7 @@
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"
-      class="bg-sky"
+      class=""
     />
     <NavBar v-else :active-link="activeLink" />
     <Nuxt />
@@ -43,9 +43,6 @@ export default {
       }
       return { is: '' }
     }
-  },
-  beforeMount () {
-    this.$store.dispatch('ducks/fetchDarkmode')
   },
   mounted () {
     this.observeSections()

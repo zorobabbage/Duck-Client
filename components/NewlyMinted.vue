@@ -1,7 +1,7 @@
 <template>
-  <section class="flex flex-col overflow-x-scroll overflow-hidden pl-10">
-    <div class="flex  bg-grass-foreground rounded-l-3xl pl-10">
-        <div class="flex bg-grass-foreground">
+  <section class="flex flex-col overflow-x-scroll overflow-hidden pl-10  noscroll sm:px-8  md:rounded-3xl">
+    <div class="flex  bg-grass-foreground rounded-l-3xl pl-10 md:pl-0 noscroll">
+        <div class="flex bg-grass-foreground noscroll">
             <div
                 v-for="duckUri in latestFiveDuckUris"
                 :key="duckUri.id"
@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 html {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
@@ -65,6 +65,10 @@ html {
 }
 
 html::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+.noscroll::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
 }
 </style>

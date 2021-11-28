@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col items-center lg:max-w-none mx-auto bg-grass-background overflow-hidden">
+  <div class="flex flex-col  lg:max-w-none mx-auto bg-grass-background overflow-hidden items-center">
     <Hero id="home" class="" />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-xl">
-      <div class="p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-lg">
+      <div class="p-4 md:p-8">
         <DuckGif/>
       </div>
-      <div class="p-8">
+      <div class="p-4 md:p-8">
         <h4 class=" font-bold text-4xl">Non Fungible Ducks</h4>
         <p class="mt-5 text-xl text-gray-900">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
@@ -44,16 +44,18 @@
         <div>
         </div>
         </div>
+        <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2">Ducks hatched</h4>
+        <DucksSold class="mb-8"/>
       </div>
     </div>
-    <div class="max-w-screen-xl mt-24 items-start">
-      <h4 class="text-2xl font-bold ml-0 self-start">Latest Ducks in the pond</h4>
+    <div class="container max-w-screen-xl items-start mt-8 md:mt-16 px-4 md:px-0">
+      <h4 class="text-2xl font-bold text-left flex self-start mb-8">Latest Ducks in the pond</h4>
     </div>
     <NewlyMinted
         id="newly-minted"
-        class="mb-24 pl-0 "
+        class="mb-24 ml-12 md:ml-0 self-center"
       />
-    <Footer />
+    <Footer class="bg-grass-footer"/>
   </div>
 </template>
 

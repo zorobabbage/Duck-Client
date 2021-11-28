@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full  flex bg-sky  ">
+  <div class="w-full  flex " :style="{ backgroundColor: navbarColors[$route.path] }">
     <div class="max-w-screen-xl flex justify-center p-2 container mx-auto h-32">
       <h4 class=" text-4xl font-bold text-black self-center mr-auto">
         <NuxtLink to="/">Duck</NuxtLink>
@@ -7,7 +7,7 @@
       <NavItem to="/#home" class="ml-auto ">
         NFDs
       </NavItem>
-      <NavItem to="/#newly-minted" class="mr-0">
+      <NavItem to="/explore" class="mr-0">
         Explore
       </NavItem>
       <ConnectWallet/>
@@ -17,20 +17,12 @@
 
 <script>
 export default {
-  props: {
-    activeLink: {
-      type: String,
-      required: true
-    }
-  },
-  watch: {
-    activeLink (val) {
-      const links = document.querySelectorAll('span > a')
-      links.forEach((link) => {
-        link.classList.remove('nuxt-link-exact-active')
-      })
-      const link = document.querySelector(`span > a[href='/${val}']`)
-      link.classList.add('nuxt-link-exact-active')
+  data () {
+    return {
+      navbarColors: {
+        '/': '#90EBD0',
+        '/explore': 'white'
+      }
     }
   }
 }
