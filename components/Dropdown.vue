@@ -30,7 +30,7 @@
     >
       <div
         v-if="isMenuOpen"
-        class="absolute mt-2 w-10/12 rounded-lg shadow-lg text-sm overflow-hidden border"
+        class="absolute md:w-56 mt-2 w-11/12 rounded-lg shadow-lg text-sm overflow-hidden border"
       >
         <div
           class="rounded-md bg-white shadow-xs"
