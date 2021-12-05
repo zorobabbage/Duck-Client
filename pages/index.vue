@@ -55,7 +55,7 @@
         id="newly-minted"
         class="mb-24 ml-12 md:ml-0 self-center"
       />
-    <Footer class="bg-grass-footer"/>
+    <Footer background = "grass" />
   </div>
 </template>
 

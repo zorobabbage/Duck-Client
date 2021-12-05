@@ -1,10 +1,10 @@
 <template>
   <div class='bg-gray-50'>
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
-      <div class='flex flex-row'>
-        <h1 class='text-4xl font-medium mt-4 mr-auto'>Explore ducks</h1>
+      <div class='flex flex-col md:flex-row space-y-4 '>
+        <h1 class='text-4xl font-medium mt-4 mr-auto '>Explore ducks</h1>
         <div class='rounded-3xl bg-gray-200 flex flex-row'>
-          <input type='number' v-model='numberOfDucks' placeholder='Search ID' class='placeholder-gray-400 font-medium bg-gray-200 text-2xl h-16 w-36 rounded-2xl  md:text-basecursor-default focus:outline-none text-center   flex items-center hover:text-black  text-gray-700 focus:text-black  outline-none'/>
+          <input type='number' v-model='numberOfDucks' placeholder='Search ID' class='placeholder-gray-400 font-medium bg-gray-200 text-2xl h-16 w-full md:w-36 rounded-2xl  md:text-basecursor-default focus:outline-none text-center   flex items-center hover:text-black  text-gray-700 focus:text-black  outline-none'/>
           <div class='bg-gray-900 rounded-3xl w-16 h-16 items-center flex'>
             <svg xmlns='http://www.w3.org/2000/svg' class='h-7 w-7 mx-auto my-auto self-center text-gray-200' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
               <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
@@ -13,20 +13,20 @@
         </div>
       </div>
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
-        <h4 class='text-xl font-medium'>Filters</h4>
-        <div class='grid grid-cols-1 lg:grid-cols-5 gap-8'>
+        <h4 class='text-xl font-medium mb-4'>Filters</h4>
+        <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
           <Dropdown label='Bases' class='w-full' :list='bases' @clicked="sortBase"/>
-          <Dropdown label='Beaks' class='w-full' :list='beaks' @clicked="sortBase"/>
-          <Dropdown label='Eyes' class='w-full' :list='eyes' @clicked="sortBase"/>
-          <Dropdown label='Hats' class='w-full' :list='hats' @clicked="sortBase"/>
-          <Dropdown label='Outfits' class='w-full' :list='outfits' @clicked="sortBase"/>
+          <Dropdown label='Beaks' class='w-full' :list='bases' @clicked="sortBase"/>
+          <Dropdown label='Eyes' class='w-full' :list='bases' @clicked="sortBase"/>
+          <Dropdown label='Hats' class='w-full' :list='bases' @clicked="sortBase"/>
+          <Dropdown label='Outfits' class='w-full' :list='bases' @clicked="sortBase"/>
         </div>
       </div>
       <div class='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 my-12'>
         <NFTCard v-for='duck in ducks' :key='duck.id' :id='duck.id' :uri='duck.uri' class='mb-6'/>
       </div>
     </div>
-    <Footer class='bg-gray-700'/>
+    <Footer background="green"/>
   </div>
 </template>
 
@@ -48,19 +48,19 @@ export default {
       ],
       ducks: [
         {
-          uri: 'https://nfds.s3.eu-west-2.amazonaws.com/DUCK_0001.png',
+          uri: 'https://d22rrd5cdtalai.cloudfront.net/DUCK_0001_bb3236c9cc9099ce.png',
           id: 1
         },
         {
-          uri: 'https://nfds.s3.eu-west-2.amazonaws.com/DUCK_0002.png',
+          uri: 'https://d22rrd5cdtalai.cloudfront.net/DUCK_0002_b1388e49cec6cd66.png',
           id: 2
         },
         {
-          uri: 'https://nfds.s3.eu-west-2.amazonaws.com/DUCK_0003.png',
+          uri: 'https://d22rrd5cdtalai.cloudfront.net/DUCK_0003_b38e9e313c9a4c66.png',
           id: 3
         },
         {
-          uri: 'https://nfds.s3.eu-west-2.amazonaws.com/DUCK_0004.png',
+          uri: 'https://d22rrd5cdtalai.cloudfront.net/DUCK_0004_e33296ccc399c993.png',
           id: 4
         }
       ]

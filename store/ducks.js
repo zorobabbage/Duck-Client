@@ -12,6 +12,7 @@ function getRpcUrl (network) {
 const zilliqa = new Zilliqa(getRpcUrl('mainnet'))
 
 export const state = () => ({
+  duckIds: [],
   duckUris: []
 })
 

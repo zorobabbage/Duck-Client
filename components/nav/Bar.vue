@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full  flex " :style="{ backgroundColor: navbarColors[$route.path] }">
+  <div class="w-full  flex " :style="{ backgroundColor: color }">
     <div class="max-w-screen-xl flex justify-center p-2 container mx-auto h-32">
       <h4 class=" text-4xl font-bold text-black self-center mr-auto">
         <NuxtLink to="/">Duck</NuxtLink>
@@ -19,9 +19,22 @@
 export default {
   data () {
     return {
-      navbarColors: {
-        '/': '#90EBD0',
-        '/explore': 'white'
+      color: 'white'
+    }
+  },
+  mounted () {
+    const path = this.$route.path
+    if (path === '/') {
+      this.color = '#90EBD0'
+    }
+  },
+  watch: {
+    $route (to, from) {
+      const path = this.$route.path
+      if (path === '/') {
+        this.color = '#90EBD0'
+      } else {
+        this.color = 'white'
       }
     }
   }
