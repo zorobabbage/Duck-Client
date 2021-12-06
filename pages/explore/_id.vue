@@ -74,7 +74,7 @@ export default {
     async fetchDuck () {
       this.id = this.$route.params.id
       console.log(this.id)
-      this.duck = (await api.get(`http://192.168.1.113:5000/duck/${this.id}`)).data
+      this.duck = (await api.get(`http://localhost:4000/duck/${this.id}`)).data
 
       this.image = this.duck.quick_resource
       this.base = this.duck.attributes[0].value
