@@ -1,6 +1,5 @@
 import api from '~/mixins/api'
-
-const apiURL = 'http://localhost:4000'
+// import { fetchMultipleDucks } from '~/mixins/api'
 
 export const state = () => ({
   ducks: []
@@ -14,17 +13,20 @@ export const mutations = {
         state.ducks.push(duck)
       }
     })
+  },
+  CLEAR_DUCKS (state) {
+    state.ducks = []
   }
 }
 
 export const actions = {
-  async fetchDucks (context, data) {
-    let query = `${apiURL}/ducks?from=${data.from}&to=${data.to}`
-    if (data.options) {
-      query += `&${data.options}`
-    }
-    console.log(query)
-    const result = (await api.get(query)).data
+  async fetchDucks (context, params) {
+    console.log(`fetch ducks ${params.from} to ${params.to} with ${JSON.stringify(params)}`)
+    const result = (await api.fetchMultipleDucks(params))
+    console.log(result)
     context.commit('SET_DUCKS', result)
+  },
+  clearDucks (context) {
+    context.commit('CLEAR_DUCKS')
   }
 }
