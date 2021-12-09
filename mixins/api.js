@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:4000'
+const baseUrl = 'http://api.duck.community'
 
 async function fetchMultipleDucks (params) {
   const response = await axios.get(`${baseUrl}/ducks`, { params })
