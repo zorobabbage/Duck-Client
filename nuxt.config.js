@@ -21,7 +21,11 @@ export default {
         content: 'Disrupt, Buidl, Scale.'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap", }
+    
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -37,7 +41,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss'
   ],
@@ -47,7 +51,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend (config) {
+    extend(config) {
       config.node = {
         fs: 'empty'
       }

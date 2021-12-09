@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-hidden">
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-RJ4ZEYV2FH"
@@ -13,13 +13,10 @@
 
       gtag('config', 'G-RJ4ZEYV2FH')
     </script>
-    <CookieWarning class="bottom-0 w-full fixed mb-4" />
-    <div class="fixed right-0 h-screen mr-8 flex items-center justify-center">
-      <Socials v-if="!(breakpoint.is === 'md' || breakpoint.is === 'sm')" />
-    </div>
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"
+      class=""
     />
     <NavBar v-else :active-link="activeLink" />
     <Nuxt />
@@ -46,9 +43,6 @@ export default {
       }
       return { is: '' }
     }
-  },
-  beforeMount () {
-    this.$store.dispatch('ducks/fetchDarkmode')
   },
   mounted () {
     this.observeSections()
