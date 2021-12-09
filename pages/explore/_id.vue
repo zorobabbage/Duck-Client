@@ -70,7 +70,14 @@ export default {
     async fetchDuck () {
       this.id = this.$route.params.id
       this.duck = await api.fetchDuck(this.id)
-
+      console.log(this.duck.message)
+      if (this.duck.message) {
+        this.quickImage = '@/assets/images/unknown-duck.png'
+      } else {
+        this.handleDuckIfExsits()
+      }
+    },
+    handleDuckIfExsits () {
       this.image = this.duck.resource.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
       this.quickImage = this.duck.quick_resource
       
@@ -79,7 +86,7 @@ export default {
       this.eyes = this.duck.attributes[2].value
       this.hat = this.duck.attributes[3].value
       this.outfit = this.duck.attributes[4].value
-      this.background = this.duck.attributes[5].value
+      this.background = this.duck.attributes[5].value 
     },
     loadHighResImage () {
       let loadingFrame = new Image()

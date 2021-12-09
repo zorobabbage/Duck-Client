@@ -21,16 +21,17 @@
       </div>
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
-        <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
-          <Dropdown label='Bases' class='w-full' :list='bases' @clicked="filterBases"/>
-          <Dropdown label='Beaks' class='w-full' :list='bases' @clicked="filterBeaks"/>
-          <Dropdown label='Eyes' class='w-full' :list='bases' @clicked="filterEyes"/>
-          <Dropdown label='Hats' class='w-full' :list='bases' @clicked="filterHats"/>
-          <Dropdown label='Outfits' class='w-full' :list='bases' @clicked="filterOutfits"/>
+        <div class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
+          <Dropdown :label='labels.bases' class='w-full' :list='filters.bases' @clicked="filterBases"/>
+          <Dropdown :label='labels.beaks' class='w-full' :list='filters.beaks' @clicked="filterBeaks"/>
+          <Dropdown :label='labels.eyes' class='w-full' :list='filters.eyes' @clicked="filterEyes"/>
+          <Dropdown :label='labels.hats' class='w-full' :list='filters.hats' @clicked="filterHats"/>
+          <Dropdown :label='labels.outfits' class='w-full' :list='filters.outfits' @clicked="filterOutfits"/>
+          <Dropdown :label='labels.background' class='w-full' :list='filters.backgrounds' @clicked="filterBackground"/>
         </div>
         <h4 class='text-xl font-medium my-4'>Sort by</h4>
         <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
-          <Dropdown :label="labels.sort" class='w-full' :list='sorts' @clicked="selectSort"/>
+          <Dropdown :label="labels.sort" class='w-full' :list='filters.sorts' @clicked="selectSort"/>
         </div>
       </div>
       <div v-if="this.allDucks.length > 0" class='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 my-12'>
@@ -42,77 +43,24 @@
 </template>
 
 <script>
+import filters from '@/assets/objects/filters'
 export default {
   data () {
     return {
-      id: 0,
+      id: "",
       currentDuck: 1,
       ducksPerPage: 24,
-      searchResult: [],
-      searchQuery: '',
+      searchQuery: {},
       labels: {
-        bases: 'bases',
+        bases: 'Bases',
         beaks: 'Beaks',
         eyes: 'Eyes',
         hats: 'Hats',
         outfits: 'Outfits',
-        sort: 'ID - Newest ducks'
+        sort: 'Newest ducks',
+        background: 'Backgrounds'
       },
-      baseSelection: '',
-      beakSelection: '',
-      eyesSelection: '',
-      hatSelection: '',
-      outfitSelection: '',
-      sortSelection: '',
-      bases: [
-        {
-          name: 'Domestic Duck'
-        },
-        {
-          name: 'Eider'
-        },
-        {
-          name: 'Goldeneye'
-        }
-      ],
-      sorts: [
-        {
-          name: 'ID - Newest ducks',
-          value: { sortBy: 'ID', order: 'desc' }
-        },
-        {
-          name: 'ID - Oldest ducks',
-          value: { sortBy: 'ID', order: 'asc' }
-        },
-        {
-          name: 'Rarity - High to Low',
-          value: { sortBy: 'overallRarity', order: 'desc' }
-        },
-        {
-          name: 'Rarity - Low to High',
-          value: { sortBy: 'overallRarity', order: 'asc' }
-        },
-        {
-          name: 'Rarest base',
-          value: { sortBy: 'BaseRarity', order: 'desc' }
-        },
-        {
-          name: 'Rarest beak',
-          value: { sortBy: 'BeakRarity', order: 'desc' }
-        },
-        {
-          name: 'Rarest eyes',
-          value: { sortBy: 'EyesRarity', order: 'desc' }
-        },
-        {
-          name: 'Rarest hats',
-          value: { sortBy: 'HatsRarity', order: 'desc' }
-        },
-        {
-          name: 'Rarest outfit',
-          value: { sortBy: 'OutfitRarity', order: 'desc' }
-        }
-      ]
+      filters: {}
     }
   },
   computed: {
@@ -121,34 +69,58 @@ export default {
     }
   },
   methods: {
-    filterBases (e) {
-      this.baseSelection = e
+    async filterBases (e) {
+      this.labels.bases = e.name
+      this.searchQuery.base = e.value
+      this.fetchDucks(1, this.ducksPerPage)
     },
     filterBeaks (e) {
-      this.beakSelection = e
+      this.labels.beaks = e.name
+      this.searchQuery.beak = e.value
+      this.fetchDucks(1, this.ducksPerPage)
     },
     filterEyes (e) {
-      this.eyesSelection = e
+      this.labels.eyes = e.name
+      this.searchQuery.eyes = e.value
+      this.fetchDucks(1, this.ducksPerPage)
     },
     filterHats (e) {
-      this.hatSelection = e
+      this.labels.hats = e.name
+      this.searchQuery.hat = e.value
+      this.fetchDucks(1, this.ducksPerPage)
     },
     filterOutfits (e) {
-      this.outfitSelection = e
+      this.labels.outfits = e.name
+      this.searchQuery.outfit = e.value
+      this.fetchDucks(1, this.ducksPerPage)
+    },
+    filterBackground (e) {
+      this.labels.background = e.name
+      this.searchQuery.background = e.value
+      this.fetchDucks(1, this.ducksPerPage)
     },
     async selectSort (e) {
       this.labels.sort = e.name
-      this.sortSelection = e.value
-      this.searchQuery = e.value
-      this.clearDucks()
-      await this.fetchDucks(1, this.ducksPerPage, this.sortSelection)
+      const sortSelection = e.value
+      const oldsearchQuery = this.searchQuery
+      this.searchQuery = { ...oldsearchQuery, ...sortSelection }
+      this.currentDuck = 1
+      await this.fetchDucks(1, this.ducksPerPage, this.searchQuery)
     },
     clearDucks () {
       this.$store.dispatch('store/clearDucks')
     },
-    async fetchDucks (from, to, params) {
+    async fetchDucks (from, to) {
       console.log('fetch ducks ' + from + ' to ' + to)
-      await this.$store.dispatch('store/fetchDucks', { from, to, ...params })
+      Object.keys(this.searchQuery).forEach(key => {
+        if (this.searchQuery[key] === null) {
+          delete this.searchQuery[key]
+        }
+      })
+
+
+      if (from == 1) this.clearDucks()
+      await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery })
       this.currentDuck = to
     },
     getInitialDucks () {
@@ -176,6 +148,7 @@ export default {
     }
   },
   mounted () {
+    this.filters = filters
     this.getInitialDucks()
     this.getNextDucksOnScroll()
   }
