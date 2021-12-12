@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://192.168.1.113:4000'
+const baseUrl = process.env.STAGE === 'production' ?  'https://api.duck.community' : 'http://192.168.1.113:4000'
 
 async function fetchMultipleDucks (params) {
   const response = await axios.get(`${baseUrl}/ducks`, { params })
@@ -7,13 +7,17 @@ async function fetchMultipleDucks (params) {
 }
 
 async function fetchDuck (id) {
-  console.log(`${baseUrl}/duck/${id}`)
   const response = await axios.get(`${baseUrl}/duck/${id}`)
-  console.log(response.data)
+  return response.data
+}
+
+async function getAttributeCounts () {
+  const response = await axios.get(`${baseUrl}/attributes`)
   return response.data
 }
 
 export default {
   fetchMultipleDucks,
-  fetchDuck
+  fetchDuck,
+  getAttributeCounts
 }

@@ -100,6 +100,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('ducks/getAttributeCounts')
     console.log(this.integrateBetweenLimits(this.$store.state.ducks.currentDuck, this.$store.state.ducks.currentDuck + 1))
   },
   beforeMount () {
