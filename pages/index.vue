@@ -48,13 +48,14 @@
         <DucksSold class="mb-8" :currentDuck="currentDuck"/>
       </div>
     </div>
-    <div class="container max-w-screen-2xl items-start mt-8 md:mt-16 px-4 md:px-8">
+    <div class="container max-w-screen-xl items-start mt-8 md:mt-16 px-4 md:px-0">
       <h4 class="text-2xl font-bold text-left flex self-start mb-8">Latest Ducks in the pond</h4>
     </div>
     <NewlyMinted
         id="newly-minted"
-        class="mb-24 self-center"
+        class="mb-24 self-center max-w-screen-xl"
       />
+      <Team />
     <Footer background = "grass" />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-8 lg:mx-auto max-w-screen-md h-screen items-center m-auto mt-12 md:mt-24 ">
-    <div class="bg-gray-200 rounded-2xl p-8 lg:p-16 pt-16 flex flex-row">
+    <div class="bg-gray-100 rounded-2xl p-8 lg:p-16 pt-16 flex flex-row">
         <div>
             <h1 class="font-black text-7xl">{{ error.statusCode }}</h1>
             <h1 class="font-black text-7xl text-gray-700" v-if="error.statusCode === 404">Page not found</h1>
