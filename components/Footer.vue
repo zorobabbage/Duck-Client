@@ -29,7 +29,6 @@ export default {
   },
   mounted () {
     if (this.background === 'grass') {
-      console.log('reeeeeeeeeeee')
       this.line = '#3C4B33'
       this.bg = 'bg-grass-footer'
     }

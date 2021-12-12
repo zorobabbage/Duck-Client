@@ -24,7 +24,8 @@ export const actions = {
     console.log(`fetch ducks ${params.from} to ${params.to} with ${JSON.stringify(params)}`)
     const result = (await api.fetchMultipleDucks(params))
     console.log(result)
-    context.commit('SET_DUCKS', result)
+    context.commit('SET_DUCKS', result.resultDucks)
+    return result.ducksInSearch
   },
   clearDucks (context) {
     context.commit('CLEAR_DUCKS')

@@ -1,42 +1,31 @@
-import { Zilliqa } from '@zilliqa-js/zilliqa'
-
-function getRpcUrl (network) {
-  const rpcUrl =
-    network === 'mainnet'
-      ? 'https://api.zilliqa.com'
-      : 'https://dev-api.zilliqa.com'
-
-  return rpcUrl
-}
-
-const zilliqa = new Zilliqa(getRpcUrl('mainnet'))
+import api from '~/mixins/api'
+// import { fetchMultipleDucks } from '~/mixins/api'
 
 export const state = () => ({
-  duckIds: [],
-  duckUris: []
+  ducks: [],
+  currentDuck: 1
 })
 
 export const mutations = {
-  SET_DUCK_IDS (state, ids) {
-    state.duckIds = [...state.duckIds, ...ids]
+  SET_DUCKS (state, newDucks) {
+    newDucks.forEach((duck) => {
+      const exists = state.ducks.find(x => x.id === duck.id)
+      if (!exists) {
+        state.ducks.push(duck)
+      }
+    })
   },
-  SET_DUCK_URIS (state, uris) {
-    state.duckUris = [...state.duckUris, ...uris]
+  SET_CURRENT_DUCK (state, currentDuck) {
+    state.currentDuck = currentDuck
   }
 }
 
 export const actions = {
-  async fetchDuckUris (context) {
-    const tokenUris = (
-      await zilliqa.blockchain.getSmartContractSubState(
-        '0x06f70655d4AA5819E711563EB2383655449f24E9',
-        'token_uris'
-      )
-    ).result.token_uris
-    console.log(tokenUris)
-    const duckUris = Object.entries(tokenUris).map((entry) => {
-      return { id: entry[0], uri: entry[1] }
-    })
-    context.commit('SET_DUCK_URIS', duckUris)
+  async fetchDucks (context, params) {
+    const result = (await api.fetchMultipleDucks(params)).resultDucks
+    context.commit('SET_DUCKS', result)
+  },
+  async fetchCurrentDuck (context) {
+    context.commit('SET_CURRENT_DUCK', 3960)
   }
 }

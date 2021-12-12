@@ -24,15 +24,15 @@
     </div>
     <transition
       enter-active-class="transition ease-out duration-100"
-      enter-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
+      enter-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
       leave-active-class="transition ease-in duration-75"
-      leave-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
+      leave-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-95"
     >
       <div
         v-if="isMenuOpen"
-        class="absolute md:w-56 mt-2 w-11/12 rounded-lg shadow-lg text-sm overflow-hidden border"
+        class="absolute md:w-56 mt-2 w-11/12 rounded-lg shadow-lg text-sm max-h-64 overflow-y-auto border"
       >
         <div
           class="rounded-md bg-white shadow-xs"
@@ -43,8 +43,8 @@
           <div>
             <div class="bg-gray-50 p-2 flex items-center">
               <div class="w-full">
-                <div class="p-2 hover:bg-gray-200 rounded-md cursor-pointer" v-for="attribute in list" :key="attribute.name" v-on:click="onClickButton(attribute)">
-                  <p v-on:click="onClickButton(attribute)">{{attribute.name}}</p>
+                <div class="p-2 hover:bg-gray-200 rounded-md cursor-pointer" :class="{'bg-amber-100': selected === attribute}" v-for="attribute in list" :key="attribute.name" v-on:click="onClickButton(attribute)">
+                  <p>{{attribute.name}}</p>
                 </div>
               </div>
             </div>
@@ -60,7 +60,8 @@ import ClickOutside from 'vue-click-outside'
 export default {
   data () {
     return {
-      isMenuOpen: false
+      isMenuOpen: false,
+      selected: {}
     }
   },
   props: {
@@ -68,13 +69,17 @@ export default {
       type: String
     },
     list: {
-      type: Array,
-      required: true
+      type: Array
+    },
+    type: {
+      type: String
     }
   },
   methods: {
     onClickButton (attribute) {
-      this.$emit('clicked', attribute)
+      let type = this.type
+      this.selected = attribute
+      this.$emit('clicked', {type, attribute})
     },
     hide () {
       this.isMenuOpen = false

@@ -1,15 +1,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}'
   ],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     extend: { 
       borderWidth: {
@@ -40,9 +39,6 @@ module.exports = {
         sans: ['Quicksand', ...defaultTheme.fontFamily.sans]
       }
     }
-  },
-  variants: {
-    extend: {}
   },
   plugins: []
 }

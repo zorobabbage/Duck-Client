@@ -22,18 +22,19 @@
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
         <div class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
-          <Dropdown :label='labels.bases' class='w-full' :list='filters.bases' @clicked="filterBases"/>
-          <Dropdown :label='labels.beaks' class='w-full' :list='filters.beaks' @clicked="filterBeaks"/>
-          <Dropdown :label='labels.eyes' class='w-full' :list='filters.eyes' @clicked="filterEyes"/>
-          <Dropdown :label='labels.hats' class='w-full' :list='filters.hats' @clicked="filterHats"/>
-          <Dropdown :label='labels.outfits' class='w-full' :list='filters.outfits' @clicked="filterOutfits"/>
-          <Dropdown :label='labels.background' class='w-full' :list='filters.backgrounds' @clicked="filterBackground"/>
+          <Dropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
+          <Dropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
+          <Dropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
+          <Dropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
+          <Dropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
+          <Dropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
         </div>
         <h4 class='text-xl font-medium my-4'>Sort by</h4>
         <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
           <Dropdown :label="labels.sort" class='w-full' :list='filters.sorts' @clicked="selectSort"/>
         </div>
       </div>
+      <h4 class='text-2xl font-medium mb-4'>{{ numberOfDucksInQuery }} results</h4>
       <div v-if="this.allDucks.length > 0" class='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 my-12'>
         <NFTCard v-for='duck in allDucks' :key='duck.id' :duck="duck" class='mb-6'/>
       </div>
@@ -50,15 +51,16 @@ export default {
       id: "",
       currentDuck: 1,
       ducksPerPage: 24,
-      searchQuery: {},
+      numberOfDucksInQuery: 0,
+      searchQuery: { sortBy: 'ID', order: 'desc' },
       labels: {
-        bases: 'Bases',
-        beaks: 'Beaks',
-        eyes: 'Eyes',
-        hats: 'Hats',
-        outfits: 'Outfits',
-        sort: 'Newest ducks',
-        background: 'Backgrounds'
+        'base': 'Bases',
+        'beak': 'Beaks',
+        'eyes': 'Eyes',
+        'hat': 'Hats',
+        'outfit': 'Outfits',
+        'sort': 'Newest ducks',
+        'background': 'Backgrounds'
       },
       filters: {}
     }
@@ -69,88 +71,61 @@ export default {
     }
   },
   methods: {
-    async filterBases (e) {
-      this.labels.bases = e.name
-      this.searchQuery.base = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    filterBeaks (e) {
-      this.labels.beaks = e.name
-      this.searchQuery.beak = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    filterEyes (e) {
-      this.labels.eyes = e.name
-      this.searchQuery.eyes = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    filterHats (e) {
-      this.labels.hats = e.name
-      this.searchQuery.hat = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    filterOutfits (e) {
-      this.labels.outfits = e.name
-      this.searchQuery.outfit = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    filterBackground (e) {
-      this.labels.background = e.name
-      this.searchQuery.background = e.value
-      this.fetchDucks(1, this.ducksPerPage)
-    },
-    async selectSort (e) {
-      this.labels.sort = e.name
-      const sortSelection = e.value
-      const oldsearchQuery = this.searchQuery
-      this.searchQuery = { ...oldsearchQuery, ...sortSelection }
+    filter(e) {
+      this.labels[e.type] = e.attribute.name
+      this.searchQuery[e.type] = e.attribute.value
       this.currentDuck = 1
-      await this.fetchDucks(1, this.ducksPerPage, this.searchQuery)
+      this.fetchDucks(this.currentDuck, this.ducksPerPage, this.searchQuery)
+    },
+    selectSort (e) {
+      this.labels.sort = e.attribute.name
+      this.searchQuery = { ...this.searchQuery, ...e.attribute.value }
+      this.currentDuck = 1
+      this.fetchDucks(this.currentDuck, this.ducksPerPage, this.searchQuery)
     },
     clearDucks () {
       this.$store.dispatch('store/clearDucks')
     },
     async fetchDucks (from, to) {
-      console.log('fetch ducks ' + from + ' to ' + to)
       Object.keys(this.searchQuery).forEach(key => {
         if (this.searchQuery[key] === null) {
           delete this.searchQuery[key]
         }
       })
 
-
       if (from == 1) this.clearDucks()
-      await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery })
+      //if theres no more ducks to fetch then dont needlessly get from api
+      if (this.numberOfDucksInQuery > from || to <= this.ducksPerPage) {
+        console.log('fetch ducks ' + from + ' to ' + to)
+        this.numberOfDucksInQuery = await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery }) 
+      }
       this.currentDuck = to
     },
-    getInitialDucks () {
-      this.searchQuery = { sortBy: 'ID', order: 'desc' }
-      const from = 1
-      const to = this.ducksPerPage - 1
-      this.currentDuck = this.ducksPerPage
-      this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery })
-    },
     getNextDucksOnScroll () {
-      window.onscroll = () => {
-        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
-        if (bottomOfWindow) {
-          this.fetchDucks(this.currentDuck, this.ducksPerPage + this.currentDuck, this.searchQuery)
-        }
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-          document.getElementById('scrollTopButton').style.display = 'block'
-        } else {
-          document.getElementById('scrollTopButton').style.display = 'none'
-        }
+      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight
+      if (bottomOfWindow) {
+        this.fetchDucks(this.currentDuck + 1, this.ducksPerPage + this.currentDuck, this.searchQuery)
+      }
+      if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+        document.getElementById('scrollTopButton').style.display = 'block'
+      } else {
+        document.getElementById('scrollTopButton').style.display = 'none'
       }
     },
     scrollToTop () {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' })
     }
   },
-  mounted () {
+  async mounted () {
     this.filters = filters
-    this.getInitialDucks()
+    await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
     this.getNextDucksOnScroll()
+  },
+  beforeMount () {
+    window.addEventListener('scroll', this.getNextDucksOnScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.getNextDucksOnScroll)
   }
 }
 </script>
