@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import api from '@/mixins/api.js'
+import api from '@/helpers/api.js'
 export default {
   data () {
     return {

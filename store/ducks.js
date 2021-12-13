@@ -1,5 +1,4 @@
-import api from '~/mixins/api'
-// import { fetchMultipleDucks } from '~/mixins/api'
+import api from '~/helpers/api'
 
 export const state = () => ({
   ducks: [],
