@@ -1,44 +1,42 @@
 <template>
-  <div class="fixed w-full p-2 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-75 bg-opacity-75 backdrop-filter backdrop-blur-sm flex justify-center">
-    <NavItem to="/#home" class="ml-auto">
-      Home
-    </NavItem>
-    <NavItem to="/#newly-minted">
-      Newly Minted
-    </NavItem>
-    <NavItem to="/#what-the-duck">
-      What the duck?
-    </NavItem>
-    <img src="~/assets/icons/duck.svg" alt="Duck icon">
-    <NavItem to="/#roadmap">
-      Roadmap
-    </NavItem>
-    <NavItem to="/#tokenomics">
-      Tokenomics
-    </NavItem>
-    <NavItem to="/#papers">
-      Papers
-    </NavItem>
-    <ToggleDarkmode class="ml-auto mr-2 self-center" />
+  <div class="w-full  flex " :style="{ backgroundColor: color }">
+    <div class="max-w-screen-xl flex justify-center p-2 container mx-auto h-32">
+      <img src="~/assets/icons/duck.svg" alt="Duck icon" class="w-12">
+      <h4 class="ml-2 text-4xl font-bold text-black self-center mr-auto">
+        <NuxtLink to="/">Duck</NuxtLink>
+      </h4>
+      <NavItem to="/#home" class="ml-auto ">
+        NFDs
+      </NavItem>
+      <NavItem to="/explore" class="mr-0">
+        Explore
+      </NavItem>
+      <ConnectWallet/>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    activeLink: {
-      type: String,
-      required: true
+  data () {
+    return {
+      color: 'white'
+    }
+  },
+  mounted () {
+    const path = this.$route.path
+    if (path === '/') {
+      this.color = '#90EBD0'
     }
   },
   watch: {
-    activeLink (val) {
-      const links = document.querySelectorAll('span > a')
-      links.forEach((link) => {
-        link.classList.remove('nuxt-link-exact-active')
-      })
-      const link = document.querySelector(`span > a[href='/${val}']`)
-      link.classList.add('nuxt-link-exact-active')
+    $route (to, from) {
+      const path = this.$route.path
+      if (path === '/') {
+        this.color = '#90EBD0'
+      } else {
+        this.color = 'white'
+      }
     }
   }
 }

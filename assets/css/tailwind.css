@@ -1,19 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.nuxt-link-exact-active {
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(
-      90deg,
-      #fdc70c 0.21%,
-      #f9ac15 37.48%,
-      #ef6a2b 60.61%,
-      #ed683c 78.59%,
-      #e93e3a 99.06%
-    )
-    1;
-}
 
 .text-duck-gradient {
   background: linear-gradient(
@@ -30,46 +19,15 @@
   background-clip: text !important;
 }
 
-@font-face {
-  font-family: 'Quicksand';
-  font-style: light;
-  font-weight: 300;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Medium.ttf') format('truetype');
+
+
+* {
+  font-family: 'Raleway', 'Fira Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
+  box-sizing: border-box;
+  touch-action: manipulation;
 }
 
-@font-face {
-  font-family: 'Quicksand';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: medium;
-  font-weight: 500;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: semi-bold;
-  font-weight: 600;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-SemiBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: bold;
-  font-weight: 700;
-  font-display: swap;
-  src: url('~/assets/fonts/Quicksand-Bold.ttf') format('truetype');
-}
-
+ 
 p, h2, h1, button {
   @apply text-gray-900;
   @apply dark:text-gray-50;

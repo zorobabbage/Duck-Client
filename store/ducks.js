@@ -1,74 +1,38 @@
-import { Zilliqa } from '@zilliqa-js/zilliqa'
-
-function getRpcUrl (network) {
-  const rpcUrl =
-    network === 'mainnet'
-      ? 'https://api.zilliqa.com'
-      : 'https://dev-api.zilliqa.com'
-
-  return rpcUrl
-}
-
-const zilliqa = new Zilliqa(getRpcUrl(process.env.zilliqaNetwork))
+import api from '~/helpers/api'
 
 export const state = () => ({
-  currentDate: Date.now(),
-  launchDate: Date.UTC(2021, 5, 19, 3),
-  darkmode: undefined,
-  duckUris: []
+  ducks: [],
+  currentDuck: 1,
+  attributeCounts: {}
 })
 
 export const mutations = {
-  SET_CURRENT_DATE (state) {
-    state.currentDate = Date.now()
+  SET_DUCKS (state, newDucks) {
+    newDucks.forEach((duck) => {
+      const exists = state.ducks.find(x => x.id === duck.id)
+      if (!exists) {
+        state.ducks.push(duck)
+      }
+    })
   },
-  SET_DARKMODE (state, bool) {
-    state.darkmode = bool
+  SET_CURRENT_DUCK (state, currentDuck) {
+    state.currentDuck = currentDuck
   },
-  SET_DUCK_IDS (state, ids) {
-    state.duckIds = [...state.duckIds, ...ids]
-  },
-  SET_DUCK_URIS (state, uris) {
-    state.duckUris = [...state.duckUris, ...uris]
+  SET_ATTRIBUTE_COUNTS (state, obj) {
+    state.attributeCounts = obj
   }
 }
 
 export const actions = {
-  startCurrentDateInterval (context) {
-    setInterval(() => {
-      context.commit('SET_CURRENT_DATE')
-    }, 1000)
+  async fetchDucks (context, params) {
+    const result = (await api.fetchMultipleDucks(params)).resultDucks
+    context.commit('SET_DUCKS', result)
   },
-  fetchDarkmode (context) {
-    const theme = localStorage.getItem('theme')
-    if (
-      theme === 'dark' ||
-      (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      context.commit('SET_DARKMODE', true)
-      document.documentElement.classList.add('dark')
-    } else {
-      context.commit('SET_DARKMODE', false)
-      document.documentElement.classList.remove('dark')
-    }
-    localStorage.setItem('theme', context.state.darkmode ? 'dark' : 'light')
+  async fetchCurrentDuck (context) {
+    context.commit('SET_CURRENT_DUCK', 3960)
   },
-  toggleDarkmode (context) {
-    context.commit('SET_DARKMODE', !context.state.darkmode)
-    localStorage.setItem('theme', context.state.darkmode ? 'dark' : 'light')
-    const classList = document.documentElement.classList
-    context.state.darkmode ? classList.add('dark') : classList.remove('dark')
-  },
-  async fetchDuckUris (context) {
-    const tokenUris = (
-      await zilliqa.blockchain.getSmartContractSubState(
-        process.env.nfdContract,
-        'token_uris'
-      )
-    ).result.token_uris
-    const duckUris = Object.entries(tokenUris).map((entry) => {
-      return { id: entry[0], uri: entry[1] }
-    })
-    context.commit('SET_DUCK_URIS', duckUris)
+  async getAttributeCounts (context) {
+    const result = await api.getAttributeCounts()
+    context.commit('SET_ATTRIBUTE_COUNTS', result)
   }
 }
