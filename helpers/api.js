@@ -1,6 +1,7 @@
 import axios from 'axios'
-const baseUrl = process.env.API === 'production' ?  'https://api.duck.community' : 'http://192.168.1.113:4000'
 
+const baseUrl = process.env.apiAddress
+console.log("API URL: " + baseUrl)
 async function fetchMultipleDucks (params) {
   const response = await axios.get(`${baseUrl}/ducks`, { params })
   return response.data
