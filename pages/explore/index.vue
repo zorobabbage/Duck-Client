@@ -1,6 +1,6 @@
 <template>
-  <div class='bg-gray-50 scroll-smooth'>
-    <div @click="scrollToTop" id="scrollTopButton" class="bg-gray-700 shadow-lg rounded-full text-center float-right cursor-pointer p-2 fixed right-5 bottom-5" style="display: none">
+  <div class='bg-gray-50'>
+    <div @click="scrollToTop" id="scrollTopButton" class="z-10 bg-gray-700 shadow-lg rounded-full text-center float-right cursor-pointer p-2 fixed right-5 bottom-5" style="display: none">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
       </svg>
@@ -22,12 +22,12 @@
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
         <div class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
-          <Dropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
-          <Dropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
-          <Dropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
-          <Dropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
-          <Dropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
-          <Dropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
+          <Dropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
+          <Dropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
+          <Dropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
+          <Dropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
+          <Dropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
+          <Dropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
         </div>
         <h4 class='text-xl font-medium my-4'>Sort by</h4>
         <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
@@ -39,7 +39,6 @@
         <NFTCard v-for='duck in allDucks' :key='duck.id' :duck="duck" class='mb-6'/>
       </div>
     </div>
-    <Footer background="green"/>
   </div>
 </template>
 
@@ -50,6 +49,7 @@ export default {
     return {
       id: "",
       currentDuck: 1,
+      fetchedDucks: {},
       ducksPerPage: 24,
       numberOfDucksInQuery: 0,
       searchQuery: { sortBy: 'ID', order: 'desc' },
@@ -62,7 +62,8 @@ export default {
         'sort': 'Newest ducks',
         'background': 'Backgrounds'
       },
-      filters: {}
+      filters: {},
+      lastFetchTime: 0
     }
   },
   computed: {
@@ -84,9 +85,13 @@ export default {
       this.fetchDucks(this.currentDuck, this.ducksPerPage, this.searchQuery)
     },
     clearDucks () {
+      this.fetchedDucks = {}
       this.$store.dispatch('store/clearDucks')
     },
     async fetchDucks (from, to) {
+      if (Date.now() - this.lastFetchTime < 300) return //rate limit api calling (prevent logitech mouse from spamming api)
+      this.lastFetchTime = Date.now()
+
       Object.keys(this.searchQuery).forEach(key => {
         if (this.searchQuery[key] === null) {
           delete this.searchQuery[key]
@@ -95,17 +100,24 @@ export default {
 
       if (from == 1) this.clearDucks()
       //if theres no more ducks to fetch then dont needlessly get from api
-      if (this.numberOfDucksInQuery > from || to <= this.ducksPerPage) {
+      if ((this.numberOfDucksInQuery > from || to <= this.ducksPerPage) && (this.fetchedDucks[from] == undefined)) {
         console.log('fetch ducks ' + from + ' to ' + to)
+        this.fetchedDucks[from] = true
         this.numberOfDucksInQuery = await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery }) 
       }
       this.currentDuck = to
     },
     getNextDucksOnScroll () {
-      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight
-      if (bottomOfWindow) {
+      const {
+            scrollTop,
+            scrollHeight,
+            clientHeight
+        } = document.documentElement
+
+      if (scrollTop + clientHeight >= scrollHeight - 250) {
         this.fetchDucks(this.currentDuck + 1, this.ducksPerPage + this.currentDuck, this.searchQuery)
       }
+
       if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
         document.getElementById('scrollTopButton').style.display = 'block'
       } else {
@@ -122,7 +134,7 @@ export default {
     this.getNextDucksOnScroll()
   },
   beforeMount () {
-    window.addEventListener('scroll', this.getNextDucksOnScroll)
+    window.addEventListener('scroll', this.getNextDucksOnScroll, { passive: true })
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.getNextDucksOnScroll)

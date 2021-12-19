@@ -2,32 +2,15 @@
   <div class="flex flex-col  lg:max-w-none mx-auto bg-grass-background overflow-hidden items-center">
     <Hero id="home" class="" />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-lg">
-      <div class="p-4 md:p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-xl">
+      <div class="p-4 md:p-8 xl:pl-0">
         <DuckGif/>
       </div>
-      <div class="p-4 md:p-8">
-        <h4 class=" font-bold text-4xl">Non Fungible Ducks</h4>
-        <p class="mt-5 text-xl text-gray-900">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
+      <div class="p-4 md:p-8 xl:pr-0">
+        <h4 class=" font-extrabold text-5xl mt-2 text-grass-muted">Mint A Duck</h4>
+        <p class="mt-5 text-xl text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
-          <!--desktop-->
-          <div class="hidden md:flex ml-2 gap-1">
-            <input type="number" v-model="numberOfDucks" class="appearance-none font-medium  text-2xl h-16 w-24 rounded-2xl  md:text-basecursor-default focus:outline-none text-center bg-gray-200  flex items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
-            <div class="flex-col gap-1">
-              <div class="">
-                <button class="bg-gray-200 rounded-lg  outline-none focus:outline-none w-7 h-7" @click="incrementNumberOfDucks">
-                  <span class="m-auto text-2xl font-thin">+</span>
-                </button>
-              </div>
-              <div>
-                <button class="bg-gray-200 rounded-lg bottom-0 outline-none focus:outline-none w-7 h-7 mb-0 mt-auto" @click="decrementNumberOfDucks">
-                  <span class="m-auto text-2xl font-thin">−</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <!--mobile-->
-          <div class="flex md:hidden flex-row  gap-1 mb-2">
+          <div class="flex  flex-row  gap-1 mb-2">
                 <input type="number" v-model="numberOfDucks" class="appearance-none font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
                 <div class="w-16">
                   <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="decrementNumberOfDucks">
@@ -40,7 +23,7 @@
                   </button>
                 </div>
           </div>
-          <button class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">Mint ( {{ zilToPay }} ZIL)</button>
+          <button class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{ wallet.isConnected ? `Mint (${zilToPay} ZIL)` : 'Connect Wallet' }} </button>
         <div>
         </div>
         </div>
@@ -49,13 +32,13 @@
       </div>
     </div>
     <div class="container max-w-screen-xl items-start mt-8 md:mt-16 px-4 md:px-0">
-      <h4 class="text-2xl font-bold text-left flex self-start mb-8">Latest Ducks in the pond</h4>
+      <h4 class="text-2xl font-bold text-left flex self-start mb-8">Fresh from the egg.</h4>
     </div>
     <NewlyMinted
         id="newly-minted"
         class="mb-24 self-center max-w-screen-xl"
       />
-      <Team />
+      <Team class="my-24"/>
     <Footer background = "grass" />
   </div>
 </template>
@@ -72,13 +55,11 @@ export default {
   methods: {
     incrementNumberOfDucks () {
       this.numberOfDucks++
-      this.integrateBetweenLimits(this.currentDuck, this.numberOfDucks + this.currentDuck)
     },
     decrementNumberOfDucks () {
       if (this.numberOfDucks > 1) {
         this.numberOfDucks--
       }
-      this.integrateBetweenLimits(this.currentDuck, this.numberOfDucks + this.currentDuck)
     },
     integrateBetweenLimits (min, max) {
       // 1/120,000x^3 + 1200x
@@ -98,6 +79,14 @@ export default {
   computed: {
     currentDuck () {
       return this.$store.state.ducks.currentDuck
+    },
+    wallet () {
+      return this.$store.state.wallet.wallet
+    }
+  },
+  watch: {
+    numberOfDucks: function () {
+      this.integrateBetweenLimits(this.currentDuck, parseInt(this.numberOfDucks) + this.currentDuck)
     }
   },
   mounted () {

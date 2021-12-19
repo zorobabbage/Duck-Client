@@ -25,13 +25,12 @@ export default {
         async handleClick() {
             if (this.wallet.isConnected) console.log('already connected') // goto(`/account/${$wallet.bech32}`)
             if (!window.zilPay) return
-            console.log('connect')
             const isConnect = await window.zilPay.wallet.connect();
             if (isConnect) {
                 this.$store.dispatch('wallet/setWallet', { 
                     bech32: window.zilPay.wallet.defaultAccount.bech32,
                     base16: window.zilPay.wallet.defaultAccount.base16,
-                    isConnect: true
+                    isConnected: true
                 })
             } else {
                 throw new Error('user rejected');
