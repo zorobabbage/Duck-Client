@@ -1,6 +1,6 @@
 <template>
     <div class="inline-flex self-center px-3 rounded-2xl bg-gray-100 text-gray-700 h-14 my-auto text-lg">
-        <button @click="handleClick" class="px-2 ">
+        <button @click="handleClick" class="px-2 font-medium">
             {{ zilPay ? wallet.bech32 ? `${wallet.bech32.slice(0, 6)}...${wallet.bech32.slice(-6)}` : 'Connect wallet' : 'Zilpay not found' }}
         </button>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="self-center ml-auto text-gray-700">
@@ -23,8 +23,14 @@ export default {
     },
     methods: {
         async handleClick() {
-            if (this.wallet.isConnected) console.log('already connected') // goto(`/account/${$wallet.bech32}`)
+            if (this.wallet.isConnected) {
+                this.$router.push({
+                    path: '/wallet'
+                })
+            }
+
             if (!window.zilPay) return
+
             const isConnect = await window.zilPay.wallet.connect();
             if (isConnect) {
                 this.$store.dispatch('wallet/setWallet', { 
@@ -32,6 +38,8 @@ export default {
                     base16: window.zilPay.wallet.defaultAccount.base16,
                     isConnected: true
                 })
+                console.log(this.wallet)
+                this.$nuxt.$emit('walletConnected')
             } else {
                 throw new Error('user rejected');
             }
