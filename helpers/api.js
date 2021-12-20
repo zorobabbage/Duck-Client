@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseUrl = process.env.apiAddress
-console.log("API URL: " + baseUrl)
+const baseUrl = process.env.apiAddress || 'https://api.duck.community'
+
 async function fetchMultipleDucks (params) {
   const response = await axios.get(`${baseUrl}/ducks`, { params })
   return response.data

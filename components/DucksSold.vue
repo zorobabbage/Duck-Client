@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-grass-foreground px-10 py-8" style="border-radius: 40px;">
+    <div class="bg-grass-foreground px-10 py-8 rounded-3xl">
         <div class="grid grid-cols-2">
             <div>
                 <h4 class="text-2xl font-medium">{{ percentageSold }}%</h4>
