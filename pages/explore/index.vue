@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     allDucks () {
-      return this.$store.state.store.ducks
+      return this.$store.state.explore.ducks
     }
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
     },
     clearDucks () {
       this.fetchedDucks = {}
-      this.$store.dispatch('store/clearDucks')
+      this.$store.dispatch('explore/clearDucks')
     },
     async fetchDucks (from, to) {
       if (Date.now() - this.lastFetchTime < 300) return //rate limit api calling (prevent logitech mouse from spamming api)
@@ -103,7 +103,7 @@ export default {
       if ((this.numberOfDucksInQuery > from || to <= this.ducksPerPage) && (this.fetchedDucks[from] == undefined)) {
         console.log('fetch ducks ' + from + ' to ' + to)
         this.fetchedDucks[from] = true
-        this.numberOfDucksInQuery = await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery }) 
+        this.numberOfDucksInQuery = await this.$store.dispatch('explore/fetchDucks', { from, to, ...this.searchQuery }) 
       }
       this.currentDuck = to
     },

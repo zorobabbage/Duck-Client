@@ -1,5 +1,3 @@
-import api from '~/helpers/api'
-
 export const state = () => ({
   wallet: {
     bech32: '',

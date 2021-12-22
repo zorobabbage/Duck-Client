@@ -4,7 +4,6 @@ export default {
   env: {
     nfdContract: process.env.NFD_CONTRACT,
     zilliqaNetwork: process.env.ZILLIQA_NETWORK,
-    apiAddress: process.env.API
   },
   
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -48,7 +47,25 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios'
+  ],
+
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
+  },
+
+  axios: {
+    baseURL: 'https://api.duck.community', // Used as fallback if no runtime config is provided
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

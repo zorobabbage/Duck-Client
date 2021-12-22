@@ -28,6 +28,7 @@
           <BurgerItem to="/explore" @click="show = false">
             Explore
           </BurgerItem>
+          <ConnectWallet class="w-full text-center text-lg bg-gray-300"/>
         </div>
       </div>
     </transition>

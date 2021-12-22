@@ -23,7 +23,8 @@
                   </button>
                 </div>
           </div>
-          <button class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{ wallet.isConnected ? `Mint (${zilToPay} ZIL)` : 'Connect Wallet' }} </button>
+          <ConnectWallet v-if="!wallet.isConnected" class="w-full md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  font-medium text-xl my-auto inline-flex items-center mx-auto"></ConnectWallet>
+          <button v-if="wallet.isConnected" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{`Mint (${zilToPay} ZIL)`}} </button>
         <div>
         </div>
         </div>
@@ -45,6 +46,7 @@
 
 <script>
 import Big from 'big.js'
+import helper from '../middleware/zilliqa'
 export default {
   data () {
     return {
@@ -94,7 +96,7 @@ export default {
     console.log(this.integrateBetweenLimits(this.$store.state.ducks.currentDuck, this.$store.state.ducks.currentDuck + 1))
   },
   beforeMount () {
-    this.$store.dispatch('ducks/fetchCurrentDuck')
+    this.$store.dispatch('ducks/mainGetBlock')
   }
 }
 </script>

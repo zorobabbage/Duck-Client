@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import api from '@/helpers/api.js'
+
 export default {
   data () {
     return {
@@ -53,7 +53,7 @@ export default {
   methods: {
     async fetchDuck () {
       this.id = this.$route.params.id
-      this.duck = await api.fetchDuck(this.id)
+      this.duck = await this.$axios.$get(`/duck/${this.id}`)
 
       if (this.duck.message) {
         this.quickImage = '@/assets/images/unknown-duck.png'
