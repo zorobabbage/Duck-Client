@@ -51,20 +51,8 @@ export default {
     '@nuxtjs/axios'
   ],
 
-  publicRuntimeConfig: {
-    axios: {
-      baseURL: process.env.BASE_URL
-    }
-  },
-
-  privateRuntimeConfig: {
-    axios: {
-      baseURL: process.env.BASE_URL
-    }
-  },
-
   axios: {
-    baseURL: 'https://api.duck.community', // Used as fallback if no runtime config is provided
+    baseURL: process.env.API_URL,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
