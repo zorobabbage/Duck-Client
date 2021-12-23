@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between p-2">
-    <NuxtLink
-      :to="to"
+    <button
+      @click="to"
       class="
         hover:underline
         flex
@@ -24,21 +24,22 @@
         />
       </svg>
       <a class="self-center"> {{ text }}</a>
-    </NuxtLink>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    to: {
-      type: String,
-      default: ''
-    },
     text: {
       type: String,
       default: 'Back'
     }
-  }
+  },
+  methods: {
+      to() {
+        this.$router.go(-1);
+      },
+    }
 }
 </script>

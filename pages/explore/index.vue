@@ -6,6 +6,7 @@
       </svg>
     </div>
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
+
       <div class='flex flex-col md:flex-row space-y-4 '>
         <h1 class='text-4xl font-medium mt-4 mr-auto '>Explore ducks</h1>
         <div class='rounded-3xl bg-gray-200 flex flex-row'>
@@ -19,9 +20,21 @@
           </NuxtLink>
         </div>
       </div>
+
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
-        <div class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
+        <!-- mobile dropdowns -->
+        <div v-if="breakpoint.is === 'sm'" class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
+          <MobileDropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
+          <MobileDropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
+          <MobileDropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
+          <MobileDropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
+          <MobileDropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
+          <MobileDropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
+        </div>
+
+        <!-- desktop dropdowns -->
+        <div v-else class='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8'>
           <Dropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
           <Dropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
           <Dropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
@@ -29,11 +42,18 @@
           <Dropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
           <Dropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
         </div>
+
         <h4 class='text-xl font-medium my-4'>Sort by</h4>
-        <div class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
-          <Dropdown :label="labels.sort" class='w-full' :list='filters.sorts' @clicked="selectSort"/>
+        <div v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'" class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
+          <MobileDropdown  :label="labels.sort" class='w-full' :list='filters.sorts' @clicked="selectSort"/>
         </div>
+        <div v-else class='grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8'>
+           <Dropdown  :label="labels.sort" class='w-full' :list='filters.sorts' @clicked="selectSort"/>
+        </div>
+
       </div>
+        
+   
       <h4 class='text-2xl font-medium mb-4'>{{ numberOfDucksInQuery }} results</h4>
       <div v-if="this.allDucks.length > 0" class='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 my-12'>
         <NFTCard v-for='duck in allDucks' :key='duck.id' :duck="duck" class='mb-6'/>
@@ -68,7 +88,13 @@ export default {
   },
   computed: {
     allDucks () {
-      return this.$store.state.store.ducks
+      return this.$store.state.explore.ducks
+    },
+    breakpoint () {
+      if (process.client) {
+        return this.$breakpoint
+      }
+      return { is: '' }
     }
   },
   methods: {
@@ -86,7 +112,7 @@ export default {
     },
     clearDucks () {
       this.fetchedDucks = {}
-      this.$store.dispatch('store/clearDucks')
+      this.$store.dispatch('explore/clearDucks')
     },
     async fetchDucks (from, to) {
       if (Date.now() - this.lastFetchTime < 300) return //rate limit api calling (prevent logitech mouse from spamming api)
@@ -103,7 +129,7 @@ export default {
       if ((this.numberOfDucksInQuery > from || to <= this.ducksPerPage) && (this.fetchedDucks[from] == undefined)) {
         console.log('fetch ducks ' + from + ' to ' + to)
         this.fetchedDucks[from] = true
-        this.numberOfDucksInQuery = await this.$store.dispatch('store/fetchDucks', { from, to, ...this.searchQuery }) 
+        this.numberOfDucksInQuery = await this.$store.dispatch('explore/fetchDucks', { from, to, ...this.searchQuery }) 
       }
       this.currentDuck = to
     },
