@@ -2,12 +2,14 @@ import { Zilliqa } from '@zilliqa-js/zilliqa'
 const { MessageType } = require('@zilliqa-js/subscriptions')
 
 function getRpcUrl (network) {
-  const rpcUrl =
-    network === 'mainnet'
-      ? 'https://api.zilliqa.com'
-      : 'https://dev-api.zilliqa.com'
-
-  return rpcUrl
+  switch(network.toLowerCase()) {
+    case 'mainnet':
+      return 'https://api.zilliqa.com'
+    case 'testnet':
+      return 'https://dev-api.zilliqa.com'
+    default :
+      return'https://api.zilliqa.com'
+  }
 }
 
 const zilliqa = new Zilliqa(getRpcUrl(process.env.zilliqaNetwork))
