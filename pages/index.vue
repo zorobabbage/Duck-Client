@@ -8,7 +8,7 @@
       </div>
       <div class="p-4 md:p-8 xl:pr-0">
         <h4 class=" font-extrabold text-5xl mt-2 text-grass-muted">Mint A Duck</h4>
-        <p class="mt-5 text-xl text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
+        <p class="mt-5 text-xl text-justify text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
           <div class="flex  flex-row  gap-1 mb-2">
                 <input type="number" v-model="numberOfDucks" class="appearance-none font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
@@ -93,7 +93,16 @@ export default {
   },
   mounted () {
     this.$store.dispatch('ducks/getAttributeCounts')
-    console.log(this.integrateBetweenLimits(this.$store.state.ducks.currentDuck, this.$store.state.ducks.currentDuck + 1))
+    console.log(this.integrateBetweenLimits(4000, 4010))
+    for (let i = 4000; i <= 4010; i++) {
+      const zil = new Big(i).pow(2).div(40000).plus(1200)
+      const qa = zil.mul(new Big(10).pow(12))
+      const rt = {
+        qa: qa.toFixed(0),
+        zil: zil.toFixed(2)
+      }
+      console.log(`${i} - ${JSON.stringify(rt)}`)
+    }
   },
   beforeMount () {
     this.$store.dispatch('ducks/mainGetBlock')

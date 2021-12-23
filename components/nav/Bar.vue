@@ -5,11 +5,12 @@
       <h4 class="ml-2 text-4xl font-bold text-black self-center mr-auto">
         <NuxtLink to="/">Duck</NuxtLink>
       </h4>
-      <NavItem to="/#home" class="ml-auto ">
-        NFDs
-      </NavItem>
+
       <NavItem to="/explore" class="mr-0">
         Explore
+      </NavItem>
+      <NavItem to="/wallet" class="mr-0">
+        My Ducks
       </NavItem>
       <ConnectWallet class="inline-flex self-center px-3 rounded-2xl bg-gray-100 text-gray-700 h-14 text-lg border-2 border-gray-400">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="self-center ml-auto text-gray-700">

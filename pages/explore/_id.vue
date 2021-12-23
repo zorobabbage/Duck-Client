@@ -3,8 +3,12 @@
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden md:pt-12 px-4'>
       <Prev to="/explore/"/>
 
-      <div class='flex flex-row'>
-        <h1 class='text-4xl font-bold mt-4 mr-auto'>Duck {{id}}</h1>
+      <div class='flex flex-row pr-4'>
+        <h1 class='text-4xl self-center font-bold mr-auto align-middle'>Duck {{id}}</h1>
+        <div v-if="yourDuck" class="ml-auto self-center text-emerald-500 flex flex-row">
+          <svg class="w-8 h-8 text-emerald-500 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+          <h5  class="text-emerald-500 font-semibold text-xl ml-2 align-middle">Your duck</h5>
+        </div>
       </div>
       <div class=" grid grid-cols-1 md:grid-cols-5 gap-4 my-12 rounded-3xlr">
         <img id="duck-image" class="rounded-3xl md:col-span-2" :src="quickImage" @load="quickDuckLoaded=true"/>
@@ -44,10 +48,12 @@ export default {
       duck: {},
       attributes: [],
       rarity: 0,
-      background: ''
+      background: '',
+      duckOwner: ''
     }
   },
   beforeMount () {
+    this.fetchTokenOwners()
     this.fetchDuck()
   },
   methods: {
@@ -60,6 +66,9 @@ export default {
       } else {
         this.handleDuckIfExsits()
       }
+    },
+    async fetchTokenOwners () {
+      this.$store.dispatch('ducks/fetchTokenOwners')
     },
     handleDuckIfExsits () {
       this.image = this.duck.resource.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
@@ -75,6 +84,7 @@ export default {
       const outfitRarity = this.duck.attributes[10].value.split('%')[0] / 100
 
       this.rarity = parseInt((1 / (baseRarity * beakRarity * eyesRarity * hatRarity * outfitRarity)).toFixed(0))
+      this.duckOwner = (this.$store.state.ducks.tokenOwners.find(x => x.id == this.id)).address
     },
     loadHighResImage () {
       let loadingFrame = new Image()
@@ -90,6 +100,9 @@ export default {
   computed: {
     attributeCounts () {
       return this.$store.ducks.attributeCounts
+    },
+    yourDuck () {
+      return this.$store.state.wallet.wallet.base16.toLowerCase() == this.duckOwner.toLowerCase()
     }
   }
 }

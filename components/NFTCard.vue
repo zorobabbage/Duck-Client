@@ -1,12 +1,12 @@
 <template>
 <div>
   <NuxtLink :to="'/explore/'+duck.id">
-    <div class="relative aspect-square">
+    <div class="aspect-square">
       <transition name="fade">
-        <img v-bind:src="duck.data.quick_resource" v-on:load="onLoaded" v-show="loaded" class="aspect-square rounded-t-3xl absolute top-0 left-0"/>
+        <img v-bind:src="duck.data.quick_resource" v-on:load="onLoaded" v-show="loaded" class="aspect-square rounded-t-3xl top-0 left-0"/>
       </transition>
-      <div class="box w-full rounded-t-3xl aspect-square " v-show="!loaded"></div>
-      <img :src="require('@/assets/images/unknown-duck-small.png')" v-show="!loaded" class="aspect-square rounded-t-3xl absolute top-0 left-0"/>
+      <!-- <div class=" w-full rounded-t-3xl aspect-square " v-show="!loaded"></div> -->
+      <img :src="require('@/assets/images/unknown-duck-small.png')" v-show="!loaded" class="box aspect-square rounded-t-3xl top-0 left-0"/>
       
     </div>
     <div class="flex flex-row w-full bg-gray-100 rounded-b-3xl p-4">
