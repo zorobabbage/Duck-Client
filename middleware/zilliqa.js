@@ -2,37 +2,27 @@ const { Zilliqa } = require('@zilliqa-js/zilliqa')
 const { MessageType } = require('@zilliqa-js/subscriptions')
 const zilliqa = new Zilliqa('https://api.zilliqa.com')
 
-
+const duck_contract = '0xc6bb661eda683bdc792b3e456a206a92cc3cb92e'
 const nfd_contract = process.env.NFD_CONTRACT || '0x06f70655d4aa5819e711563eb2383655449f24e9'
 
-async function mainGetBlock() {
-    console.log('get blocks')
-    const tokenHolders = getTokenHolders()
-    this.$store.commit('ducks/setCurrentDuck', tokenHolders.length)
-    const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
-      'wss://api-ws.zilliqa.com',
-    )
-        
-    subscriber.emitter.on(MessageType.NEW_BLOCK, () => {
-        getTokenHolders()
-    })
+
+export async function getDuckHolders () {
+    const result = (await zilliqa.blockchain.getSmartContractSubState(
+        nfd_contract,
+        "token_owners"
+    )).result.token_owners
     
-    await subscriber.start()
+    const arrayResult = Object.entries(result).map(x => ({ id: x[0], address: x[1] }))
+    return arrayResult
+     
 }
 
-async function getTokenHolders () {
-    try {
-        const result = (await zilliqa.blockchain.getSmartContractSubState(
-            nfd_contract,
-            "token_owners"
-        )).result.token_owners
-    
-        const arrayResult = Object.entries(result).map(x => ({ id: x[0], address: x[1] }))
-        if (arrayResult.length > 4000) holders = arrayResult
-    } catch (err) {
+export async function getDuckTokenHolders () {
+    const result = (await zilliqa.blockchain.getSmartContractSubState(
+        duck_contract,
+        "balances"
+    )).result.balances
 
-    }
+    return result
 }
-export default {
-    mainGetBlock
-}
+ 

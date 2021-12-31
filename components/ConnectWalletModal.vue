@@ -34,9 +34,9 @@
     >
       <div class="modal-content py-4 text-left px-6">
         <div class="flex flex-col">
-          <p class="text-xl font-bold mb-4">Connect Wallet</p>
+          <p v-if="!wallet.isConnected" class="text-xl font-bold mb-4">Connect Wallet</p>
           <div v-if="wallet.isConnected">
-            <h4 class="font-semibold">You are connected</h4>
+            <p class="text-xl font-bold mb-2">Your Wallet</p>
             <h6 >{{ zilPay ? wallet.bech32 ? `${wallet.bech32}` : 'Connect wallet' : 'Zilpay not found' }}</h6>
           </div>
         </div>
@@ -90,6 +90,7 @@
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
