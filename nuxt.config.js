@@ -4,8 +4,9 @@ export default {
   env: {
     nfdContract: process.env.NFD_CONTRACT,
     zilliqaNetwork: process.env.ZILLIQA_NETWORK,
+    rewardsContract: process.env.REWARDS_CONTRACT
   },
-  
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Duck',
@@ -24,7 +25,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap", }
-    
+
     ]
   },
 

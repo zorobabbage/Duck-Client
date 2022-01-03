@@ -33,22 +33,21 @@
       "
     >
       <div class="modal-content text-left px-6">
-        <div class="my-6 border-b-1">
+        <div class="my-6">
           <h4 class="align-middle mr-2 text-lg font-semibold text-gray-600 ml-2">Your DUCK balance</h4>
-  
+
           <div class="flex flex-row my-2">
             <h4 class="align-middle mr-2 text-3xl font-extrabold uppercase text-gray-800 ml-2" style="color: #f1743a!important;">
               {{ duckHeld / 100 }} DUCK
             </h4>
             <img class="h-10" src="https://meta.viewblock.io/ZIL.zil1c6akv8k6dqaac7ft8ezk5gr2jtxrewfw8hc27d/logo?t=dark"/>
-       
+
             <h4 class="align-middle self-center mr-2 text-sm font-semibold text-gray-500 ml-2">≈ {{ (duckPriceUSD * duckHeld/100).toFixed(2) }}$</h4>
           </div>
 
-          <div class="mt-6 bg-gray-100 p-8 rounded-xl">
-            <h4 class="align-middle mr-2 text-lg font-semibold text-gray-600 ml-2">Claim rewards</h4>
-          </div>
+          <h4 class="align-middle mr-2 mb-1 mt-6 text-sm font-semibold text-gray-600 ml-2">Claim rewards</h4>
 
+          <RewardSection />
         </div>
 
       </div>
@@ -74,9 +73,7 @@ export default {
     },
     duckHeld () {
         let amounts = this.$store.state.ducks.duckTokenOwnerAmounts
-        console.log(amounts)
         const wallet = this.$store.state.wallet.wallet.base16.toLowerCase()
-        console.log(wallet)
         let thisAmount = amounts[wallet]
         if (thisAmount === undefined) thisAmount = 0
         return thisAmount
@@ -98,9 +95,6 @@ export default {
   },
   props: {
     show: Boolean,
-  },
-  data() {
-    return {};
-  },
-};
+  }
+}
 </script>

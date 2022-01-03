@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="showModal = true" class="px-2 font-medium flex items-center justify-center text-center">
-        {{duckHeld}}
+        {{ (duckHeld/100).toFixed(2) }}
     </button>
     <slot />
     <DuckModal :show="showModal" @close="showModal = false"> </DuckModal>
@@ -21,12 +21,13 @@ export default {
   },
   computed: {
     duckHeld () {
-      return 1.98
+      let amounts = this.$store.state.ducks.duckTokenOwnerAmounts
+      const wallet = this.$store.state.wallet.wallet.base16.toLowerCase()
+      let thisAmount = amounts[wallet]
+      if (thisAmount === undefined) thisAmount = 0
+      return thisAmount
     }
-  },
-  mounted() {
-
-  },
+  }
 };
 </script>
 
