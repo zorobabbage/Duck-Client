@@ -41,8 +41,8 @@
           </div>
         </div>
 
-        <div class="mt-6 bg-gray-100 p-8 rounded-xl">
-          <div class="flex flex-col md:flex-row h-12">
+        <div class="mt-6 bg-gray-100 p-8 rounded-xl ">
+          <div class="flex flex-col md:flex-row min-h-12">
             <div class="w-60 flex flex-row mb-6 md:mb-0">
               <svg
                 class="h-10 w-10 align-top self-center"

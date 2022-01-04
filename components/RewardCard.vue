@@ -4,10 +4,10 @@
       <h4 class="text-sm font-semibold text-gray-700">{{ from }} - {{ to }}</h4>
       <h4 class="text-sm font-semibold text-gray-400">Block {{ reward.epoch }}</h4>
     </div>
-    <div class="flex flex-col md:flex-row h-12">
+    <div class="flex flex-col lg:flex-row min-h-12 mt-3">
       <div class="w-60 flex flex-row mb-6 md:mb-0">
 
-        <div class="self-center flex flex-col lg:flex-row">
+        <div class="self-center flex flex-row">
           <h4 class="align-middle text-lg font-extrabold uppercase text-gray-800" style="color: #f1743a!important;">
               {{ (amount / 100).toFixed(2) }} DUCK
           </h4>
@@ -17,6 +17,7 @@
       <button
         class="
                 flex
+                w-full
                 ml-auto
                 items-center
                 justify-center
@@ -34,7 +35,7 @@
                 focus:bg-gray-400 focus:outline-none
               "
       >
-        <span class="m-2 text-white" @click="handleClick()">
+        <span class="m-2 text-white" >
           Claim
         </span>
       </button>
