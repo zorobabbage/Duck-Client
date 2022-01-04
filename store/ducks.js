@@ -1,6 +1,8 @@
 import { Zilliqa } from '@zilliqa-js/zilliqa'
 const { MessageType } = require('@zilliqa-js/subscriptions')
 
+import * as ZilMiddleware from '../middleware/zilliqa'
+
 function getRpcUrl (network) {
   switch(network.toLowerCase()) {
     case 'mainnet':
@@ -20,7 +22,8 @@ export const state = () => ({
   ducks: [],
   currentDuck: 1,
   attributeCounts: {},
-  tokenOwners: []
+  duckOwners: [],
+  duckTokenOwnerAmounts: {}
 })
 
 export const mutations = {
@@ -38,8 +41,11 @@ export const mutations = {
   SET_ATTRIBUTE_COUNTS (state, obj) {
     state.attributeCounts = obj
   },
-  SET_TOKEN_OWNERS (state, owners) {
-    state.tokenOwners = owners
+  SET_DUCK_OWNERS (state, owners) {
+    state.duckOwners = owners
+  },
+  SET_DUCK_TOKEN_OWNER_AMOUNTS (state, owners) {
+    state.duckTokenOwnerAmounts = owners
   }
 }
 
@@ -48,43 +54,41 @@ export const actions = {
     const result = await this.$axios.$get('/ducks', { params })
     context.commit('SET_DUCKS', result.resultDucks)
   },
-  async setCurrentDuck (context, ducks) {
-    context.commit('SET_CURRENT_DUCK', ducks)
-  },
   async getAttributeCounts (context) {
     const result = await this.$axios.$get('/attributes')
     context.commit('SET_ATTRIBUTE_COUNTS', result)
   },
 
-  async mainGetBlock({ commit, dispatch }) {
-    console.log('get blocks')
+  // ======================================================
+
+  async mainGetBlock({ dispatch }) {
+    dispatch('fetchDuckOwners')
     dispatch('fetchTokenOwners')
 
-    
     const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
       'wss://api-ws.zilliqa.com',
     )
         
     subscriber.emitter.on(MessageType.NEW_BLOCK, () => {
+      dispatch('fetchDuckOwners')
       dispatch('fetchTokenOwners')
     })
     
     await subscriber.start()
   },
 
-  async fetchTokenOwners ({ commit, dispatch }) {
-    const tokenUris = (
-      await zilliqa.blockchain.getSmartContractSubState(
-        process.env.nfdContract,
-        'token_owners'
-      )
-    ).result.token_owners
+  // non fungible owners
+  async fetchDuckOwners ({ commit }) {
+    const tokenUrisArr = await ZilMiddleware.getDuckHolders()
 
-    const tokenUrisArr = Object.entries(tokenUris).map((entry) => {
-      return { id: entry[0], address: entry[1] }
-    })
     console.log(`fetched ${tokenUrisArr.length} ducks`)
-    commit('SET_TOKEN_OWNERS', tokenUrisArr)  
-    dispatch('setCurrentDuck', tokenUrisArr.length)
+    commit('SET_DUCK_OWNERS', tokenUrisArr)  
+    commit('SET_CURRENT_DUCK', tokenUrisArr.length)
   },
+
+  //fungible $duck token
+  async fetchTokenOwners ({commit}) {
+    const tokenOwnersAndAmounts = await ZilMiddleware.getDuckTokenHolders()
+    commit('SET_DUCK_TOKEN_OWNER_AMOUNTS', tokenOwnersAndAmounts)
+  }
 }

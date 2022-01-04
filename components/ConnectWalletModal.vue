@@ -34,15 +34,15 @@
     >
       <div class="modal-content py-4 text-left px-6">
         <div class="flex flex-col">
-          <p class="text-xl font-bold mb-4">Connect Wallet</p>
+          <p v-if="!wallet.isConnected" class="text-xl font-bold mb-4">Connect Wallet</p>
           <div v-if="wallet.isConnected">
-            <h4 class="font-semibold">You are connected</h4>
+            <p class="text-xl font-bold mb-2">Your Wallet</p>
             <h6 >{{ zilPay ? wallet.bech32 ? `${wallet.bech32}` : 'Connect wallet' : 'Zilpay not found' }}</h6>
           </div>
         </div>
 
-        <div class="mt-6 bg-gray-100 p-8 rounded-xl">
-          <div class="flex flex-col md:flex-row h-12">
+        <div class="mt-6 bg-gray-100 p-8 rounded-xl ">
+          <div class="flex flex-col md:flex-row min-h-12">
             <div class="w-60 flex flex-row mb-6 md:mb-0">
               <svg
                 class="h-10 w-10 align-top self-center"
@@ -90,17 +90,19 @@
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   computed: {
-    wallet() {
-      return this.$store.state.wallet.wallet;
-    },
+    ...mapState({
+      wallet: (state) => state.wallet.wallet
+    }),
     zilPay() {
       if (process.browser) {
         if (window.zilPay) return window.zilPay;

@@ -9,11 +9,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     computed: {
-    wallet() {
-      return this.$store.state.wallet.wallet;
-    },
+    ...mapState({
+      wallet: (state) => state.wallet.wallet
+    }),
     zilPay() {
       if (process.browser) {
         if (window.zilPay) return window.zilPay;
