@@ -42,7 +42,7 @@
             </h4>
             <img class="h-10" src="https://meta.viewblock.io/ZIL.zil1c6akv8k6dqaac7ft8ezk5gr2jtxrewfw8hc27d/logo?t=dark"/>
 
-            <h4 class="align-middle self-center mr-2 text-sm font-semibold text-gray-500 ml-2">≈ {{ (duckPriceUSD * duckHeld/100).toFixed(2) }}$</h4>
+            <h4 class="align-middle self-center mr-2 text-sm font-semibold text-gray-500 ml-2">≈ {{ (duckPrice.usd * duckHeld/100).toFixed(2) }}$</h4>
           </div>
 
           <h4 class="align-middle mr-2 mb-1 mt-6 text-sm font-semibold text-gray-600 ml-2">Claim rewards</h4>
@@ -59,7 +59,7 @@
 export default {
   data () {
     return {
-        duckPriceUSD: 0
+        rewards: []
     }
   },
   computed: {
@@ -77,6 +77,9 @@ export default {
         let thisAmount = amounts[wallet]
         if (thisAmount === undefined) thisAmount = 0
         return thisAmount
+    },
+    duckPrice () {
+      return this.$store.state.wallet.duckPrice
     }
   },
   methods: {
@@ -84,8 +87,9 @@ export default {
         const data = await fetch("https://api.zilstream.com/tokens/zil1c6akv8k6dqaac7ft8ezk5gr2jtxrewfw8hc27d")
                             .then((response) => response.json())
         const { rate, rate_usd } = data
-        this.duckPriceUSD = rate_usd
+        this.$store.dispatch('wallet/setDuckPrice', { zil: rate, usd: rate_usd })
     },
+    
     close_modal() {
       this.$emit("close");
     },
