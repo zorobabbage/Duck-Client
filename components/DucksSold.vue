@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2">
             <div>
                 <h4 class="text-2xl font-medium">{{ percentageSold }}%</h4>
-                <div class="relative pt-1 align-bottom mt-auto">
+                <div class=" pt-1 align-bottom mt-auto">
                     <div class="overflow-hidden h-3 mb-4 text-xs flex rounded-full border-1 border-black bg-gray-200">
                         <div :style="{'width': percentageSold + '%'}" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-black rounded-full"></div>
                     </div>

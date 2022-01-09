@@ -23,6 +23,9 @@ export const mutations = {
   },
   CLEAR_DUCKS (state) {
     state.ducks = []
+  },
+  CLEAR_USER_DUCKS (state) {
+    state.ducks = []
   }
 }
 
@@ -33,8 +36,8 @@ export const actions = {
     return result.ducksInSearch
   },
 
-  async fetchUserDucks (context, wallet) {
-    const userDucks = await this.$axios.$get('/ducks',{ params: { owner: wallet }})
+  async fetchUserDucks (context, params) {
+    const userDucks = await this.$axios.$get('/ducks', { params } )
     context.commit('SET_USER_DUCKS', userDucks.resultDucks)
     return userDucks.ducksInSearch
   },
@@ -43,5 +46,8 @@ export const actions = {
     context.commit('CLEAR_DUCKS')
   },
 
+  clearUserDucks (context) {
+    context.commit('CLEAR_USER_DUCKS')
+  },
   
 }
