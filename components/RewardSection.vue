@@ -1,6 +1,7 @@
 <template>
   <div v-if="rewards">
     <RewardCard 
+      class="mb-1"
       v-for="reward in rewards" 
       v-bind:key="reward.epoch" 
       :reward="reward" 

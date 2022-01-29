@@ -18,6 +18,7 @@
         class="
                 flex
                 w-full
+                md:max-w-min
                 ml-auto
                 items-center
                 justify-center

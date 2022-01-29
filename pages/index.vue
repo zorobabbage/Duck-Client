@@ -24,7 +24,7 @@
                 </div>
           </div>
           <ConnectWallet v-if="!wallet.isConnected" class="w-full md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  font-medium text-xl my-auto inline-flex items-center mx-auto"></ConnectWallet>
-          <button v-if="wallet.isConnected" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{`Mint (${zilToPay} ZIL)`}} </button>
+          <button v-if="wallet.isConnected" @click="buy" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{`Mint (${zilToPay.zil} ZIL)`}} </button>
         <div>
         </div>
         </div>
@@ -45,13 +45,17 @@
 </template>
 
 <script>
+const environment = require('@/helpers/environment')
 import Big from 'big.js'
-import helper from '../middleware/zilliqa'
+import { doProxyMint, doProxyBatchMint } from '@/zilpay/proxy'
+
 export default {
   data () {
     return {
       numberOfDucks: 1,
-      zilToPay: 1200,
+      zilToPay: {
+        ducks: 1
+      },
     }
   },
   methods: {
@@ -63,18 +67,48 @@ export default {
         this.numberOfDucks--
       }
     },
-    integrateBetweenLimits (min, max) {
-      // 1/120,000x^3 + 1200x
-      console.log(min, max)
-      const minimum = new Big(min)
-      const maximum = new Big(max)
-      const zil = (maximum.pow(3).div(120000).plus(maximum.mul(1200))).minus(minimum.pow(3).div(120000).plus(minimum.mul(1200)))
+    buy () {
+      const numDucks = this.zilToPay.ducks
+      const amount = this.zilToPay.qa
+      let arrayOfIDs = Array.from({length: numDucks}, i => String(i + 1))
+
+      if (this.zilToPay.ducks == 1) {
+        doProxyMint(amount)
+      } else {
+        doProxyBatchMint(amount, arrayOfIDs)
+      }
+    },
+    getPriceAtX (x) {
+      const bx = new Big(x)
+      const zil = (bx.pow(2).div(40000)).plus(1200)
       const qa = zil.mul(new Big(10).pow(12))
+      return {
+        zil: zil.toFixed(2),
+        qa: qa.toFixed(0)
+      }
+    },
+    getPricesBetweenXandY (x, y) {
+      let btotal = new Big(0)
+      for (let i = x; i <= y; i++) {
+        let thisQa = this.getPriceAtX(i).qa
+        btotal = btotal.plus(thisQa)
+      }
+      return Number(btotal)
+    },
+    integrateBetweenLimits (min, max) {
+      if (max > 8192) max = 8192
+      console.log(min, max)
+      const qa = this.getPricesBetweenXandY(min, max)
+      const bqa = new Big(qa)
+      const zil = bqa.div(new Big(10).pow(12))
+     
       const rt = {
         qa: qa.toFixed(0),
-        zil: zil.toFixed(2)
+        zil: zil.toFixed(2),
+        ducks: max - min + 1
       }
-      this.zilToPay = zil.toFixed(2)
+      console.log(rt)
+      this.zilToPay = rt
       return rt
     }
   },
@@ -84,17 +118,27 @@ export default {
     },
     wallet () {
       return this.$store.state.wallet.wallet
-    }
+    },
+    zilPay() {
+      if (process.browser) {
+        if (window.zilPay) return window.zilPay;
+      }
+    },
   },
   watch: {
     numberOfDucks: function () {
-      this.integrateBetweenLimits(this.currentDuck, parseInt(this.numberOfDucks) + this.currentDuck)
+      if ((parseInt(this.numberOfDucks) + this.currentDuck) > 8192) this.numberOfDucks = 8192 - this.currentDuck
+
+      this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
+    },
+    currentDuck: function () {
+      this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
     }
   },
   mounted () {
     this.$store.dispatch('ducks/getAttributeCounts')
-    console.log(this.integrateBetweenLimits(4000, 4010))
-    for (let i = 4000; i <= 4010; i++) {
+    
+    for (let i = 4040; i <= 4050; i++) {
       const zil = new Big(i).pow(2).div(40000).plus(1200)
       const qa = zil.mul(new Big(10).pow(12))
       const rt = {
@@ -103,6 +147,7 @@ export default {
       }
       console.log(`${i} - ${JSON.stringify(rt)}`)
     }
+    this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
   },
   beforeMount () {
     this.$store.dispatch('ducks/mainGetBlock')

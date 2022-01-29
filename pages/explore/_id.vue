@@ -102,7 +102,8 @@ export default {
       return this.$store.ducks.attributeCounts
     },
     yourDuck () {
-      return this.$store.state.wallet.wallet.base16.toLowerCase() == this.duckOwner.toLowerCase()
+      const userWallet = this.$store.state.wallet.wallet.base16.toLowerCase()
+      return userWallet == this.duckOwner.toLowerCase()
     }
   }
 }

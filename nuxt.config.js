@@ -1,10 +1,36 @@
+
+export function getApiUrl () {
+  const network = process.env.ZILLIQA_NETWORK
+  switch (network) {
+    case 'testnet': {
+      return process.env.TESTNET_API_URL
+    }
+    case 'mainnet': {
+      return process.env.MAINNET_API_URL
+    }
+    default: throw new Error('Invalid network')
+  }
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   env: {
-    nfdContract: process.env.NFD_CONTRACT,
-    zilliqaNetwork: process.env.ZILLIQA_NETWORK,
-    rewardsContract: process.env.REWARDS_CONTRACT
+    ZILLIQA_NETWORK: process.env.ZILLIQA_NETWORK,
+
+    //mainnet
+    MAINNET_PROXY_CONTRACT: process.env.MAINNET_PROXY_CONTRACT,
+    MAINNET_NFD_CONTRACT: process.env.MAINNET_NFD_CONTRACT,
+    MAINNET_REWARDS_CONTRACT: process.env.MAINNET_REWARDS_CONTRACT,
+    MAINNET_TOKEN_CONTRACT: process.env.MAINNET_TOKEN_CONTRACT,
+    MAINNET_API_URL: process.env.MAINNET_API_URL,
+
+    //testnet
+    TESTNET_PROXY_CONTRACT: process.env.TESTNET_PROXY_CONTRACT,
+    TESTNET_NFD_CONTRACT: process.env.TESTNET_NFD_CONTRACT,
+    TESTNET_REWARDS_CONTRACT: process.env.TESTNET_REWARDS_CONTRACT,
+    TESTNET_TOKEN_CONTRACT: process.env.TESTNET_TOKEN_CONTRACT,
+    TESTNET_API_URL: process.env.TESTNET_API_URL,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -53,7 +79,7 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.API_URL,
+    baseURL: getApiUrl()
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

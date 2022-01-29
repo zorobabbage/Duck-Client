@@ -1,20 +1,10 @@
+const environment = require('@/helpers/environment')
 import { Zilliqa } from '@zilliqa-js/zilliqa'
 const { MessageType } = require('@zilliqa-js/subscriptions')
 
 import * as ZilMiddleware from '../middleware/zilliqa'
 
-function getRpcUrl (network) {
-  switch(network.toLowerCase()) {
-    case 'mainnet':
-      return 'https://api.zilliqa.com'
-    case 'testnet':
-      return 'https://dev-api.zilliqa.com'
-    default :
-      return'https://api.zilliqa.com'
-  }
-}
-
-const zilliqa = new Zilliqa(getRpcUrl(process.env.zilliqaNetwork))
+const zilliqa = new Zilliqa(environment.getRpcUrl())
 
 
 
@@ -66,7 +56,7 @@ export const actions = {
     dispatch('fetchTokenOwners')
 
     const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
-      'wss://api-ws.zilliqa.com',
+      environment.getRpcUrl('ws'),
     )
         
     subscriber.emitter.on(MessageType.NEW_BLOCK, () => {

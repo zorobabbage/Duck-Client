@@ -37,7 +37,16 @@
           <p v-if="!wallet.isConnected" class="text-xl font-bold mb-4">Connect Wallet</p>
           <div v-if="wallet.isConnected">
             <p class="text-xl font-bold mb-2">Your Wallet</p>
-            <h6 >{{ zilPay ? wallet.bech32 ? `${wallet.bech32}` : 'Connect wallet' : 'Zilpay not found' }}</h6>
+
+            <div v-if="!zilPay" >
+              <a class="flex flex-row"><h4 class="text-sm mt-0 font-medium text-gray-600 self-center">Connect wallet</h4></a>
+            </div>
+            <div v-else-if="wallet.bech32" >
+              <a target="_blank" :href="`https://viewblock.io/zilliqa/address/${wallet.bech32}`" class="flex flex-row">  <h4 class="text-sm mt-0 font-medium text-gray-600 self-center hover:underline">{{ wallet.bech32 }}  </h4> <IconLink class="ml-1 h-5 w-5 self-center text-gray-600"/></a>
+            </div>
+            <div v-else >
+              <a class="flex flex-row"><h4 class="text-sm mt-0 font-medium text-gray-600 self-center">Zilpay not found</h4></a>
+            </div>
           </div>
         </div>
 
@@ -108,6 +117,11 @@ export default {
         if (window.zilPay) return window.zilPay;
       }
     },
+    network () {
+      if (process.browser) {
+        return process.env.ZILLIQA_NETWORK
+      }
+    }
   },
   methods: {
     async handleClick() {
@@ -116,8 +130,6 @@ export default {
                     path: '/wallet'
                 })
       }
-
-      if (!window.zilPay) return;
 
       const isConnect = await window.zilPay.wallet.connect();
       if (isConnect) {
@@ -141,9 +153,6 @@ export default {
   },
   props: {
     show: Boolean,
-  },
-  data() {
-    return {};
-  },
+  }
 };
 </script>
