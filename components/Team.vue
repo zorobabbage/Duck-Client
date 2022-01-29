@@ -21,7 +21,7 @@
             </div>
             <div class="text-center">
                 <p class="text-xl text-gray-900 font-bold mb-2">Buckaroo</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
+                <p class="text-base text-gray-800 font-normal">Lead Artist</p>
             </div>
         </div>
         <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
@@ -48,7 +48,7 @@
             </div>
             <div class="text-center">
                 <p class="text-xl text-gray-900 font-bold mb-2">GreenWeeny</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
+                <p class="text-base text-gray-800 font-normal">Marketing</p>
             </div>
         </div>
         <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">

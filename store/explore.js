@@ -25,7 +25,7 @@ export const mutations = {
     state.ducks = []
   },
   CLEAR_USER_DUCKS (state) {
-    state.ducks = []
+    state.userDucks = []
   }
 }
 

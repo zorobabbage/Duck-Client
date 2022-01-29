@@ -25,22 +25,22 @@
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
         <!-- mobile dropdowns -->
         <div v-if="breakpoint.is === 'sm'" class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
-          <MobileDropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
-          <MobileDropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
-          <MobileDropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
-          <MobileDropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
-          <MobileDropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
-          <MobileDropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
+          <MobileDropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
+          <MobileDropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
+          <MobileDropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
+          <MobileDropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
+          <MobileDropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
+          <MobileDropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
         </div>
 
         <!-- desktop dropdowns -->
         <div v-else class='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8'>
-          <Dropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
-          <Dropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
-          <Dropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
-          <Dropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
-          <Dropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
-          <Dropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
+          <Dropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
+          <Dropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
+          <Dropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
+          <Dropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
+          <Dropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
+          <Dropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
         </div>
 
         <h4 class='text-xl font-medium my-4'>Sort by</h4>

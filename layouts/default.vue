@@ -13,6 +13,7 @@
 
       gtag('config', 'G-RJ4ZEYV2FH')
     </script>
+   
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"

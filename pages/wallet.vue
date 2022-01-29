@@ -7,31 +7,33 @@
     </div>
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
 
-      <div class='flex flex-col md:flex-row space-y-4 '>
+      <div class='flex flex-col space-y-4 '>
         <h1 class='text-4xl font-medium mt-4 mr-auto '>Your ducks</h1>
-
+        <div v-if="wallet.bech32" >
+         <a target="_blank" :href="`https://viewblock.io/zilliqa/address/${wallet.bech32}`" class="flex flex-row">  <h4 class="text-sm mt-0 font-medium text-gray-600 self-center hover:underline">{{ wallet.bech32 }}  </h4> <IconLink class="ml-1 h-5 w-5 self-center text-gray-600"/></a>
+        </div>
       </div>
 
       <div class='bg-gray-100 rounded-xl w-full h-90 my-8 p-4 md:p-12'>
         <h4 class='text-xl font-medium mb-4'>Filters</h4>
         <!-- mobile dropdowns -->
         <div v-if="breakpoint.is === 'sm'" class='grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8'>
-          <MobileDropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
-          <MobileDropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
-          <MobileDropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
-          <MobileDropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
-          <MobileDropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
-          <MobileDropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
+          <MobileDropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
+          <MobileDropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
+          <MobileDropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
+          <MobileDropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
+          <MobileDropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
+          <MobileDropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
         </div>
 
         <!-- desktop dropdowns -->
         <div v-else class='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8'>
-          <Dropdown :label="labels.base" type="base" class='w-full z-10' :list='filters.bases' @clicked="filter"/>
-          <Dropdown :label='labels.beak' type="beak" class='w-full z-10' :list='filters.beaks' @clicked="filter"/>
-          <Dropdown :label='labels.eyes' type="eyes" class='w-full z-10' :list='filters.eyes' @clicked="filter"/>
-          <Dropdown :label='labels.hat' type="hat" class='w-full z-10' :list='filters.hats' @clicked="filter"/>
-          <Dropdown :label='labels.outfit' type="outfit" class='w-full z-10' :list='filters.outfits' @clicked="filter"/>
-          <Dropdown :label='labels.background' type="background" class='w-full z-10' :list='filters.backgrounds' @clicked="filter"/>
+          <Dropdown :label="labels.base" type="base" class='w-full' :list='filters.bases' @clicked="filter"/>
+          <Dropdown :label='labels.beak' type="beak" class='w-full' :list='filters.beaks' @clicked="filter"/>
+          <Dropdown :label='labels.eyes' type="eyes" class='w-full' :list='filters.eyes' @clicked="filter"/>
+          <Dropdown :label='labels.hat' type="hat" class='w-full' :list='filters.hats' @clicked="filter"/>
+          <Dropdown :label='labels.outfit' type="outfit" class='w-full' :list='filters.outfits' @clicked="filter"/>
+          <Dropdown :label='labels.background' type="background" class='w-full' :list='filters.backgrounds' @clicked="filter"/>
         </div>
 
         <h4 class='text-xl font-medium my-4'>Sort by</h4>
