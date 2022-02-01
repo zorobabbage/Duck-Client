@@ -44,7 +44,7 @@
         class="mb-24 self-center max-w-screen-xl"
       />
       <Team class="my-24"/>
-    
+    <Footer background="grass"/>
   </div>
 </template>
 
