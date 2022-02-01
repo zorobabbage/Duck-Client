@@ -117,10 +117,10 @@ export default {
       this.zilToPay = rt
       return rt
     },
-    async doProxyMint() {
+    async doProxyMint(amount) {
       const gasLimit = Long.fromString('25000')
       const gasPrice = new BN('500000000')
-      let amount = new BN('0')
+    
       let contract
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
