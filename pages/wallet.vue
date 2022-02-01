@@ -54,6 +54,7 @@
         <NFTCard v-for='duck in allDucks' :key='duck.id' :duck="duck" class='mb-6'/>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
