@@ -134,6 +134,7 @@ export default {
       this.currentDuck = to
     },
     getNextDucksOnScroll () {
+      
       const {
             scrollTop,
             scrollHeight,
@@ -155,6 +156,7 @@ export default {
     }
   },
   async mounted () {
+    
     this.filters = filters
     await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
     this.getNextDucksOnScroll()

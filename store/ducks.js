@@ -10,6 +10,8 @@ const zilliqa = new Zilliqa(environment.getRpcUrl())
 
 export const state = () => ({
   ducks: [],
+  zrc1owners: [],
+  zrc1operators: {},
   currentDuck: 1,
   attributeCounts: {},
   duckOwners: [],
@@ -36,6 +38,12 @@ export const mutations = {
   },
   SET_DUCK_TOKEN_OWNER_AMOUNTS (state, owners) {
     state.duckTokenOwnerAmounts = owners
+  },
+  SET_ZRC1_OWNERS (state, owners) {
+    state.zrc1owners = owners
+  },
+  SET_ZRC1_OPERATORS (state, operators) {
+    state.zrc1operators = operators
   }
 }
 
@@ -54,6 +62,8 @@ export const actions = {
   async mainGetBlock({ dispatch }) {
     dispatch('fetchDuckOwners')
     dispatch('fetchTokenOwners')
+    dispatch('fetchZRC1Owners')
+    dispatch('fetchZRC1Operators')
 
     const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
       environment.getRpcUrl('ws'),
@@ -62,6 +72,8 @@ export const actions = {
     subscriber.emitter.on(MessageType.NEW_BLOCK, () => {
       dispatch('fetchDuckOwners')
       dispatch('fetchTokenOwners')
+      dispatch('fetchZRC1Owners')
+      dispatch('fetchZRC1Operators')
     })
     
     await subscriber.start()
@@ -70,10 +82,20 @@ export const actions = {
   // non fungible owners
   async fetchDuckOwners ({ commit }) {
     const tokenUrisArr = await ZilMiddleware.getDuckHolders()
-
     console.log(`fetched ${tokenUrisArr.length} ducks`)
     commit('SET_DUCK_OWNERS', tokenUrisArr)  
     commit('SET_CURRENT_DUCK', tokenUrisArr.length)
+  },
+
+  // zrc1 OLD
+  async fetchZRC1Owners ({commit}) {
+    const oldTokensArr = await ZilMiddleware.getHeldZRC1Tokens()
+    commit('SET_ZRC1_OWNERS', oldTokensArr)
+  },
+
+  async fetchZRC1Operators ({commit}) {
+    const result = await ZilMiddleware.getZRC1Operators()
+    commit('SET_ZRC1_OPERATORS', result)
   },
 
   //fungible $duck token

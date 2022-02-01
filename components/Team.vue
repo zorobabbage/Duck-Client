@@ -1,83 +1,75 @@
 <template>
-    <section class="">
+  <section class="">
     <div class="text-center pb-12">
-        <h1 class="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-900">
-            Meet the team
-        </h1>
+      <h1
+        class="
+          font-bold
+          text-3xl
+          md:text-4xl
+          lg:text-5xl
+          font-heading
+          text-gray-900
+        "
+      >
+        Meet the team
+      </h1>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Nines</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Buckaroo</p>
-                <p class="text-base text-gray-800 font-normal">Lead Artist</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Neeko</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Hatzz</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">GreenWeeny</p>
-                <p class="text-base text-gray-800 font-normal">Marketing</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Soluxos</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Prodpeak</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
-        <div class="w-full  rounded-lg p-12 flex flex-col justify-center items-center">
-            <div class="mb-8">
-                <img class="object-center object-cover border-2 border-black rounded-full h-36 w-36" src="https://d22rrd5cdtalai.cloudfront.net/DUCK_0008_b399c64cc387cd32.png" alt="photo">
-            </div>
-            <div class="text-center">
-                <p class="text-xl text-gray-900 font-bold mb-2">Nicfusc</p>
-                <p class="text-base text-gray-800 font-normal">Software Engineer</p>
-            </div>
-        </div>
+    <div
+      class="
+        grid grid-cols-1
+        sm:grid-cols-2
+        md:grid-cols-2
+        lg:grid-cols-4
+        gap-6
+      "
+    >
+      <TeamMember name="Nines" twitter="CryptoNines" :id="8" role="Developer" />
+
+      <TeamMember
+        name="Neeko"
+        twitter="neeko_zilduck"
+        :id="2374"
+        role="Developer"
+      />
+
+      <TeamMember
+        name="Buckaroo"
+        twitter="BuckaroniCheese"
+        role="Lead Artist"
+        :id="32"
+      />
+
+      <TeamMember
+        name="GreenWeeny"
+        twitter="0x_Greeny"
+        :id="1"
+        role="Marketing"
+      />
+
+      <TeamMember 
+        name="Rich" 
+        :id="280" 
+        role="Developer" 
+      />
+
+      <TeamMember 
+        name="Prodpeak" 
+        role="Developer" 
+        :id="3074"
+      />
+
+      <TeamMember 
+        name="50Cal" 
+        role="Designer" 
+        :id="3115"
+      />
+
+      <TeamMember 
+        name="nicfusc" 
+        role="Developer" 
+        :id="3945" 
+      />
+
     </div>
-    </section>
+  </section>
 </template>

@@ -7,6 +7,8 @@
     </div>
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
 
+      <Migration />
+
       <div class='flex flex-col space-y-4 '>
         <h1 class='text-4xl font-medium mt-4 mr-auto '>Your ducks</h1>
         <div v-if="wallet.bech32" >
@@ -57,6 +59,7 @@
 
 <script>
 import filters from '@/assets/objects/filters'
+import { getHeldZRC1Tokens } from '@/middleware/zilliqa'
 export default {
   data () {
     return {
@@ -159,6 +162,7 @@ export default {
   async mounted () {
     this.filters = filters
     await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
+    
     this.getNextDucksOnScroll()
   },
   beforeMount () {

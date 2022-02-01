@@ -1,5 +1,7 @@
 import { BN, Long } from '@zilliqa-js/util'
 const environment = require('@/helpers/environment')
+import { getLink } from '@/helpers/viewblock'
+
 
 const gasLimit = Long.fromString('25000')
 const gasPrice = new BN('500000000')
@@ -8,12 +10,13 @@ if (process.browser) {
   contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
 }
 
-import pollTx from './poll-tx'
+
 
 export async function doProxyMint(amount) {
   console.log(`proxymint ${amount}`)
   console.log(contract)
   try {
+    
     const tx = await contract.call('ProxyMint', [], {
       amount,
       gasPrice,
@@ -21,9 +24,18 @@ export async function doProxyMint(amount) {
     })
 
     console.log(tx)
+
+    let txToast = this.$toast.success("TX 1 sending") 
+    txToast = this.$styleToast(txToast, "Minting one duck", getLink(tx), 'block')
+    
     await pollTx(tx)
+    
+    txToast = this.$styleToast(txToast, "Duck minted", getLink(tx), 'check')
+    txToast.goAway(10000)
+        
     console.log(tx)
     console.log('confirmed')
+
   } catch (err) {
     console.log(err)
   }

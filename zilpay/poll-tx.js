@@ -1,8 +1,11 @@
 export const pollTx = async (tx) => new Promise((resolve, reject) => {
+
   const interval = setInterval(async () => {
+    console.log(tx.ID)
     const status = await window.zilPay.blockchain.getTransactionStatus('0x' + tx.ID)
     if (status.result.status === 3 && status.result.success === true) {
       clearInterval(interval)
+      console.log('success')
       resolve(true)
     }
     if (status.result.status >= 10 || (status.result.status === 3 && status.result.success === false)) {
@@ -10,6 +13,6 @@ export const pollTx = async (tx) => new Promise((resolve, reject) => {
       clearInterval(interval)
       reject(failedTx)
     }
-  }, 5000)
+  }, 3000)
 })
 //

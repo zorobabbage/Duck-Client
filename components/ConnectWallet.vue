@@ -18,8 +18,9 @@ export default {
     }),
     zilPay() {
       if (process.browser) {
-        if (window.zilPay) return window.zilPay;
+        if (window.zilPay) return window.zilPay
       }
+      return
     },
     network () {
       if (process.browser) {
@@ -34,7 +35,10 @@ export default {
     }
   },
   mounted () {
-    const networkStreamChanged = window
+    /** this breaks if not connected previously
+    console.log(this.zilPay)
+    if (this.zilPay.wallet.isEnable && typeof window.zilPay !== 'undefined') {
+      const networkStreamChanged = window
       .zilPay
       .wallet
       .observableNetwork()
@@ -45,6 +49,8 @@ export default {
           this.zilpayModal = false
         }
       })
+    }
+    */
   },
   methods: {
     handleClick () {

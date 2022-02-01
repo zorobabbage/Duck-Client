@@ -148,9 +148,6 @@ export default {
       this.$emit("close");
     },
   },
-  mounted() {
-    this.$store.dispatch("wallet/getZilpay");
-  },
   props: {
     show: Boolean,
   }

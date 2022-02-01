@@ -6,10 +6,14 @@
       <div class="p-4 md:p-8 xl:pl-0">
         <DuckGif/>
       </div>
+      
       <div class="p-4 md:p-8 xl:pr-0">
+
         <h4 class=" font-extrabold text-5xl mt-2 text-grass-muted">Mint A Duck</h4>
         <p class="mt-5 text-xl text-justify text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
+
+         
           <div class="flex  flex-row  gap-1 mb-2">
                 <input type="number" v-model="numberOfDucks" class="appearance-none font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
                 <div class="w-16">
@@ -40,14 +44,16 @@
         class="mb-24 self-center max-w-screen-xl"
       />
       <Team class="my-24"/>
-    <Footer background = "grass" />
+    
   </div>
 </template>
 
 <script>
 const environment = require('@/helpers/environment')
 import Big from 'big.js'
-import { doProxyMint, doProxyBatchMint } from '@/zilpay/proxy'
+import { pollTx } from '@/zilpay/poll-tx'
+import { BN, Long } from '@zilliqa-js/util'
+
 
 export default {
   data () {
@@ -73,9 +79,9 @@ export default {
       let arrayOfIDs = Array.from({length: numDucks}, i => String(i + 1))
 
       if (this.zilToPay.ducks == 1) {
-        doProxyMint(amount)
+        this.doProxyMint(amount)
       } else {
-        doProxyBatchMint(amount, arrayOfIDs)
+        this.doProxyBatchMint(amount, arrayOfIDs)
       }
     },
     getPriceAtX (x) {
@@ -97,7 +103,7 @@ export default {
     },
     integrateBetweenLimits (min, max) {
       if (max > 8192) max = 8192
-      console.log(min, max)
+      
       const qa = this.getPricesBetweenXandY(min, max)
       const bqa = new Big(qa)
       const zil = bqa.div(new Big(10).pow(12))
@@ -107,9 +113,82 @@ export default {
         zil: zil.toFixed(2),
         ducks: max - min + 1
       }
-      console.log(rt)
+     
       this.zilToPay = rt
       return rt
+    },
+    async doProxyMint() {
+      const gasLimit = Long.fromString('25000')
+      const gasPrice = new BN('500000000')
+      let amount = new BN('0')
+      let contract
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
+      }
+
+      console.log(`proxymint ${amount}`)
+      console.log(contract)
+      try {
+        
+  
+        const tx = await contract.call('ProxyMint', [], {
+          amount,
+          gasPrice,
+          gasLimit
+        })
+
+        
+ 
+        let txToast = this.$toast.success("TX 1 sending") 
+        txToast = this.$styleToast(txToast, tx, "Minting", 'block')
+
+        await pollTx(tx)
+        
+        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
+        txToast.goAway(10000)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async doProxyBatchMint(amount, dummy_list_count) {
+      console.log(`ProxyBatchMint ${amount} ${dummy_list_count}`)
+      const gasLimit = Long.fromString('70000')
+      const gasPrice = new BN('500000000')
+      let contract
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
+      }
+
+      console.log(`proxymint ${amount}`)
+      console.log(contract)
+      try {
+        const tx = await contract.call('ProxyBatchMint',
+          [
+            {
+              vname: "dummy_list_count",
+              type: "List Uint256",
+              value: dummy_list_count
+            }
+          ],
+          {
+            amount,
+            gasPrice,
+            gasLimit
+          })
+
+
+        let txToast = this.$toast.success("TX sending") 
+        txToast = this.$styleToast(txToast, tx, "Minting", 'block')
+
+        await pollTx(tx)
+        
+        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
+        txToast.goAway(10000)
+
+
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   computed: {
@@ -118,12 +197,7 @@ export default {
     },
     wallet () {
       return this.$store.state.wallet.wallet
-    },
-    zilPay() {
-      if (process.browser) {
-        if (window.zilPay) return window.zilPay;
-      }
-    },
+    }
   },
   watch: {
     numberOfDucks: function () {
@@ -137,16 +211,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('ducks/getAttributeCounts')
-    
-    for (let i = 4040; i <= 4050; i++) {
-      const zil = new Big(i).pow(2).div(40000).plus(1200)
-      const qa = zil.mul(new Big(10).pow(12))
-      const rt = {
-        qa: qa.toFixed(0),
-        zil: zil.toFixed(2)
-      }
-      console.log(`${i} - ${JSON.stringify(rt)}`)
-    }
     this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
   },
   beforeMount () {
@@ -170,3 +234,10 @@ input[type='number']::-webkit-inner-spin-button,
     outline: none !important;
   }
 </style>
+
+
+
+
+
+
+

@@ -5,6 +5,7 @@ export const state = () => ({
     isConnected: false
   },
   userDucks: [],
+  oldUserDucks: [],
   duckPrice: {
     zil: 0,
     usd: 0
@@ -24,10 +25,10 @@ export const actions = {
   setWallet(context, params) {
     context.commit('SET_WALLET', params)
   },
-  getZilpay(context) {
-    console.log(window.zilPay)
-  },
   setDuckPrice (context, params) {
     context.commit('SET_DUCK_PRICE', params)
+  },
+  fetchUserDucks(context, address) {
+    
   }
 }
