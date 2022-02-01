@@ -75,11 +75,11 @@ export default {
     },
     buy () {
       const numDucks = this.zilToPay.ducks
-      const amount = this.zilToPay.qa
-      let arrayOfIDs = Array.from({length: numDucks}, i => String(i + 1))
-
-
-      this.doProxyBatchMint(amount, arrayOfIDs)
+      const amount = new Big(this.zilToPay.qa).plus(new Big(10).pow(12))
+  
+      let arrayOfIDs = Array.from({length: numDucks}, (e, i) => String(i + 1))
+  
+      this.doProxyBatchMint(String(amount), arrayOfIDs)
 
     },
     getPriceAtX (x) {
@@ -108,7 +108,7 @@ export default {
      
       const rt = {
         qa: qa.toFixed(0),
-        zil: zil.toFixed(2),
+        zil: zil.toFixed(2) + 2,
         ducks: max - min + 1
       }
      
@@ -120,12 +120,13 @@ export default {
       const gasLimit = Long.fromString('70000')
       const gasPrice = new BN('500000000')
       let contract
+       
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
       }
 
       console.log(`proxymint ${amount}`)
-      console.log(contract)
+     
       try {
         const tx = await contract.call('ProxyBatchMint',
           [

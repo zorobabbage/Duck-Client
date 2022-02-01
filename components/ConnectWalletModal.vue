@@ -138,7 +138,7 @@ export default {
           base16: window.zilPay.wallet.defaultAccount.base16,
           isConnected: true,
         });
-        console.log(this.wallet);
+
         this.$nuxt.$emit("walletConnected");
       } else {
         throw new Error("user rejected");
