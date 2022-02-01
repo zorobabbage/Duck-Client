@@ -66,7 +66,6 @@ export default {
             .wallet
             .observableNetwork()
             .subscribe(net => {
-              console.log(net)
               this.zilpayModal = false
               this.showModal = true
             })

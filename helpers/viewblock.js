@@ -7,7 +7,7 @@ export const getLink = (tx) => {
             return `https://viewblock.io/zilliqa/tx/0x${tx.ID}?network=testnet`
         }
         case 'mainnet': {
-            return `https://viewblock.io/zilliqa/tx/0x${txID}`
+            return `https://viewblock.io/zilliqa/tx/0x${tx.ID}`
         }
         default: {
             return `https://viewblock.io/zilliqa/tx/0x${tx.ID}`
