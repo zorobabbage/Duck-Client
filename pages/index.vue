@@ -78,11 +78,9 @@ export default {
       const amount = this.zilToPay.qa
       let arrayOfIDs = Array.from({length: numDucks}, i => String(i + 1))
 
-      if (this.zilToPay.ducks == 1) {
-        this.doProxyMint(amount)
-      } else {
-        this.doProxyBatchMint(amount, arrayOfIDs)
-      }
+
+      this.doProxyBatchMint(amount, arrayOfIDs)
+
     },
     getPriceAtX (x) {
       const bx = new Big(x)
@@ -116,39 +114,6 @@ export default {
      
       this.zilToPay = rt
       return rt
-    },
-    async doProxyMint(amount) {
-      const gasLimit = Long.fromString('25000')
-      const gasPrice = new BN('500000000')
-    
-      let contract
-      if (process.browser) {
-        contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
-      }
-
-      console.log(`proxymint ${amount}`)
-      console.log(contract)
-      try {
-        
-  
-        const tx = await contract.call('ProxyMint', [], {
-          amount,
-          gasPrice,
-          gasLimit
-        })
-
-        
- 
-        let txToast = this.$toast.success("TX 1 sending") 
-        txToast = this.$styleToast(txToast, tx, "Minting", 'block')
-
-        await pollTx(tx)
-        
-        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
-        txToast.goAway(10000)
-      } catch (err) {
-        console.log(err)
-      }
     },
     async doProxyBatchMint(amount, dummy_list_count) {
       console.log(`ProxyBatchMint ${amount} ${dummy_list_count}`)
