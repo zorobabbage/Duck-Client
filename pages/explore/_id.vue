@@ -68,7 +68,7 @@ export default {
       }
     },
     async fetchTokenOwners () {
-      this.$store.dispatch('ducks/fetchTokenOwners')
+      if (this.$store.state.ducks.duckOwners === undefined) this.$store.dispatch('ducks/fetchTokenOwners')
     },
     handleDuckIfExsits () {
       this.image = this.duck.resource.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
@@ -84,7 +84,7 @@ export default {
       const outfitRarity = this.duck.attributes[10].value.split('%')[0] / 100
 
       this.rarity = parseInt((1 / (baseRarity * beakRarity * eyesRarity * hatRarity * outfitRarity)).toFixed(0))
-      this.duckOwner = (this.$store.state.ducks.tokenOwners.find(x => x.id == this.id)).address
+      this.duckOwner = (this.$store.state.ducks.duckOwners.find(x => x.id == this.id)).address
     },
     loadHighResImage () {
       let loadingFrame = new Image()
