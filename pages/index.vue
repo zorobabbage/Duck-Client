@@ -13,7 +13,7 @@
         <p class="mt-5 text-xl text-justify text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
         <div class="mt-10 flex flex-col md:flex-row">
 
-         
+        
           <div class="flex  flex-row  gap-1 mb-2">
                 <input type="number" v-model="numberOfDucks" class="appearance-none font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
                 <div class="w-16">
@@ -21,17 +21,25 @@
                       <span class="m-auto text-4xl font-thin">−</span>
                   </button>
                 </div>
-                <div class="w-16">
+                <div class="w-16"> 
                   <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="incrementNumberOfDucks">
                     <span class="m-auto text-4xl font-thin">+</span>
                   </button>
                 </div>
           </div>
           <ConnectWallet v-if="!wallet.isConnected" class="w-full md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  font-medium text-xl my-auto inline-flex items-center mx-auto"></ConnectWallet>
-          <button v-if="wallet.isConnected" @click="buy" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">{{`Mint (${zilToPay.zil} ZIL)`}} </button>
-        <div>
+          <button v-if="wallet.isConnected" @click="buy" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">
+            {{`Mint (${zilToPay.zil} ZIL)`}}
+          </button>
+        
+          
+           <!--
+          <button disabled class="md:ml-3 bg-gray-200 rounded-3xl h-16  border-2 border-gray-400 opacity-75 w-full font-medium text-xl">
+            Coming soon!
+          </button>
+            -->
         </div>
-        </div>
+      
         <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2">Ducks hatched</h4>
         <DucksSold class="mb-8" :currentDuck="currentDuck"/>
       </div>
@@ -116,18 +124,17 @@ export default {
       return rt
     },
     async doProxyBatchMint(amount, dummy_list_count) {
+
       console.log(`ProxyBatchMint ${amount} ${dummy_list_count}`)
-      const gasLimit = Long.fromString('70000')
-      const gasPrice = new BN('500000000')
+       
+      const gasLimit = Long.fromString('25000')
+      const gasPrice = new BN('200000000')
       let contract
        
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
       }
-
-      console.log(`proxymint ${amount}`)
-     
-      try {
+ 
         const tx = await contract.call('ProxyBatchMint',
           [
             {
@@ -143,18 +150,22 @@ export default {
           })
 
 
+
         let txToast = this.$toast.success("TX sending") 
-        txToast = this.$styleToast(txToast, tx, "Minting", 'block')
+        txToast = this.$styleToast(txToast, tx,   "Minting", 'pending')
 
         await pollTx(tx)
-        
-        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
-        txToast.goAway(10000)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Failed", 'failed')
+            txToast.goAway(20000)
+          })
 
-
-      } catch (err) {
-        console.log(err)
-      }
     }
   },
   computed: {
@@ -168,7 +179,7 @@ export default {
   watch: {
     numberOfDucks: function () {
       if ((parseInt(this.numberOfDucks) + this.currentDuck) > 8192) this.numberOfDucks = 8192 - this.currentDuck
-
+      if (this.numberOfDucks > 100) this.numberOfDucks = 100
       this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
     },
     currentDuck: function () {

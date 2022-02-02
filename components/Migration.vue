@@ -11,12 +11,15 @@
       </p>
     </div>
     <div class="p-4 md:p-12">
-      <div class="mb-4">
+      <div class="mb-4" v-if="!tooManyDucks">
         <p>You will be migrating {{ oldOwnedIDs.length}} duck<a v-if="oldOwnedIDs.length > 1">s</a>, with us <a class="fond-bold">offsetting {{  oldOwnedIDs.length * 4 }} ZIL</a> worth of transaction fees</p>
       </div>
+      <div class="mb-4" v-if="tooManyDucks">
+        <p class="test-medium uppercase">You have too many ducks ({{ oldOwnedIDs.length }}) to migrate at this time. This is a known issue which we will be issuing a fix to over the coming days. </p>
+      </div>
       <div class="flex flex-col lg:flex-row gap-2 mt-auto pl-auto w-full ">
-        <button @click="approve" class=" bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled">1. Approve</button>
-        <button :disabled="!approved" @click="migrate" class="bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled disabled:opacity-50">2. Migrate</button>
+        <button :disabled="approved || tooManyDucks" @click="approve" class=" bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled:opacity-50">1. Approve</button>
+        <button :disabled="!approved || tooManyDucks" @click="migrate" class="bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled:opacity-50">2. Migrate</button>
       </div>
     </div>
   </div>
@@ -48,13 +51,16 @@ export default {
         return approved
       }
       return bool 
+    },
+    tooManyDucks () {
+      return this.oldOwnedIDs.length > 5
     }
   },
   methods: {
     async approve() {
       let amount = new BN('0')
       const gasLimit = Long.fromString('25000')
-      const gasPrice = new BN('500000000')
+      const gasPrice = new BN('200000000')
       let contract
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('ZRC1_CONTRACT')) 
@@ -78,12 +84,19 @@ export default {
 
 
         let txToast = this.$toast.success("TX sending") 
-        txToast = this.$styleToast(txToast, tx, "Approving", 'block')
+        txToast = this.$styleToast(txToast, tx,   "Approving token spend", 'pending')
 
         await pollTx(tx)
-        
-        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
-        txToast.goAway(10000)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Approve failed", 'failed')
+            txToast.goAway(20000)
+          })
 
 
       } catch (err) {
@@ -95,8 +108,8 @@ export default {
       console.log(`Migrate  ${tokenArray}`)
 
       const amount = new BN('0')
-      const gasLimit = Long.fromString('70000')
-      const gasPrice = new BN('500000000')
+      const gasLimit = Long.fromString('25000')
+      const gasPrice = new BN('200000000')
       let contract
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('MIGRATOR_CONTRACT')) 
@@ -109,7 +122,7 @@ export default {
             {
               vname: "claim_list",
               type: "List Uint256",
-              value: tokenArray
+              value: tokenArray.slice(0, 50)
             }
           ],
           {
@@ -120,12 +133,19 @@ export default {
 
 
         let txToast = this.$toast.success("TX sending") 
-        txToast = this.$styleToast(txToast, tx, "Migrating", 'block')
+        txToast = this.$styleToast(txToast, tx,   "Migrating", 'pending')
 
         await pollTx(tx)
-        
-        txToast = this.$styleToast(txToast, tx, "Confirmed", 'check')
-        txToast.goAway(10000)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Failed", 'failed')
+            txToast.goAway(20000)
+          })
 
 
       } catch (err) {
