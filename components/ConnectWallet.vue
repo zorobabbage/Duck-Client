@@ -57,18 +57,17 @@ export default {
     async checkIfWalletConnected() {
       if (this.zilPay) {
         const localStorageAddress = localStorage.getItem('wallet')
-        const isConnect = await window.zilPay.wallet.connect()
-        if (isConnect) {
-          this.$store.dispatch("wallet/setWallet", {
-            bech32: window.zilPay.wallet.defaultAccount.bech32,
-            base16: window.zilPay.wallet.defaultAccount.base16,
-            isConnected: true,
-          })
-          this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
-          this.$nuxt.$emit("walletConnected")
 
-          if (localStorageAddress === zilpay.wallet.defaultAccount.base16) {
-            this.connect()
+        if (localStorageAddress === this.zilPay.wallet.defaultAccount.base16) {
+          const isConnect = await window.zilPay.wallet.connect()
+          if (isConnect) {
+            this.$store.dispatch("wallet/setWallet", {
+              bech32: window.zilPay.wallet.defaultAccount.bech32,
+              base16: window.zilPay.wallet.defaultAccount.base16,
+              isConnected: true,
+            })
+            this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
+            this.$nuxt.$emit("walletConnected") 
           }
         }
       }
