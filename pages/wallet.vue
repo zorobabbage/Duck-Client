@@ -170,10 +170,11 @@ export default {
     }
   },
   async mounted () {
+    this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
     this.filters = filters
     await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
-    
     this.getNextDucksOnScroll()
+    
   },
   beforeMount () {
     window.addEventListener('scroll', this.getNextDucksOnScroll, { passive: true })
@@ -183,6 +184,7 @@ export default {
   },
   created() {
     this.$nuxt.$on("walletConnected", () => {
+      this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
       this.fetchDucks(1, this.ducksPerPage)
     })
   },
