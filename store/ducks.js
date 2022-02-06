@@ -60,7 +60,7 @@ export const actions = {
   // ======================================================
 
   async mainGetBlock({ dispatch }) {
-    dispatch('fetchDuckOwners')
+    dispatch('fetchZRC6Owners')
     dispatch('fetchTokenOwners')
     dispatch('fetchZRC1Owners')
     dispatch('fetchZRC1Operators')
@@ -70,7 +70,7 @@ export const actions = {
     )
         
     subscriber.emitter.on(MessageType.NEW_BLOCK, () => {
-      dispatch('fetchDuckOwners')
+      dispatch('fetchZRC6Owners')
       dispatch('fetchTokenOwners')
       dispatch('fetchZRC1Owners')
       dispatch('fetchZRC1Operators')
@@ -80,7 +80,7 @@ export const actions = {
   },
 
   // non fungible owners
-  async fetchDuckOwners ({ commit }) {
+  async fetchZRC6Owners ({ commit }) {
     const tokenUrisArr = await ZilMiddleware.getDuckHolders()
     console.log(`fetched ${tokenUrisArr.length} ducks`)
     commit('SET_DUCK_OWNERS', tokenUrisArr)  

@@ -38,7 +38,7 @@ const returnNewToast = (toast, tx,  text, state) => {
                             <a class="flex uppercase" href="${vbLink}" target="_blank">${txlink}</a>
                             <a class="flex ml-1  w-8 h-8 self-center " href="${vbLink}" target="_blank">${icons[state]}</a>
                         </div>
-                        <div class="ml-1 text-md font-semibold ${textColour[state]}">|  ${text}</div>`
+                        <div class="ml-1 text-md font-semibold ${textColour[state]}"> ${text}</div>`
 
 
     toast.el.classList.add("m-2", "ml-auto", "flex", "items-center", "max-w-xs", "p-4", "mb-4", "text-gray-600", "bg-white", "rounded-lg", "shadow", "min-w-min", backgrounds[state], text[state] )

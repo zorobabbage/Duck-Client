@@ -12,6 +12,7 @@
       flex
       items-center
       justify-center
+      z-10
     "
   >
     <div
@@ -138,7 +139,8 @@ export default {
           base16: window.zilPay.wallet.defaultAccount.base16,
           isConnected: true,
         });
-
+        localStorage.setItem('wallet', this.zilPay.wallet.defaultAccount.base16)
+        this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
         this.$nuxt.$emit("walletConnected");
       } else {
         throw new Error("user rejected");

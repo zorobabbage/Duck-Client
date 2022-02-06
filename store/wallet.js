@@ -1,3 +1,5 @@
+import * as ZilMiddleware from '../middleware/zilliqa'
+
 export const state = () => ({
   wallet: {
     bech32: '',
@@ -9,7 +11,8 @@ export const state = () => ({
   duckPrice: {
     zil: 0,
     usd: 0
-  }
+  },
+  balance: 0
 })
 
 export const mutations = {
@@ -18,8 +21,12 @@ export const mutations = {
   },
   SET_DUCK_PRICE (state, params) {
     state.duckPrice = params
+  },
+  SET_BALANCE(state, bal) {
+    state.balance = bal
   }
 }
+ 
 
 export const actions = {
   setWallet(context, params) {
@@ -28,7 +35,9 @@ export const actions = {
   setDuckPrice (context, params) {
     context.commit('SET_DUCK_PRICE', params)
   },
-  fetchUserDucks(context, address) {
-    
+  async fetchBalance(context, address) {
+    const balance = await ZilMiddleware.getBalance(address)
+    console.log(balance)
+    context.commit('SET_BALANCE', balance)
   }
 }
