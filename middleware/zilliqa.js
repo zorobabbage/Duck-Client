@@ -9,8 +9,7 @@ const zilliqa = new Zilliqa(environment.getRpcUrl())
 export async function getBalance (wallet) {
     const { result } = await zilliqa.blockchain.getBalance(wallet)  
     const zilInQa = units.toQa(1, units.Units.Zil)
-    console.log(result.balance, zilInQa)
-    console.log(result.balance / zilInQa)
+   
     return result.balance / zilInQa
 }
 

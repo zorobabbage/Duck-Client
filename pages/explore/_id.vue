@@ -11,7 +11,12 @@
         </div>
       </div>
       <div class=" grid grid-cols-1 md:grid-cols-5 gap-4 my-12 rounded-3xlr">
-        <img id="duck-image" class="rounded-3xl md:col-span-2" :src="quickImage" @load="quickDuckLoaded=true"/>
+        <div class="md:col-span-2">
+          <img id="duck-image" class="rounded-3xl md:col-span-2" :src="quickImage" @load="quickDuckLoaded=true"/>
+          <div class="bg-gray-100 rounded-2xl p-8 mt-6" v-if="ZRC1Duck">
+            <h4 class="text-gray-700 text-sm">This is a ZRC-1 Duck which has not yet been migrated to the ZRC-6 standard</h4>
+          </div>
+        </div>
         <div class="flex flex-col p-2 md:p-4 gap-y-2 md:col-span-3">
           <h1 class='text-2xl font-bold mr-auto'>Attributes</h1>
 
@@ -113,6 +118,9 @@ export default {
     yourDuck () {
       const userWallet = this.$store.state.wallet.wallet.base16.toLowerCase()
       return userWallet == this.duckOwner.toLowerCase()
+    },
+    ZRC1Duck () {
+      return '0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97'.toLowerCase() == this.duckOwner.toLowerCase() ? true : false
     },
     duckOwners () {
       return this.$store.state.ducks.duckOwners
