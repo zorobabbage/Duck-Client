@@ -51,6 +51,7 @@ export default {
       })
     }
     */
+   console.log('mounted wallet component')
    this.checkIfWalletConnected()
   },
   methods: {
@@ -58,7 +59,7 @@ export default {
       if (this.zilPay) {
         const localStorageAddress = localStorage.getItem('wallet')
 
-        if (localStorageAddress === this.zilPay.wallet.defaultAccount.base16) {
+        if (localStorageAddress === window.zilPay.wallet.defaultAccount.base16) {
           const isConnect = await window.zilPay.wallet.connect()
           if (isConnect) {
             this.$store.dispatch("wallet/setWallet", {
