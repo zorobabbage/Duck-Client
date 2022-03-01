@@ -12,7 +12,7 @@ export async function fetchUserRewardsState () {
         environment.getContractAddress('MAINNET_REWARDS_CONTRACT'),
         "user_claim_rewards"
     )).result.user_claim_rewards
-
+     
     return result
 }
 
