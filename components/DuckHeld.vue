@@ -14,10 +14,7 @@ export default {
     return {
       showModal: false,
       duckPriceUSD: 0
-    };
-  },
-  methods: {
-
+    }
   },
   computed: {
     duckHeld () {
@@ -28,6 +25,6 @@ export default {
       return thisAmount
     }
   }
-};
+}
 </script>
 
