@@ -75,14 +75,14 @@ export default {
       }
     },
     async fetchTokenOwners () {
-      console.log(this.duckOwners)
       if (this.$store.state.ducks.duckOwners.length === 0) {
         this.$store.dispatch('ducks/fetchZRC6Owners')
-        console.log('fetch')
       } 
     },
     handleDuckIfExsits () {
-      this.image = this.duck.resource.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
+      const ipfshash = this.duck.resources.find(x => x.uri).uri
+  
+      this.image = ipfshash.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
       this.quickImage = this.duck.quick_resource
       this.attributes = this.duck.attributes.slice(0, 5)
 
