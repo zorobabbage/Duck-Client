@@ -23,7 +23,7 @@
                 <h5 class= "text-base text-gray-300 my-auto self-center">&copy; Duck Team {{ new Date().getFullYear() }}</h5>
                 <div class="ml-auto self-center flex flex-row space-x-6 md:space-x-2">
                     <IconDiscord />
-                    <IconTwitter />
+                    <IconTwitter link="https://twitter.com/zilduck"/>
                     <IconTelegram />
                 </div>
             </div>

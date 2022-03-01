@@ -170,7 +170,7 @@ export default {
     }
   },
   async mounted () {
-    this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
+    if (this.zilPay) this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
     this.filters = filters
     await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
     this.getNextDucksOnScroll()
