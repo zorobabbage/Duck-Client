@@ -15,7 +15,8 @@ export const state = () => ({
   currentDuck: 1,
   attributeCounts: {},
   duckOwners: [],
-  duckTokenOwnerAmounts: {}
+  duckTokenOwnerAmounts: {},
+  userRewardsState: {}
 })
 
 export const mutations = {
@@ -44,6 +45,9 @@ export const mutations = {
   },
   SET_ZRC1_OPERATORS (state, operators) {
     state.zrc1operators = operators
+  },
+  SET_USER_REWARDS_STATE (state, rewards) {
+    state.userRewardsState = rewards
   }
 }
 
@@ -64,6 +68,7 @@ export const actions = {
     dispatch('fetchTokenOwners')
     dispatch('fetchZRC1Owners')
     dispatch('fetchZRC1Operators')
+    dispatch('fetchUserRewards')
 
     const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
       environment.getRpcUrl('ws'),
@@ -74,6 +79,7 @@ export const actions = {
       dispatch('fetchTokenOwners')
       dispatch('fetchZRC1Owners')
       dispatch('fetchZRC1Operators')
+      dispatch('fetchUserRewards')
     })
     
     await subscriber.start()
@@ -102,5 +108,11 @@ export const actions = {
   async fetchTokenOwners ({commit}) {
     const tokenOwnersAndAmounts = await ZilMiddleware.getDuckTokenHolders()
     commit('SET_DUCK_TOKEN_OWNER_AMOUNTS', tokenOwnersAndAmounts)
+  },
+
+  // duck fungible LP rewards
+  async fetchUserRewards ({commit}) {
+    const rewards = await ZilMiddleware.fetchUserRewardsState()
+    commit('SET_USER_REWARDS_STATE',rewards) 
   }
 }

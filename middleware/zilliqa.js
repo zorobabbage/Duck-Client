@@ -1,10 +1,20 @@
 const environment = require('@/helpers/environment')
 const { Zilliqa } = require('@zilliqa-js/zilliqa')
 const {  units } = require('@zilliqa-js/util')
+ 
 
 const zilliqa = new Zilliqa(environment.getRpcUrl())
 // const mainnetZilliqa = new Zilliqa('https://api.zilliqa.com')
 
+export async function fetchUserRewardsState () {
+
+    const result = (await zilliqa.blockchain.getSmartContractSubState(
+        environment.getContractAddress('MAINNET_REWARDS_CONTRACT'),
+        "user_claim_rewards"
+    )).result.user_claim_rewards
+
+    return result
+}
 
 export async function getBalance (wallet) {
     const { result } = await zilliqa.blockchain.getBalance(wallet)  
