@@ -20,10 +20,10 @@
         </div>
         <div style="border-top: 1px; border-style: solid;" :style="{'border-color': line}">
             <div class="container px-8 md:px-0 mx-auto max-w-screen-xl flex  h-28">
-                <h5 class= "text-base text-gray-300 my-auto self-center">&copy; Duck Team 2021</h5>
+                <h5 class= "text-base text-gray-300 my-auto self-center">&copy; Duck Team {{ new Date().getFullYear() }}</h5>
                 <div class="ml-auto self-center flex flex-row space-x-6 md:space-x-2">
                     <IconDiscord />
-                    <IconTwitter />
+                    <IconTwitter link="https://twitter.com/zilduck"/>
                     <IconTelegram />
                 </div>
             </div>

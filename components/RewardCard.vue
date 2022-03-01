@@ -32,13 +32,14 @@
                 transform
                 bg-gray-500
                 rounded-2xl
-                hover:bg-gray-400
+                hover:bg-gray-400w
                 focus:bg-gray-400 focus:outline-none
+                disabled:opacity-50
               "
+              @click="claim" :disabled="!isInState"
       >
-        <span class="m-2 text-white" >
-          Claim
-        </span>
+        <a v-if="parseInt(amount) > 0">{{ isInState ? 'Claim' : 'Claimed' }}</a>
+        <a v-if="parseInt(amount) == 0">Not elegible</a>
       </button>
     </div>
   </div>
@@ -46,6 +47,10 @@
 
 <script>
 import { mapState } from 'vuex'
+import { pollTx } from '@/zilpay/poll-tx'
+import { BN, Long } from '@zilliqa-js/util'
+const environment = require('@/helpers/environment')
+
 export default {
   props: {
     reward: {
@@ -56,7 +61,8 @@ export default {
   computed: {
     ...mapState({
       wallet: (state) => state.wallet.wallet,
-      duckPrice: (state) => state.wallet.duckPrice
+      duckPrice: (state) => state.wallet.duckPrice,
+      userRewardsState: (state) => state.ducks.userRewardsState
     }),
     from () {
       return new Date(this.reward.fromUnixTime * 1000).toLocaleDateString()
@@ -66,11 +72,69 @@ export default {
     },
     amount () {
       const address = this.wallet.base16
-      if (this.reward.rewards.filter(x => x.address == address.toLowerCase()).length > 0) {
-        return this.reward.rewards.find(x => x.address == address.toLowerCase()).amount
+      if (this.reward.rewards.filter(x => x.address.toLowerCase() == address.toLowerCase()).length > 0) {
+        console.log()
+        
+        return this.reward.rewards.find(x => x.address.toLowerCase() == address.toLowerCase()).amount
       }
       return 0
+    },
+    isInState () {
+      const address = this.wallet.base16
+      return address.toLowerCase() in this.userRewardsState[this.reward.epoch] 
     }
+  },
+  methods: {
+    async claim() {
+      let amount = new BN('0')
+      const gasLimit = Long.fromString('25000')
+      const gasPrice = new BN('200000000')
+      let contract
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('MAINNET_REWARDS_CONTRACT')) 
+      }
+
+ 
+      try {
+        const tx = await contract.call('userClaimRewardRow',
+          [
+            {
+                vname: 'claim_block',
+                type: 'BNum',
+                value: String(this.reward.epoch)
+            }
+          ],
+          {
+            amount,
+            gasPrice,
+            gasLimit
+          })
+
+
+        let txToast = this.$toast.success("TX sending") 
+        txToast = this.$styleToast(txToast, tx,   `Claiming rewards for block ${this.reward.epoch}`, 'pending')
+
+        await pollTx(tx)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            this.approved = true
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Claim failed", 'failed')
+            txToast.goAway(20000)
+          })
+
+
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  mounted () {
+
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="rewards">
+  <div v-if="rewards" class="overflow-y-scroll">
     <RewardCard 
       class="mb-1"
       v-for="reward in rewards" 

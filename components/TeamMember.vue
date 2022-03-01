@@ -35,7 +35,7 @@
           :href="'https://twitter.com/' + twitter"
           >@{{ twitter }}</a
         >
-        <IconTwitter />
+        <IconTwitter :link="'https://twitter.com/' + twitter"/>
       </div>
       <p class="text-base text-gray-800 font-normal self-center">{{ role }}</p>
     </div>
