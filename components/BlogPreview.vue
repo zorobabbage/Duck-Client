@@ -8,9 +8,11 @@
                 :key="index"
                 class="w-full rounded-xl bg-grass-card-900 h-36 p-4"
             >
+              <nuxt-link :to="article.path">
                 <h6 class="font-semibold text-lg">{{ article.title }}</h6>
                 <p class="font-light">{{ new Date(article.createdAt).toLocaleString() }}</p>
                 <p>{{ article.description }}</p>
+              </nuxt-link>
             </div>
         </div>
         <NuxtLink to="/blog">

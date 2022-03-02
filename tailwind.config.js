@@ -10,6 +10,18 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    typography: {
+      default: {
+        css: {
+          'code::before': {
+            content: '""',
+          },
+          'code::after': {
+            content: '""',
+          },
+        },
+      },
+    },
     extend: { 
       borderWidth: {
         DEFAULT: '1px',
@@ -51,5 +63,7 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    require(`@tailwindcss/typography`)
+  ]
 }

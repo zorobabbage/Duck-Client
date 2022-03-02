@@ -2,11 +2,9 @@
   <div class='bg-gray-50'>
 
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
-      <div class='flex flex-col md:flex-row space-y-4'>
-        <h1 class='text-4xl font-medium mt-4 mr-auto '>Duck blog</h1>
-      </div>
-      
-      <nuxt-content :document="article" />
+
+      <Prev />
+      <nuxt-content :document="article" class="prose prose-slate mx-auto max-w-3xl"/>
 
       <div>
         <h6 class="text-gray-700 font-medium my-4">Articles</h6>
