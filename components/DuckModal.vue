@@ -47,7 +47,7 @@
 
           <h4 class="align-middle mr-2 mb-1 mt-6 text-sm font-semibold text-gray-600 ml-2">Claim rewards</h4>
 
-          <RewardSection />
+          <RewardSection class="max-h-80 overflow-y-auto"/>
         </div>
 
       </div>

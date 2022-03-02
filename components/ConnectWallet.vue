@@ -18,8 +18,9 @@ export default {
     }),
     zilPay() {
       if (process.browser) {
-        if (window.zilPay) return window.zilPay;
+        if (window.zilPay) return window.zilPay
       }
+      return
     },
     network () {
       if (process.browser) {
@@ -34,7 +35,10 @@ export default {
     }
   },
   mounted () {
-    const networkStreamChanged = window
+    /** this breaks if not connected previously
+    console.log(this.zilPay)
+    if (this.zilPay.wallet.isEnable && typeof window.zilPay !== 'undefined') {
+      const networkStreamChanged = window
       .zilPay
       .wallet
       .observableNetwork()
@@ -45,8 +49,30 @@ export default {
           this.zilpayModal = false
         }
       })
+    }
+    */
+   console.log('mounted wallet component')
+   this.checkIfWalletConnected()
   },
   methods: {
+    async checkIfWalletConnected() {
+      if (this.zilPay) {
+        const localStorageAddress = localStorage.getItem('wallet')
+
+        if (localStorageAddress == this.zilPay.wallet.defaultAccount.base16) {
+          const isConnect = await window.zilPay.wallet.connect()
+          if (isConnect) {
+            this.$store.dispatch("wallet/setWallet", {
+              bech32: window.zilPay.wallet.defaultAccount.bech32,
+              base16: window.zilPay.wallet.defaultAccount.base16,
+              isConnected: true,
+            })
+            this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
+            this.$nuxt.$emit("walletConnected") 
+          }
+        }
+      }
+    },
     handleClick () {
       if (!this.zilPay) {
         this.zilpayModal = true
@@ -60,7 +86,6 @@ export default {
             .wallet
             .observableNetwork()
             .subscribe(net => {
-              console.log(net)
               this.zilpayModal = false
               this.showModal = true
             })

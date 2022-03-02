@@ -1,15 +1,24 @@
+const environment = require('@/helpers/environment')
+const { Zilliqa } = require('@zilliqa-js/zilliqa')
+const zilliqa = new Zilliqa(environment.getRpcUrl())
+
 export const pollTx = async (tx) => new Promise((resolve, reject) => {
+
   const interval = setInterval(async () => {
-    const status = await window.zilPay.blockchain.getTransactionStatus('0x' + tx.ID)
-    if (status.result.status === 3 && status.result.success === true) {
+    console.log(tx.ID)
+    const result = await zilliqa.blockchain.getTransactionStatus(tx.ID)
+  
+    if (result.status === 3 && result.success === true) {
       clearInterval(interval)
+      console.log('success')
       resolve(true)
     }
-    if (status.result.status >= 10 || (status.result.status === 3 && status.result.success === false)) {
-      const failedTx = await window.zilPay.blockchain.getTransaction('0x' + tx.ID)
+    if (result.status >= 10 || (result.status === 3 && result.success === false)) {
+      const failedTx = await zilliqa.blockchain.getTransaction(tx.ID)
+      console.log('failed')
       clearInterval(interval)
       reject(failedTx)
     }
-  }, 5000)
+  }, 3000)
 })
 //

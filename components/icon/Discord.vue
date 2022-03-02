@@ -1,5 +1,5 @@
 <template>
-    <a href="https://discord.com/invite/zilduck" target="_blank">
+    <a href="https://discord.gg/3Cu3ZR6CYX" target="_blank">
         <svg
             width="21"
             height="16"

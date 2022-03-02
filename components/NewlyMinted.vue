@@ -1,12 +1,12 @@
 <template>
 <div>
   <section v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'" class="flex flex-col overflow-x-scroll overflow-hidden pl-10 ml-12 md:ml-0 md:pl-0 container mx-auto noscroll sm:px-8  md:rounded-3xl">
-    <div class="flex  bg-grass-foreground rounded-l-3xl px-5 noscroll">
-        <div class="flex bg-grass-foreground noscroll">
+    <div class="flex  bg-grass-card-900 rounded-l-3xl px-5 noscroll">
+        <div class="flex bg-grass-card-900 noscroll">
             <div
                 v-for="duck in latestFiveDucks"
                 :key="duck.id"
-                class="px-4 flex-shrink-0  p-8 bg-grass-foreground"
+                class="px-4 flex-shrink-0  p-8 bg-grass-card-900"
             >
               <NuxtLink :to="'/explore/'+duck.id">
                 <img
@@ -22,7 +22,7 @@
         </div>
     </div>
   </section>
-  <section v-else class="grid lg:grid-cols-4 xl:grid-cols-5 container mx-auto rounded-3xl bg-grass-foreground">
+  <section v-else class="grid lg:grid-cols-4 xl:grid-cols-5 container mx-auto rounded-3xl bg-grass-card-900">
     <div
         v-for="duck in latestFiveDucks"
         :key="duck.id"

@@ -11,7 +11,12 @@
         </div>
       </div>
       <div class=" grid grid-cols-1 md:grid-cols-5 gap-4 my-12 rounded-3xlr">
-        <img id="duck-image" class="rounded-3xl md:col-span-2" :src="quickImage" @load="quickDuckLoaded=true"/>
+        <div class="md:col-span-2">
+          <img id="duck-image" class="rounded-3xl md:col-span-2" :src="quickImage" @load="quickDuckLoaded=true"/>
+          <div class="bg-gray-100 rounded-2xl p-8 mt-6" v-if="ZRC1Duck">
+            <h4 class="text-gray-700 text-sm">This is a ZRC-1 Duck which has not yet been migrated to the ZRC-6 standard</h4>
+          </div>
+        </div>
         <div class="flex flex-col p-2 md:p-4 gap-y-2 md:col-span-3">
           <h1 class='text-2xl font-bold mr-auto'>Attributes</h1>
 
@@ -19,6 +24,7 @@
             <div class="bg-gray-100 rounded-2xl p-8 md:col-span-2">
               <div class="flex flex-row border-b-1 border-gray-400 border-dotted">
                 <h1 class='flex text-xl font-semibold text-gray-700 mt-4 mr-auto'>Background</h1>
+                <div class="mt-4 mr-1 w-5 h-5 rounded-full inline self-center" :style="'background-color: ' + backgroundColour"></div>
                 <h1 class='flex text-xl font-semibold text-gray-700 mt-4'>{{ background }}</h1>
               </div>
               <div class="flex flex-row border-b-1 border-gray-400 border-dotted mb-4">
@@ -37,7 +43,7 @@
 </template>
 
 <script>
-
+import { getHexFromName } from '@/assets/objects/backgroundColours'
 export default {
   data () {
     return {
@@ -49,7 +55,8 @@ export default {
       attributes: [],
       rarity: 0,
       background: '',
-      duckOwner: ''
+      duckOwner: '',
+      backgroundColour: '#aaa'
     }
   },
   beforeMount () {
@@ -68,14 +75,19 @@ export default {
       }
     },
     async fetchTokenOwners () {
-      this.$store.dispatch('ducks/fetchTokenOwners')
+      if (this.$store.state.ducks.duckOwners.length === 0) {
+        this.$store.dispatch('ducks/fetchZRC6Owners')
+      } 
     },
     handleDuckIfExsits () {
-      this.image = this.duck.resource.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
+      const ipfshash = this.duck.resources.find(x => x.uri).uri
+  
+      this.image = ipfshash.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
       this.quickImage = this.duck.quick_resource
       this.attributes = this.duck.attributes.slice(0, 5)
 
       this.background = this.duck.attributes[5].value
+      this.backgroundColour = getHexFromName(this.background)
 
       const baseRarity = this.duck.attributes[6].value.split('%')[0] / 100
       const beakRarity = this.duck.attributes[7].value.split('%')[0] / 100
@@ -84,7 +96,9 @@ export default {
       const outfitRarity = this.duck.attributes[10].value.split('%')[0] / 100
 
       this.rarity = parseInt((1 / (baseRarity * beakRarity * eyesRarity * hatRarity * outfitRarity)).toFixed(0))
-      this.duckOwner = (this.$store.state.ducks.tokenOwners.find(x => x.id == this.id)).address
+      if (this.duckOwners.length > 1) {
+        this.duckOwner = (this.duckOwners.find(x => x.id == this.id)).address
+      }
     },
     loadHighResImage () {
       let loadingFrame = new Image()
@@ -104,6 +118,12 @@ export default {
     yourDuck () {
       const userWallet = this.$store.state.wallet.wallet.base16.toLowerCase()
       return userWallet == this.duckOwner.toLowerCase()
+    },
+    ZRC1Duck () {
+      return '0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97'.toLowerCase() == this.duckOwner.toLowerCase() ? true : false
+    },
+    duckOwners () {
+      return this.$store.state.ducks.duckOwners
     }
   }
 }

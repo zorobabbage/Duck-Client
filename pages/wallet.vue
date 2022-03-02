@@ -1,11 +1,13 @@
 <template>
   <div class='bg-gray-50'>
-    <div @click="scrollToTop" id="scrollTopButton" class="z-10 bg-gray-700 shadow-lg rounded-full text-center float-right cursor-pointer p-2 fixed right-5 bottom-5" style="display: none">
+    <div v-if="allDucks.length > 32" @click="scrollToTop" id="scrollTopButton" class="z-10 bg-gray-700 shadow-lg rounded-full text-center float-right cursor-pointer p-2 fixed right-5 bottom-5" style="display: none">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
       </svg>
     </div>
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
+
+      <Migration v-if="oldOwnedIDs.length > 0" />
 
       <div class='flex flex-col space-y-4 '>
         <h1 class='text-4xl font-medium mt-4 mr-auto '>Your ducks</h1>
@@ -52,11 +54,13 @@
         <NFTCard v-for='duck in allDucks' :key='duck.id' :duck="duck" class='mb-6'/>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import filters from '@/assets/objects/filters'
+ 
 export default {
   data () {
     return {
@@ -96,6 +100,12 @@ export default {
         return this.$breakpoint
       }
       return { is: '' }
+    },
+    oldOwnedIDs () {
+      let pairs = this.$store.state.ducks.zrc1owners
+      let owned = pairs.filter(x => x.address.toLowerCase() === this.wallet.base16.toLowerCase())
+      let arrayOfIDs = owned.map(pair => pair.id)
+      return arrayOfIDs
     }
   },
   methods: {
@@ -146,20 +156,25 @@ export default {
         this.fetchDucks(this.currentDuck + 1, this.ducksPerPage + this.currentDuck, this.searchQuery)
       }
 
-      if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-        document.getElementById('scrollTopButton').style.display = 'block'
-      } else {
-        document.getElementById('scrollTopButton').style.display = 'none'
+      if (this.allDucks.length > 32) {
+          if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800 ) {
+          document.getElementById('scrollTopButton').style.display = 'block'
+        } else {
+          document.getElementById('scrollTopButton').style.display = 'none'
+        }
       }
+      
     },
     scrollToTop () {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' })
     }
   },
   async mounted () {
+    if (this.zilPay) this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
     this.filters = filters
     await this.fetchDucks(this.currentDuck, this.ducksPerPage) 
     this.getNextDucksOnScroll()
+    
   },
   beforeMount () {
     window.addEventListener('scroll', this.getNextDucksOnScroll, { passive: true })
@@ -169,6 +184,7 @@ export default {
   },
   created() {
     this.$nuxt.$on("walletConnected", () => {
+      this.$store.dispatch('wallet/fetchBalance', this.$store.state.wallet.wallet.bech32)
       this.fetchDucks(1, this.ducksPerPage)
     })
   },
