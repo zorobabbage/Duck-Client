@@ -17,6 +17,7 @@ export function getApiUrl () {
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   //target: 'static',
+  ssr: true,
   env: {
     ZILLIQA_NETWORK: process.env.ZILLIQA_NETWORK,
 
