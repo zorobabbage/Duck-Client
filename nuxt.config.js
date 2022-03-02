@@ -12,6 +12,14 @@ export function getApiUrl () {
   }
 }
 
+import theme from '@nuxt/content-theme-docs'
+
+export default theme({
+  docs: {
+    primaryColor: '#E24F55'
+  },
+  loading: { color: '#00CD81' }
+})
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -87,7 +95,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxt/content'
   ],
 
   axios: {

@@ -40,18 +40,22 @@
             -->
         </div>
       
-        <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2">Ducks hatched</h4>
+        <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2 text-gray-900">Ducks hatched</h4>
         <DucksSold class="mb-8" :currentDuck="currentDuck"/>
       </div>
     </div>
     <div class="container max-w-screen-xl items-start mt-8 md:mt-16 px-4 md:px-0">
-      <h4 class="text-2xl font-bold text-left flex self-start mb-8">Fresh from the egg.</h4>
+      <h4 class="text-2xl font-bold text-left flex self-start mb-8 text-gray-900">Fresh from the egg.</h4>
     </div>
     <NewlyMinted
         id="newly-minted"
         class="mb-24 self-center max-w-screen-xl"
       />
-      <Team class="my-24"/>
+    <BlogPreview/>
+    <Team class="my-24"/>
+
+      
+
     <Footer background="grass"/>
   </div>
 </template>
@@ -211,6 +215,26 @@ input[type='number']::-webkit-inner-spin-button,
     outline: none !important;
   }
 </style>
+
+
+
+
+
+
+
+=
+=
+=
+TESTNET_NFD_CONTRACT=[secure]
+TESTNET_PROXY_CONTRACT=[secure]
+MAINNET_ZRC1_CONTRACT=0x06f70655d4aa5819e711563eb2383655449f24e9
+MAINNET_ZRC6_CONTRACT=0x8ab2af0cccee7195a7c16030fbdfde6501d91903
+MAINNET_MIGRATOR_CONTRACT=0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97
+MAINNET_TOKEN_CONTRACT=0xc6bb661eda683bdc792b3e456a206a92cc3cb92e
+MAINNET_PROXY_CONTRACT=0x62055246a4b1b05e8e577e456ee00c898cb23bf8
+MAINNET_REWARDS_CONTRACT=0x4e932c4069d34d9b06c14b5f610de826302b1011
+ZILLIQA_NETWORK=mainnet
+
 
 
 
