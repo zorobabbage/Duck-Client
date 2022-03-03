@@ -11,7 +11,7 @@
               <nuxt-link :to="article.path">
                 <h6 class="font-semibold text-lg">{{ article.title }}</h6>
                 <p class="font-light">{{ new Date(article.createdAt).toLocaleString() }}</p>
-                <p>{{ article.description }}</p>
+                <p class="overflow-ellipsis truncate">{{ article.description }}</p>
               </nuxt-link>
             </div>
         </div>
