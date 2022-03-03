@@ -4,7 +4,7 @@
     <div class='flex flex-col container max-w-screen-xl mx-auto overflow-hidden pt-12 px-4'>
 
       <Prev />
-      <nuxt-content :document="article" class="prose  mx-auto max-w-3xl"/>
+      <nuxt-content :document="article" class="prose  mx-auto w-full max-w-full lg:max-w-3xl"/>
 
       <div>
         <h6 class="text-gray-700 font-medium my-4">Articles</h6>
