@@ -39,7 +39,7 @@
           </button>
             -->
         </div>
-        <button v-if="wallet.isConnected" @click="buy" class="bg-grass-card-300 rounded-3xl h-12 mt-2  border-2 border-black  w-full font-medium text-xl">
+        <button v-if="voucherIDs.length > 0" @click="doClaimVoucher" class="bg-grass-card-300 rounded-3xl h-12 mt-2  border-2 border-black  w-full font-medium text-xl">
             {{`Mint with voucher`}}
           </button>
       
@@ -172,7 +172,55 @@ export default {
             txToast.goAway(20000)
           })
 
-    }
+    },
+    async doClaimVoucher() {   
+      const gasLimit = Long.fromString('25000')
+      const gasPrice = new BN('200000000')
+      let contract
+      let amount = 0
+       
+      try {
+
+      
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
+      }
+ 
+        const tx = await contract.call('ProxyVoucher',
+          [
+            {
+              vname: "this_exchangeable_token_id",
+              type: "Uint256",
+              value: String(this.voucherIDs[0])
+            }
+          ],
+          {
+            amount,
+            gasPrice,
+            gasLimit
+          })
+
+
+
+        let txToast = this.$toast.success("TX sending") 
+        txToast = this.$styleToast(txToast, tx,   "Minting", 'pending')
+
+        await pollTx(tx)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Failed", 'failed')
+            txToast.goAway(20000)
+          })
+       } catch (err) {
+         console.log(err)
+       }
+    },
+
   },
   computed: {
     currentDuck () {
