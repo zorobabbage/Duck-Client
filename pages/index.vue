@@ -39,6 +39,9 @@
           </button>
             -->
         </div>
+        <button v-if="wallet.isConnected" @click="buy" class="bg-grass-card-300 rounded-3xl h-12 mt-2  border-2 border-black  w-full font-medium text-xl">
+            {{`Mint with voucher`}}
+          </button>
       
         <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2 text-gray-900">Ducks hatched</h4>
         <DucksSold class="mb-8" :currentDuck="currentDuck"/>
@@ -128,7 +131,6 @@ export default {
       return rt
     },
     async doProxyBatchMint(amount, dummy_list_count) {
-
       console.log(`ProxyBatchMint ${amount} ${dummy_list_count}`)
        
       const gasLimit = Long.fromString('25000')
@@ -178,6 +180,12 @@ export default {
     },
     wallet () {
       return this.$store.state.wallet.wallet
+    },
+    voucherIDs () {
+      let pairs = this.$store.state.ducks.voucherOwners
+      let owned = pairs.filter(x => x.address.toLowerCase() === this.wallet.base16.toLowerCase())
+      let arrayOfIDs = owned.map(pair => pair.id)
+      return arrayOfIDs
     }
   },
   watch: {
