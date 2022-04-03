@@ -4,15 +4,7 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-RJ4ZEYV2FH"
     />
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-      dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
 
-      gtag('config', 'G-RJ4ZEYV2FH')
-    </script>
    
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"

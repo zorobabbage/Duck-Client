@@ -13,9 +13,11 @@ export function getApiUrl () {
 }
 
 
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   //target: 'static',
+  ssr: true,
   env: {
     ZILLIQA_NETWORK: process.env.ZILLIQA_NETWORK,
 
@@ -27,6 +29,7 @@ export default {
     MAINNET_MIGRATOR_CONTRACT: process.env.MAINNET_MIGRATOR_CONTRACT,
     MAINNET_REWARDS_CONTRACT: process.env.MAINNET_REWARDS_CONTRACT,
     MAINNET_API_URL: process.env.MAINNET_API_URL,
+    MAINNET_VOUCHER_CONTRACT: process.env.MAINNET_VOUCHER_CONTRACT,
 
     //testnet
     TESTNET_TOKEN_CONTRACT: process.env.TESTNET_TOKEN_CONTRACT,
@@ -87,7 +90,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxt/content'
   ],
 
   axios: {
