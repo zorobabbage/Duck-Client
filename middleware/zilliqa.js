@@ -17,6 +17,7 @@ export async function fetchVoucherOwners () {
     return pairs
 }
 
+
 export async function fetchUserRewardsState () {
     const result = (await zilliqa.blockchain.getSmartContractSubState(
         environment.getContractAddress('MAINNET_REWARDS_CONTRACT'),
