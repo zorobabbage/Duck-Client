@@ -6,6 +6,15 @@ const {  units } = require('@zilliqa-js/util')
 const zilliqa = new Zilliqa(environment.getRpcUrl())
 // const mainnetZilliqa = new Zilliqa('https://api.zilliqa.com')
 
+export async function fetchVoucherState() {
+    const result = (await zilliqa.blockchain.getSmartContractSubState(
+        environment.getContractAddress('VOUCHER_CONTRACT'),
+        "operators"
+    )).result.operators
+     
+    return result
+}
+
 export async function fetchVoucherOwners () {
     const result = (await zilliqa.blockchain.getSmartContractSubState(
         environment.getContractAddress('VOUCHER_CONTRACT'),

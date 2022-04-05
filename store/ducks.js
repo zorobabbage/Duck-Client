@@ -17,7 +17,8 @@ export const state = () => ({
   duckOwners: [],
   duckTokenOwnerAmounts: {},
   userRewardsState: {},
-  voucherOwners: []
+  voucherOwners: [],
+  voucherState: {}
 })
 
 export const mutations = {
@@ -52,6 +53,9 @@ export const mutations = {
   },
   SET_VOUCHER_OWNERS (state, owners) {
     state.voucherOwners = owners
+  },
+  SET_VOUCHER_STATE (state, operators) {
+    state.voucherState = operators
   }
 }
 
@@ -74,6 +78,7 @@ export const actions = {
     dispatch('fetchZRC1Operators')
     dispatch('fetchUserRewards')
     dispatch('fetchVoucherOwners')
+    dispatch('fetchVoucherState')
 
     const subscriber = zilliqa.subscriptionBuilder.buildNewBlockSubscriptions(
       environment.getRpcUrl('ws'),
@@ -86,6 +91,7 @@ export const actions = {
       dispatch('fetchZRC1Operators')
       dispatch('fetchUserRewards')
       dispatch('fetchVoucherOwners')
+      dispatch('fetchVoucherState')
     })
     
     await subscriber.start()
@@ -126,5 +132,10 @@ export const actions = {
   async fetchVoucherOwners ({commit}) {
     const oldTokensArr = await ZilMiddleware.fetchVoucherOwners()
     commit('SET_VOUCHER_OWNERS', oldTokensArr)
+  },
+
+  async fetchVoucherState ({commit}) {
+    const state = await ZilMiddleware.fetchVoucherState()
+    commit('SET_VOUCHER_STATE', state)
   }
 }
