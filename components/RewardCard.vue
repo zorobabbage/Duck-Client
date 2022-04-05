@@ -1,41 +1,21 @@
 <template>
-  <div class="bg-gray-100 p-5 rounded-xl">
+  <div class="p-5 bg-gray-100 rounded-xl">
     <div class="flex flex-col">
       <h4 class="text-sm font-semibold text-gray-700">{{ from }} - {{ to }}</h4>
       <h4 class="text-sm font-semibold text-gray-400">Block {{ reward.epoch }}</h4>
     </div>
-    <div class="flex flex-col lg:flex-row min-h-12 mt-3">
-      <div class="w-60 flex flex-row mb-6 md:mb-0">
+    <div class="flex flex-col mt-3 lg:flex-row min-h-12">
+      <div class="flex flex-row mb-6 w-60 md:mb-0">
 
-        <div class="self-center flex flex-row">
-          <h4 class="align-middle text-lg font-extrabold uppercase text-gray-800" style="color: #f1743a!important;">
+        <div class="flex flex-row self-center">
+          <h4 class="text-lg font-extrabold text-gray-800 uppercase align-middle" style="color: #f1743a!important;">
               {{ (amount / 100).toFixed(2) }} DUCK
           </h4>
-          <h4 class="align-middle self-center mr-2 text-sm font-semibold text-gray-500 ml-2">≈ {{ (duckPrice.usd * amount/100).toFixed(2) }}$</h4>
+          <h4 class="self-center mr-2 ml-2 text-sm font-semibold text-gray-500 align-middle">≈ {{ (duckPrice.usd * amount/100).toFixed(2) }}$</h4>
         </div>
       </div>
       <button
-        class="
-                flex
-                w-full
-                md:max-w-min
-                ml-auto
-                items-center
-                justify-center
-                px-3
-                py-2
-                text-sm
-                font-medium
-                text-white
-                transition-colors 
-                duration-200
-                transform
-                bg-gray-500
-                rounded-2xl
-                hover:bg-gray-400w
-                focus:bg-gray-400 focus:outline-none
-                disabled:opacity-50
-              "
+        class="flex justify-center items-center px-3 py-2 ml-auto w-full text-sm font-medium text-white bg-gray-500 rounded-2xl transition-colors duration-200 transform md:max-w-min hover:bg-gray-400w focus:bg-gray-400 focus:outline-none disabled:opacity-50"
               @click="claim" :disabled="!isInState"
       >
         <a v-if="parseInt(amount) > 0">{{ isInState ? 'Claim' : 'Claimed' }}</a>
@@ -87,11 +67,11 @@ export default {
   methods: {
     async claim() {
       let amount = new BN('0')
-      const gasLimit = Long.fromString('25000')
+      const gasLimit = Long.fromString('5000')
       const gasPrice = new BN('200000000')
       let contract
       if (process.browser) {
-        contract = window.zilPay.contracts.at(environment.getContractAddress('MAINNET_REWARDS_CONTRACT')) 
+        contract = window.zilPay.contracts.at(environment.getContractAddress('REWARDS_CONTRACT')) 
       }
 
  
@@ -132,9 +112,6 @@ export default {
         console.log(err)
       }
     }
-  },
-  mounted () {
-
   }
 }
 </script>
