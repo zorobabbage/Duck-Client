@@ -40,11 +40,11 @@
             <p>Go ahead, mint a duck without using up a single Zil</p>
           </div>
           <div class="flex flex-col gap-2 md:flex-row">
-            <button :disabled="approved" @click="approveClaim" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
+            <button :disabled="approvedVouchers" @click="approveClaim" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
                 {{`1. Approve voucher`}}
             </button>
 
-            <button :disabled="!approved" @click="doClaimVoucher" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
+            <button :disabled="!approvedVouchers" @click="doClaimVoucher" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
                 {{`2. Mint with voucher`}}
             </button>
           </div>
