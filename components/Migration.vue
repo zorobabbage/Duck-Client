@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-orange-100 rounded-xl w-full h-90 my-8   grid grid-cols-1 lg:grid-cols-2 sm:divide-y lg:divide-y-0 lg:divide-x  divide-yellow-50">
+  <div class="grid grid-cols-1 my-8 w-full bg-orange-100 rounded-xl divide-yellow-50 h-90 lg:grid-cols-2 sm:divide-y lg:divide-y-0 lg:divide-x">
     <div class="p-4 md:p-12">
       <h1 class="text-xl font-bold">NFD migration</h1>
-      <p class="text-md font-medium mt-4">
+      <p class="mt-4 font-medium text-md">
         Here you can migrate your old ZRC-1 ducks to the new ZRC-6 standard. This
         process will convert every one of your NFDs to be compatible with the new
         future of zilliqa NFT dapps. The cost for performing this action is zero,
@@ -10,8 +10,8 @@
         
       </p>
     </div>
-    <div class="p-4 md:p-12 relative" >
-      <h4 v-if="!wallet.isConnected" class="absolute font-semibold text-xl left-1/2 top-1/2 text-center -translate-x-1/2 -translate-y-1/2 z-20">Connect Wallet</h4>
+    <div class="relative p-4 md:p-12" >
+      <h4 v-if="!wallet.isConnected" class="absolute top-1/2 left-1/2 z-20 text-xl font-semibold text-center -translate-x-1/2 -translate-y-1/2">Connect Wallet</h4>
       <div v-bind:class="{ 'blur-md': !wallet.isConnected }">
         <div class="mb-4">
           <p>You will be migrating {{ oldOwnedIDs.length}} duck<a v-if="oldOwnedIDs.length > 1">s</a>, with us <a class="fond-bold">offsetting {{  oldOwnedIDs.length * 4 }} ZIL</a> worth of transaction fees</p>
@@ -22,9 +22,9 @@
         <div class="mb-4" v-if="walletBalance < oldOwnedIDs.length * 4">
           <p class="font-semibold text-red-600">You do not have enough zil ({{ walletBalance }}) to cover the required gas fees ({{ oldOwnedIDs.length * 4 }} zil)</p>
         </div>
-        <div class="flex flex-col lg:flex-row gap-2 mt-auto pl-auto w-full ">
-          <button :disabled="approved" @click="approve" class="shadow-sm disabled:shadow-none bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled:opacity-50">1. Approve</button>
-          <button :disabled="!approved" @click="migrate" class="shadow-sm disabled:shadow-none bg-orange-200 px-auto rounded-xl py-4 font-semibold flex items-center justify-center text-center w-full disabled:opacity-50">2. Migrate</button>
+        <div class="flex flex-col gap-2 mt-auto w-full lg:flex-row pl-auto">
+          <button :disabled="approved" @click="approve" class="flex justify-center items-center py-4 w-full font-semibold text-center bg-orange-200 rounded-xl shadow-sm disabled:shadow-none px-auto disabled:opacity-50">1. Approve</button>
+          <button :disabled="!approved" @click="migrate" class="flex justify-center items-center py-4 w-full font-semibold text-center bg-orange-200 rounded-xl shadow-sm disabled:shadow-none px-auto disabled:opacity-50">2. Migrate</button>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@ export default {
     },
     async approve() {
       let amount = new BN('0')
-      const gasLimit = Long.fromString('25000')
+      const gasLimit = Long.fromString('5000')
       const gasPrice = new BN('200000000')
       let contract
       if (process.browser) {
@@ -203,12 +203,6 @@ export default {
 
         console.log(`nonce: ${nonce + callsOfBatch + 1 }`)
         call(nonce + callsOfBatch + 1, arrayPosition, leftToMigrate % numInBatch)
-
-
-
-
-
-      
     }
   },
   beforeMount() {

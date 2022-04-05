@@ -7,7 +7,6 @@ const zilliqa = new Zilliqa(environment.getRpcUrl())
 // const mainnetZilliqa = new Zilliqa('https://api.zilliqa.com')
 
 export async function fetchVoucherOwners () {
- 
     const result = (await zilliqa.blockchain.getSmartContractSubState(
         environment.getContractAddress('VOUCHER_CONTRACT'),
         "token_owners"
@@ -20,7 +19,7 @@ export async function fetchVoucherOwners () {
 
 export async function fetchUserRewardsState () {
     const result = (await zilliqa.blockchain.getSmartContractSubState(
-        environment.getContractAddress('MAINNET_REWARDS_CONTRACT'),
+        environment.getContractAddress('REWARDS_CONTRACT'),
         "user_claim_rewards"
     )).result.user_claim_rewards
     return result
