@@ -288,14 +288,19 @@ export default {
       return arrayOfIDs
     },
     approvedVouchers () {
-      let map = this.$store.state.ducks.voucherOwners 
+      let map = this.$store.state.ducks.voucherState 
+  
+      if (!map) return false
+
       let contract = environment.getContractAddress('PROXY_CONTRACT')
-      let bool = this.wallet.base16.toLowerCase() in map 
-      if (bool) {
+      let addressExistsOuter = this.wallet.base16.toLowerCase() in map 
+
+     
+      if (addressExistsOuter) {
         let approved = contract in map[this.wallet.base16.toLowerCase()]
         return approved
       }
-      return bool 
+      return addressExistsOuter 
     }
   },
   watch: {
