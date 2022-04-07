@@ -45,6 +45,7 @@ export default {
       let contract
       if (process.browser) {
         contract = window.zilPay.contracts.at(environment.getContractAddress('OWNERSHIP_CONTRACT')) 
+        console.log(contract)
       }
 
       //bcrypt logic
