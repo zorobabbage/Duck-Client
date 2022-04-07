@@ -1,8 +1,6 @@
 const environment = require('@/helpers/environment')
 const { Zilliqa } = require('@zilliqa-js/zilliqa')
 const zilliqa = new Zilliqa(environment.getRpcUrl())
-import { blockchain } from '@zilliqa-js/blockchain'
-
 
 export const pollTx = async (tx) => new Promise((resolve, reject) => {
 
