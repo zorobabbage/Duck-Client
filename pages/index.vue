@@ -15,7 +15,7 @@
 
         
           <div class="flex flex-row gap-1 mb-2">
-                <input type="number" v-model="numberOfDucks" class="block items-center w-full h-16 text-2xl font-medium text-center text-gray-700 bg-gray-200 rounded-2xl appearance-none outline-none md:text-basecursor-default focus:outline-none hover:text-black focus:text-black"/>
+                <input type="number" v-model="numberOfDucks" aria-label="Number of ducks to buy" class="block items-center w-full h-16 text-2xl font-medium text-center text-gray-700 bg-gray-200 rounded-2xl appearance-none outline-none md:text-basecursor-default focus:outline-none hover:text-black focus:text-black"/>
                 <div class="w-16">
                   <button class="flex-grow-0 w-16 h-16 bg-gray-200 rounded-2xl outline-none focus:outline-none" @click="decrementNumberOfDucks">
                       <span class="m-auto text-4xl font-thin">−</span>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="container items-start px-4 mt-8 max-w-screen-xl md:mt-16 md:px-0">
-      <h4 class="flex self-start mb-8 text-2xl font-bold text-left text-gray-900">Fresh from the egg.</h4>
+      <h2 class="flex self-start mb-8 text-2xl font-bold text-left text-gray-900">Fresh from the egg.</h2>
     </div>
     <NewlyMinted
         id="newly-minted"
