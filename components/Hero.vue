@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="bg-sky h-10"/>
-    <img src = "~/assets/images/banner.png" class="object-cover object-right h-48 md:h-full w-full"/>
+    <div class="h-10 bg-sky"/>
+    <img src = "~/assets/images/banner.png" alt="A sunny field with a duck pond" class="object-cover object-right w-full h-48 md:h-full"/>
 </div>
 </template>
