@@ -84,8 +84,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@aceforth/nuxt-optimized-images'
+    '@nuxtjs/tailwindcss' 
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
