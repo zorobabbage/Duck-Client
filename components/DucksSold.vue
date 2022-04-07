@@ -11,7 +11,7 @@
             </div>
             <div>
                 <h2 class="text-5xl font-medium text-right">{{currentDuck}}</h2>
-                <a class="text-lg font-normal text-right">out of 8192</a>
+                <h3 class="text-lg font-normal text-right">out of 8192</h3>
             </div>
         </div>
     </div>
