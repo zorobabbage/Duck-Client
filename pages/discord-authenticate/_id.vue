@@ -95,21 +95,6 @@ export default {
     quickDuckLoaded: function (val) {
       this.loadHighResImage()
     }
-  },
-  computed: {
-    attributeCounts () {
-      return this.$store.ducks.attributeCounts
-    },
-    yourDuck () {
-      const userWallet = this.$store.state.wallet.wallet.base16.toLowerCase()
-      return userWallet == this.duckOwner.toLowerCase()
-    },
-    ZRC1Duck () {
-      return '0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97'.toLowerCase() == this.duckOwner.toLowerCase() ? true : false
-    },
-    duckOwners () {
-      return this.$store.state.ducks.duckOwners
-    }
   }
 }
 </script>
