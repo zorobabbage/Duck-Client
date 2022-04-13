@@ -316,6 +316,11 @@ export default {
   mounted () {
     this.$store.dispatch('ducks/getAttributeCounts')
     this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
+
+    console.log(this.getPriceAtX(4341))
+    console.log(this.getPriceAtX(4342))
+    console.log(this.getPriceAtX(4343))
+    console.log(this.getPriceAtX(4344))
   },
   beforeMount () {
     this.$store.dispatch('ducks/mainGetBlock')
