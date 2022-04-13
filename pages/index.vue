@@ -95,7 +95,7 @@ export default {
     },
     buy () {
       const numDucks = this.zilToPay.ducks
-      const amount = new Big(this.zilToPay.qa).plus(new Big(10).pow(12))
+      const amount = new Big(this.zilToPay.qa).plus((new Big(10).pow(12)).mul(numDucks))
   
       let arrayOfIDs = Array.from({length: numDucks}, (e, i) => String(i + 1))
   
