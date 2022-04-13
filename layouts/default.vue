@@ -5,7 +5,7 @@
       src="https://www.googletagmanager.com/gtag/js?id=G-RJ4ZEYV2FH"
     />
 
-   
+    <Banner/>
     <BurgerMenu
       v-if="breakpoint.is === 'sm' || breakpoint.is === 'md'"
       :active-link="activeLink"
