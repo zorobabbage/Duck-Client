@@ -1,15 +1,24 @@
 <template>
-    <div class="relative flex overflow-x-hidden bg-indigo-700 mx-auto pause-animations-on-children-on-hover">
-        <div class="py-2 animate-marquee whitespace-nowrap">
-            <span class="mr-1 text-md text-indigo-50" v-for="word in text"  :key="word" > 
-                {{ word }}
-            </span>
+    <div>
+        <div class="hidden overflow-x-hidden mx-auto bg-indigo-700 md:flex">
+                <div class="self-center py-2 mx-auto whitespace-nowrap">
+                    <span class="mr-1 text-indigo-50 text-md" v-for="word in text"  :key="word" > 
+                        {{ word }}
+                    </span>
+                </div>
         </div>
+        <div class="flex overflow-x-hidden relative mx-auto bg-indigo-700 md:hidden px-auto pause-animations-on-children-on-hover">
+                <div class="py-2 whitespace-nowrap animate-marquee">
+                    <span class="mr-1 text-indigo-50 text-md" v-for="word in text"  :key="word" > 
+                        {{ word }}
+                    </span>
+                </div>
 
-        <div class="absolute top-0 py-2 animate-marquee2 whitespace-nowrap">
-            <span class="mr-1 text-md text-indigo-50" v-for="word in text"  :key="word" > 
-                {{ word }}
-            </span>
+                <div class="absolute top-0 py-2 whitespace-nowrap animate-marquee2">
+                    <span class="mr-1 text-indigo-50 text-md" v-for="word in text"  :key="word" > 
+                        {{ word }}
+                    </span>
+                </div>
         </div>
     </div>
 </template>
@@ -33,7 +42,7 @@ export default {
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            return `${days} d ${hours}h ${minutes}m ${seconds}s`
+            return `${days}d ${hours}h ${minutes}m ${seconds}s`
         },
         setText () {
             let start = new Date(1649980800 * 1000)
