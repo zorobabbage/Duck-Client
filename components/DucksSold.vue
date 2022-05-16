@@ -1,17 +1,17 @@
 <template>
-    <div class="bg-grass-card-900 px-10 py-8 rounded-3xl">
+    <div class="px-10 py-8 rounded-3xl bg-grass-card-900">
         <div class="grid grid-cols-2">
             <div>
                 <h4 class="text-2xl font-medium">{{ percentageSold }}%</h4>
-                <div class=" pt-1 align-bottom mt-auto">
-                    <div class="overflow-hidden h-3 mb-4 text-xs flex rounded-full border-1 border-black bg-gray-200">
-                        <div :style="{'width': percentageSold + '%'}" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-black rounded-full"></div>
+                <div class="pt-1 mt-auto align-bottom">
+                    <div class="flex overflow-hidden mb-4 h-3 text-xs bg-gray-200 rounded-full border-black border-1">
+                        <div :style="{'width': percentageSold + '%'}" class="flex flex-col justify-center text-center text-white whitespace-nowrap bg-black rounded-full shadow-none"></div>
                     </div>
                 </div>
             </div>
             <div>
                 <h2 class="text-5xl font-medium text-right">{{currentDuck}}</h2>
-                <h4 class="text-lg font-normal text-right">out of 8192</h4>
+                <h3 class="text-lg font-normal text-right">out of 8192</h3>
             </div>
         </div>
     </div>

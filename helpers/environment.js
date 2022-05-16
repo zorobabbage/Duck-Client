@@ -18,7 +18,9 @@ export function getContractAddress (address) {
           case 'PROXY_CONTRACT': return process.env.MAINNET_PROXY_CONTRACT
           case 'TOKEN_CONTRACT': return process.env.MAINNET_TOKEN_CONTRACT
           case 'MIGRATOR_CONTRACT': return process.env.MAINNET_MIGRATOR_CONTRACT
-          case 'MAINNET_REWARDS_CONTRACT': return process.env.MAINNET_REWARDS_CONTRACT
+          case 'REWARDS_CONTRACT': return process.env.MAINNET_REWARDS_CONTRACT
+          case 'VOUCHER_CONTRACT': return process.env.MAINNET_VOUCHER_CONTRACT
+          case 'OWNERSHIP_CONTRACT': return process.env.MAINNET_OWNERSHIP_CONTRACT
         }
       }
       default: throw new Error('Invalid network')

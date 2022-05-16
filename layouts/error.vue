@@ -1,15 +1,15 @@
 <template>
-  <div class="container mx-8 lg:mx-auto max-w-screen-md h-screen items-center m-auto mt-12 md:mt-24 ">
-    <div class="bg-gray-100 rounded-2xl p-8 lg:p-16 pt-16 flex flex-row">
+  <div class="container items-center m-auto mx-8 mt-12 max-w-screen-md h-screen lg:mx-auto md:mt-24">
+    <div class="flex flex-row p-8 pt-16 bg-gray-100 rounded-2xl lg:p-16">
         <div>
-            <h1 class="font-black text-7xl">{{ error.statusCode }}</h1>
-            <h1 class="font-black text-7xl text-gray-700" v-if="error.statusCode === 404">Page not found</h1>
-            <h1 class="font-black text-7xl text-gray-700" v-else>An error occurred <a class="text-lg">{{error.message}}</a></h1>
-            <NuxtLink to="/"><h4 class="text-lg font-medium text-gray-900 underline mt-8">Home page</h4></NuxtLink>
+            <h1 class="text-7xl font-black">{{ error.statusCode }}</h1>
+            <h1 class="text-7xl font-black text-gray-700" v-if="error.statusCode === 404">Page not found</h1>
+            <h1 class="text-7xl font-black text-gray-700" v-else>An error occurred <a class="text-lg">{{error.message}}</a></h1>
+            <NuxtLink to="/"><h4 class="mt-8 text-lg font-medium text-gray-900 underline">Home page</h4></NuxtLink>
         </div>
-        <img class="hidden lg:flex" src="@/assets/images/engineer-duck.png">
+        <img class="hidden lg:flex" src="@/assets/images/engineer-duck-small.png">
     </div>
-    <img class="lg:hidden" src="@/assets/images/engineer-duck.png">
+    <img class="lg:hidden" src="@/assets/images/engineer-duck-small.png">
   </div>
 </template>
 

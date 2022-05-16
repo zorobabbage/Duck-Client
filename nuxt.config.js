@@ -29,6 +29,8 @@ export default {
     MAINNET_MIGRATOR_CONTRACT: process.env.MAINNET_MIGRATOR_CONTRACT,
     MAINNET_REWARDS_CONTRACT: process.env.MAINNET_REWARDS_CONTRACT,
     MAINNET_API_URL: process.env.MAINNET_API_URL,
+    MAINNET_VOUCHER_CONTRACT: process.env.MAINNET_VOUCHER_CONTRACT,
+    MAINNET_OWNERSHIP_CONTRACT: process.env.MAINNET_OWNERSHIP_CONTRACT,
 
     //testnet
     TESTNET_TOKEN_CONTRACT: process.env.TESTNET_TOKEN_CONTRACT,
@@ -83,7 +85,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss' 
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

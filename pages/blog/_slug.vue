@@ -6,15 +6,6 @@
       <Prev />
       <nuxt-content :document="article" class="prose  mx-auto w-full max-w-full lg:max-w-3xl"/>
 
-      <div>
-        <h6 class="text-gray-700 font-medium my-4">Articles</h6>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      
-        </div>
- 
-
-    
-      </div>
     </div>
     <Footer class="mt-24"/>
   </div>

@@ -1,60 +1,68 @@
 <template>
-  <div class="flex flex-col  lg:max-w-none mx-auto bg-grass-background overflow-hidden items-center">
+  <div class="flex overflow-hidden flex-col items-center mx-auto lg:max-w-none bg-grass-background">
     <Hero id="home" class="" />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 mt-24 lg:mt-48 container max-w-screen-xl">
+    <div class="container grid grid-cols-1 mt-24 max-w-screen-xl md:grid-cols-2 lg:mt-48">
       <div class="p-4 md:p-8 xl:pl-0">
         <DuckGif/>
       </div>
       
       <div class="p-4 md:p-8 xl:pr-0">
 
-        <h4 class=" font-extrabold text-5xl mt-2 text-grass-muted">Mint A Duck</h4>
+        <h4 class="mt-2 text-5xl font-extrabold text-grass-muted">Mint A Duck</h4>
         <p class="mt-5 text-xl text-justify text-gray-800">8192 Duck NFTs with varying rarity levels. Price starts from 1200 to a maximum of 2877 zil. $DUCK token holders are able to regenerate their NFDs. NFD holders can transfer ownership, share and rename their ducks. Additional features may be added as the project progresses. </p>
-        <div class="mt-10 flex flex-col md:flex-row">
+        <div class="flex flex-col mt-10 md:flex-row">
 
         
-          <div class="flex  flex-row  gap-1 mb-2">
-                <input type="number" v-model="numberOfDucks" class="appearance-none font-medium block text-2xl h-16  rounded-2xl  w-full md:text-basecursor-default focus:outline-none text-center bg-gray-200  items-center hover:text-black  text-gray-700 focus:text-black  outline-none"/>
+          <div class="flex flex-row gap-1 mb-2">
+                <input type="number" v-model="numberOfDucks" aria-label="Number of ducks to buy" class="block items-center w-full h-16 text-2xl font-medium text-center text-gray-700 bg-gray-200 rounded-2xl appearance-none outline-none md:text-basecursor-default focus:outline-none hover:text-black focus:text-black"/>
                 <div class="w-16">
-                  <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="decrementNumberOfDucks">
+                  <button class="flex-grow-0 w-16 h-16 bg-gray-200 rounded-2xl outline-none focus:outline-none" @click="decrementNumberOfDucks">
                       <span class="m-auto text-4xl font-thin">−</span>
                   </button>
                 </div>
                 <div class="w-16"> 
-                  <button class="bg-gray-200 rounded-2xl h-16 w-16 outline-none focus:outline-none flex-grow-0" @click="incrementNumberOfDucks">
+                  <button class="flex-grow-0 w-16 h-16 bg-gray-200 rounded-2xl outline-none focus:outline-none" @click="incrementNumberOfDucks">
                     <span class="m-auto text-4xl font-thin">+</span>
                   </button>
                 </div>
           </div>
-          <ConnectWallet v-if="!wallet.isConnected" class="w-full md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  font-medium text-xl my-auto inline-flex items-center mx-auto"></ConnectWallet>
-          <button v-if="wallet.isConnected" @click="buy" class="md:ml-3 bg-sun rounded-3xl h-16  border-2 border-black  w-full font-medium text-xl">
+          <ConnectWallet v-if="!wallet.isConnected" class="inline-flex items-center mx-auto my-auto w-full h-16 text-xl font-medium rounded-3xl border-2 border-black md:ml-3 bg-sun"></ConnectWallet>
+          <button v-if="wallet.isConnected" @click="buy" class="w-full h-16 text-xl font-medium rounded-3xl border-2 border-black md:ml-3 bg-sun">
             {{`Mint (${zilToPay.zil} ZIL)`}}
           </button>
         
-          
-           <!--
-          <button disabled class="md:ml-3 bg-gray-200 rounded-3xl h-16  border-2 border-gray-400 opacity-75 w-full font-medium text-xl">
-            Coming soon!
-          </button>
-            -->
+        </div>
+
+        <div  v-if="voucherIDs.length > 0" class="flex flex-col gap-2 p-4 mt-2 rounded-2xl bg-grass-card-900">
+          <div class="flex flex-col">
+            <h4 class="text-xl font-semibold">You have a voucher!</h4>
+            <p>Go ahead, mint a duck without using up a single Zil</p>
+          </div>
+          <div class="flex flex-col gap-2 md:flex-row">
+            <button :disabled="approvedVouchers" @click="approveClaim" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
+                {{`1. Approve voucher`}}
+            </button>
+
+            <button :disabled="!approvedVouchers" @click="doClaimVoucher" class="h-12 text-lg font-medium bg-gray-200 rounded-2xl border-2 border-black md:w-1/2 disabled:border-gray-200 disabled:text-gray-400">
+                {{`2. Mint with voucher`}}
+            </button>
+          </div>
         </div>
       
-        <h4 class="text-xl font-bold text-left flex self-start mt-8 mb-2 text-gray-900">Ducks hatched</h4>
+        <h4 class="flex self-start mt-8 mb-2 text-xl font-bold text-left text-gray-900">Ducks hatched</h4>
         <DucksSold class="mb-8" :currentDuck="currentDuck"/>
       </div>
     </div>
-    <div class="container max-w-screen-xl items-start mt-8 md:mt-16 px-4 md:px-0">
-      <h4 class="text-2xl font-bold text-left flex self-start mb-8 text-gray-900">Fresh from the egg.</h4>
+    <div class="container items-start px-4 mt-8 max-w-screen-xl md:mt-16 md:px-0">
+      <h2 class="flex self-start mb-8 text-2xl font-bold text-left text-gray-900">Fresh from the egg.</h2>
     </div>
     <NewlyMinted
         id="newly-minted"
-        class="mb-24 self-center max-w-screen-xl"
+        class="self-center mb-24 max-w-screen-xl"
       />
     <BlogPreview/>
     <Team class="my-24"/>
-
-      
 
     <Footer background="grass"/>
   </div>
@@ -87,7 +95,7 @@ export default {
     },
     buy () {
       const numDucks = this.zilToPay.ducks
-      const amount = new Big(this.zilToPay.qa).plus(new Big(10).pow(12))
+      const amount = new Big(this.zilToPay.qa).plus((new Big(10).pow(12)).mul(numDucks))
   
       let arrayOfIDs = Array.from({length: numDucks}, (e, i) => String(i + 1))
   
@@ -128,10 +136,9 @@ export default {
       return rt
     },
     async doProxyBatchMint(amount, dummy_list_count) {
-
       console.log(`ProxyBatchMint ${amount} ${dummy_list_count}`)
        
-      const gasLimit = Long.fromString('25000')
+      const gasLimit = Long.fromString('5000')
       const gasPrice = new BN('200000000')
       let contract
        
@@ -170,7 +177,102 @@ export default {
             txToast.goAway(20000)
           })
 
-    }
+    },
+    async approveClaim () {
+      let amount = new BN('0')
+      const gasLimit = Long.fromString('5000')
+      const gasPrice = new BN('200000000')
+      let contract
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('VOUCHER_CONTRACT')) 
+      }
+
+ 
+      try {
+        const tx = await contract.call('AddOperator',
+          [
+            {
+              vname: "operator",
+              type: "ByStr20",
+              value: environment.getContractAddress('PROXY_CONTRACT')
+            }
+          ],
+          {
+            amount,
+            gasPrice,
+            gasLimit
+          })
+
+
+        let txToast = this.$toast.success("TX sending") 
+        txToast = this.$styleToast(txToast, tx,   "Approving voucher spend", 'pending')
+
+        await pollTx(tx)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            this.approved = true
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Approve failed", 'failed')
+            txToast.goAway(20000)
+          })
+
+
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async doClaimVoucher() {   
+      const gasLimit = Long.fromString('5000')
+      const gasPrice = new BN('200000000')
+      let contract
+      let amount = 0
+       
+      try {
+
+      
+      if (process.browser) {
+        contract = window.zilPay.contracts.at(environment.getContractAddress('PROXY_CONTRACT')) 
+      }
+ 
+        const tx = await contract.call('ProxyVoucher',
+          [
+            {
+              vname: "this_exchangeable_token_id",
+              type: "Uint256",
+              value: String(this.voucherIDs[0])
+            }
+          ],
+          {
+            amount,
+            gasPrice,
+            gasLimit
+          })
+
+
+
+        let txToast = this.$toast.success("TX sending") 
+        txToast = this.$styleToast(txToast, tx,   "Minting", 'pending')
+
+        await pollTx(tx)
+          .then(res => {
+            console.log(res)
+            txToast = this.$styleToast(txToast, tx, "Confirmed", 'success')
+            txToast.goAway(20000)
+          })
+          .catch(err => {
+            console.log(err)
+            txToast = this.$styleToast(txToast, tx, "Failed", 'failed')
+            txToast.goAway(20000)
+          })
+       } catch (err) {
+         console.log(err)
+       }
+    },
+
   },
   computed: {
     currentDuck () {
@@ -178,6 +280,27 @@ export default {
     },
     wallet () {
       return this.$store.state.wallet.wallet
+    },
+    voucherIDs () {
+      let pairs = this.$store.state.ducks.voucherOwners
+      let owned = pairs.filter(x => x.address.toLowerCase() === this.wallet.base16.toLowerCase())
+      let arrayOfIDs = owned.map(pair => pair.id)
+      return arrayOfIDs
+    },
+    approvedVouchers () {
+      let map = this.$store.state.ducks.voucherState 
+  
+      if (!map) return false
+
+      let contract = environment.getContractAddress('PROXY_CONTRACT')
+      let addressExistsOuter = this.wallet.base16.toLowerCase() in map 
+
+     
+      if (addressExistsOuter) {
+        let approved = contract in map[this.wallet.base16.toLowerCase()]
+        return approved
+      }
+      return addressExistsOuter 
     }
   },
   watch: {
@@ -193,6 +316,11 @@ export default {
   mounted () {
     this.$store.dispatch('ducks/getAttributeCounts')
     this.integrateBetweenLimits(this.currentDuck + 1, parseInt(this.numberOfDucks) + this.currentDuck)
+
+    console.log(this.getPriceAtX(4341))
+    console.log(this.getPriceAtX(4342))
+    console.log(this.getPriceAtX(4343))
+    console.log(this.getPriceAtX(4344))
   },
   beforeMount () {
     this.$store.dispatch('ducks/mainGetBlock')
@@ -215,30 +343,4 @@ input[type='number']::-webkit-inner-spin-button,
     outline: none !important;
   }
 </style>
-
-
-
-
-
-
-
-=
-=
-=
-TESTNET_NFD_CONTRACT=[secure]
-TESTNET_PROXY_CONTRACT=[secure]
-MAINNET_ZRC1_CONTRACT=0x06f70655d4aa5819e711563eb2383655449f24e9
-MAINNET_ZRC6_CONTRACT=0x8ab2af0cccee7195a7c16030fbdfde6501d91903
-MAINNET_MIGRATOR_CONTRACT=0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97
-MAINNET_TOKEN_CONTRACT=0xc6bb661eda683bdc792b3e456a206a92cc3cb92e
-MAINNET_PROXY_CONTRACT=0x62055246a4b1b05e8e577e456ee00c898cb23bf8
-MAINNET_REWARDS_CONTRACT=0x4e932c4069d34d9b06c14b5f610de826302b1011
-ZILLIQA_NETWORK=mainnet
-
-
-
-
-
-
-
 
