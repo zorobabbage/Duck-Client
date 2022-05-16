@@ -36,7 +36,7 @@ The mint price is yet to be announced. We are taking current market conditions i
 
 ## Airdrop distribution
 
-1250 - or 50% of the total supply of Bizzare Biomes will be minted to NFD holders. We will keep the distribution infomation private until the snapshot has taken place. 
+1250 - or 50% of the total supply of Bizzare Biomes will be minted to NFD holders. We will keep the distribution infomation private until the snapshot has taken place.
 
 We will announce the date of the snapshot ahead of time, so that NFD holders are aware.
 
