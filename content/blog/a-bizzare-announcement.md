@@ -96,7 +96,7 @@ And as such, we're looking for a duck to come and join our team to lead our Mark
 
 If you've got marketing knowledge, and fancy joining the team, drop us a quick 2 min video about why you would be good for this role and any other relevant experience. Upload this as a private youtube link (we don't and won't download files) and send it as a DM to Nines#0643 on Discord.
 
-The Zilkroad beta is scheduled to be deployed to a selected group of community beta testers on Friday May 6th. Hopefully this won't take long and we can schedule a deployment to mainnet ASAP. We really appreciate your patience, trust me, it'll be worth the wait.
+The Zilkroad beta is scheduled to be deployed to a selected group of community beta testers on Friday May 20th. Hopefully this won't take long and we can schedule a deployment to mainnet ASAP. We really appreciate your patience, trust me, it'll be worth the wait.
 
 ## Continue the conversation
 
