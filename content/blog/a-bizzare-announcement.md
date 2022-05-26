@@ -1,10 +1,10 @@
 ---
-title: A Bizzare Announcement
+title: A Bizarre Announcement
 description: "In our last post we briefly mentioned Project Ponds being a secret NFT project the duck team work on in the sidelines. Now that the project is nearly ready to go-live we are able to share more details about it."
-alt: Project Ponds is announced as Bizzare Biomes.
+alt: Project Ponds is announced as Bizarre Biomes.
 ---
 
-## A Bizzare Announcement
+## A Bizarre Announcement
 
 In our last [post](https://duck.community/blog/postbag-from-the-pond-1#projectponds-update) we briefly mentioned Project Ponds being a secretive NFT project the duck team are working on in the sidelines.
 
@@ -12,7 +12,7 @@ Now that the project is nearly ready to go-live we are able to share more detail
 
 People often ask the duck team if we are worried that ducks haven't minted out yet. We aren't worried about the ones we haven't sold when we are too busy developing for the ducks that we have.
 
-From the beginning of the NFD project, we always wanted to provide more value to our holders through the development efforts we undertook, Bizzare Biomes is now one of these efforts we will celebrate with NFD holders.
+From the beginning of the NFD project, we always wanted to provide more value to our holders through the development efforts we undertook, Bizarre Biomes is now one of these efforts we will celebrate with NFD holders.
 
 So get a cup of tea, kick back, and let's catch everyone up to speed to what the heck we are talking about.
 
@@ -20,7 +20,7 @@ So get a cup of tea, kick back, and let's catch everyone up to speed to what the
 
 ## Supply and mint
 
-Bizzare Biomes has a fixed supply of 2500 tokens. The first 50 minted will be the teams allocation. The next 1250 minted will be to airdropped accounts which we will discuss in the next section.  1100 will be available to purchase from the website at a later time. 200 will form part of the marketing strategy which we will mint and distribute over time.
+Bizarre Biomes has a fixed supply of 2500 tokens. The first 50 minted will be the teams allocation. The next 1250 minted will be to airdropped accounts which we will discuss in the next section.  1100 will be available to purchase from the website at a later time. 200 will form part of the marketing strategy which we will mint and distribute over time.
 
 ![](https://cdn.discordapp.com/attachments/914536079225421904/975871462546219088/supply.png)
 
@@ -36,7 +36,7 @@ The mint price is yet to be announced. We are taking current market conditions i
 
 ## Airdrop distribution
 
-1250 - or 50% of the total supply of Bizzare Biomes will be minted to NFD holders. We will keep the distribution infomation private until the snapshot has taken place. 
+1250 - or 50% of the total supply of Bizarre Biomes will be minted to NFD holders. We will keep the distribution infomation private until the snapshot has taken place.
 
 We will announce the date of the snapshot ahead of time, so that NFD holders are aware.
 
@@ -78,7 +78,7 @@ These example biomes have different foregrounds and backgrounds but all include 
 
 ![Preview](https://cdn.discordapp.com/attachments/914536079225421904/975871438135361596/pond4.png)
 
-## Bizzare Biomes future roadmap
+## Bizarre Biomes future roadmap
 
 The Biomes project is considered finished as-is, and does not have a future roadmap. 
 
@@ -96,8 +96,8 @@ And as such, we're looking for a duck to come and join our team to lead our Mark
 
 If you've got marketing knowledge, and fancy joining the team, drop us a quick 2 min video about why you would be good for this role and any other relevant experience. Upload this as a private youtube link (we don't and won't download files) and send it as a DM to Nines#0643 on Discord.
 
-The Zilkroad beta is scheduled to be deployed to a selected group of community beta testers on Friday May 6th. Hopefully this won't take long and we can schedule a deployment to mainnet ASAP. We really appreciate your patience, trust me, it'll be worth the wait.
+The Zilkroad beta is scheduled to be deployed to a selected group of community beta testers on Friday May 20th. Hopefully this won't take long and we can schedule a deployment to mainnet ASAP. We really appreciate your patience, trust me, it'll be worth the wait.
 
 ## Continue the conversation
 
-Come over to our [Duck Discord](https://discord.gg/3Cu3ZR6CYX) and discuss this news post in the #Bizzare-Biomes channel!
+Come over to our [Duck Discord](https://discord.gg/3Cu3ZR6CYX) and discuss this news post in the #Bizarre-Biomes channel!
