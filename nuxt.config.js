@@ -1,12 +1,12 @@
 
 export function getApiUrl () {
-  const network = process.env.ZILLIQA_NETWORK
+  const network = process.env.zilliqa_network
   switch (network) {
     case 'testnet': {
       return process.env.TESTNET_API_URL
     }
     case 'mainnet': {
-      return process.env.MAINNET_API_URL
+      return process.env.mainnet_api_url
     }
     default: throw new Error('Invalid network')
   }
@@ -19,18 +19,18 @@ export default {
   //target: 'static',
   ssr: true,
   env: {
-    ZILLIQA_NETWORK: process.env.ZILLIQA_NETWORK,
+    zilliqa_network: process.env.zilliqa_network,
 
     //mainnet
-    MAINNET_TOKEN_CONTRACT: process.env.MAINNET_TOKEN_CONTRACT,
-    MAINNET_PROXY_CONTRACT: process.env.MAINNET_PROXY_CONTRACT,
-    MAINNET_ZRC1_CONTRACT: process.env.MAINNET_ZRC1_CONTRACT,
-    MAINNET_ZRC6_CONTRACT: process.env.MAINNET_ZRC6_CONTRACT,
-    MAINNET_MIGRATOR_CONTRACT: process.env.MAINNET_MIGRATOR_CONTRACT,
-    MAINNET_REWARDS_CONTRACT: process.env.MAINNET_REWARDS_CONTRACT,
-    MAINNET_API_URL: process.env.MAINNET_API_URL,
-    MAINNET_VOUCHER_CONTRACT: process.env.MAINNET_VOUCHER_CONTRACT,
-    MAINNET_OWNERSHIP_CONTRACT: process.env.MAINNET_OWNERSHIP_CONTRACT,
+    mainnet_token_contract: process.env.mainnet_token_contract,
+    mainnet_proxy_contract: process.env.mainnet_proxy_contract,
+    mainnet_zrc1_contract: process.env.mainnet_zrc1_contract,
+    mainnet_zrc6_contract: process.env.mainnet_zrc6_contract,
+    mainnet_migrator_contract: process.env.mainnet_migrator_contract,
+    mainnet_rewards_contract: process.env.mainnet_rewards_contract,
+    mainnet_api_url: process.env.mainnet_api_url,
+    mainnet_voucher_contract: process.env.mainnet_voucher_contract,
+    mainnet_ownership_contract: process.env.mainnet_ownership_contract,
 
     //testnet
     TESTNET_TOKEN_CONTRACT: process.env.TESTNET_TOKEN_CONTRACT,

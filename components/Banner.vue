@@ -57,7 +57,7 @@ export default {
                 const countdown = this.getDiffString(end-current)
                 text = `Buy one get one free weekend ending in ${countdown}`
             } else {
-                text = `Buy one get one free weekend over. Thanks for playing!`
+                text = `Somethings brewing...`
             }
 
             text += '.'
