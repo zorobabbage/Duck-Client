@@ -25,16 +25,39 @@ spec:
           ports:
             - containerPort: {{ .Values.port }}
           env:
-            - name: VITE_API_ENDPOINT
-              value: {{ .Values.env.viteApiEndpoint | quote }}
-            - name: VITE_BLOCK_NETWORK
-              value: {{ .Values.env.network | quote }}
-            - name: VITE_MARKETPLACE_ADDRESS
-              value: {{ .Values.env.nftMarketplaceAddress | quote }}
-            - name: VITE_WZIL_ADDRESS
-              value: {{ .Values.env.wzilAddress | quote }}
-            - name: VITE_CDN_BASE_URL
-              value: {{ .Values.env.cdnBase | quote }}
+            - name: zilliqa_network
+              value: {{ .Values.env.zilliqa_network | quote }}
+            - name: mainnet_token_contract
+              value: {{ .Values.env.mainnet_token_contract | quote }}
+            - name: mainnet_proxy_contract
+              value: {{ .Values.env.mainnet_proxy_contract | quote }}
+            - name: mainnet_zrc1_contract
+              value: {{ .Values.env.mainnet_zrc1_contract | quote }}
+            - name: mainnet_zrc6_contract
+              value: {{ .Values.env.mainnet_zrc6_contract | quote }}
+            - name: mainnet_migrator_contract
+              value: {{ .Values.env.mainnet_migrator_contract | quote }}
+            - name: mainnet_rewards_contract
+              value: {{ .Values.env.mainnet_rewards_contract | quote }}
+            - name: mainnet_voucher_contract
+              value: {{ .Values.env.mainnet_voucher_contract | quote }}
+            - name: mainnet_ownership_contract
+              value: {{ .Values.env.mainnet_ownership_contract | quote }}
+            - name: testnet_token_contract
+              value: {{ .Values.env.testnet_token_contract | quote }}
+            - name: testnet_proxy_contract
+              value: {{ .Values.env.testnet_proxy_contract | quote }}
+            - name: testnet_zrc1_contract
+              value: {{ .Values.env.testnet_zrc1_contract | quote }}
+            - name: testnet_zrc6_contract
+              value: {{ .Values.env.testnet_zrc6_contract | quote }}
+            - name: testnet_migrator_contract
+              value: {{ .Values.env.testnet_migrator_contract | quote }}
+            - name: testnet_rewards_contract
+              value: {{ .Values.env.testnet_rewards_contract | quote }}
+            - name: testnet_api_url
+              value: {{ .Values.env.testnet_api_url | quote }}
+
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}
