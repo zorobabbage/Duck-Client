@@ -16,7 +16,7 @@ env:
   testnet_migrator_contract: "0xdaaf7e1479ef28ba7818b48ae5664b59b738dc97"
   testnet_rewards_contract: "0x4e932c4069d34d9b06c14b5f610de826302b1011"
   testnet_api_url: "https://api.zilliqa.com"
-  
+
 namespace: duck-testnet
 
 image:
