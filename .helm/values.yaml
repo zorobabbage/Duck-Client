@@ -1,6 +1,6 @@
 image:
   app: 
-    url: 465700395685.dkr.ecr.eu-west-1.amazonaws.com/zilkroad-private/duck-client
+    url: 465700395685.dkr.ecr.eu-west-1.amazonaws.com/duck/client
     tag: latest
     pullPolicy: IfNotPresent
     pullSecret: ~
