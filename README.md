@@ -1,5 +1,6 @@
-# duck-homepage
+# duck-client
 :shy_duck:
+
 ## Build Setup
 
 ```bash

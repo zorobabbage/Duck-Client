@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    service: client
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      service: client
+  template:
+    metadata:
+      labels:
+        service: client
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.image.app.pullSecret }}
+      containers:
+        - name: client
+          image: "{{ .Values.image.app.url }}:{{ .Values.image.app.tag }}"
+          imagePullPolicy: {{ .Values.image.app.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          env:
+            - name: zilliqa_network
+              value: {{ .Values.env.zilliqa_network | quote }}
+            - name: mainnet_token_contract
+              value: {{ .Values.env.mainnet_token_contract | quote }}
+            - name: mainnet_proxy_contract
+              value: {{ .Values.env.mainnet_proxy_contract | quote }}
+            - name: mainnet_zrc1_contract
+              value: {{ .Values.env.mainnet_zrc1_contract | quote }}
+            - name: mainnet_zrc6_contract
+              value: {{ .Values.env.mainnet_zrc6_contract | quote }}
+            - name: mainnet_migrator_contract
+              value: {{ .Values.env.mainnet_migrator_contract | quote }}
+            - name: mainnet_rewards_contract
+              value: {{ .Values.env.mainnet_rewards_contract | quote }}
+            - name: mainnet_voucher_contract
+              value: {{ .Values.env.mainnet_voucher_contract | quote }}
+            - name: mainnet_ownership_contract
+              value: {{ .Values.env.mainnet_ownership_contract | quote }}
+            - name: testnet_token_contract
+              value: {{ .Values.env.testnet_token_contract | quote }}
+            - name: testnet_proxy_contract
+              value: {{ .Values.env.testnet_proxy_contract | quote }}
+            - name: testnet_zrc1_contract
+              value: {{ .Values.env.testnet_zrc1_contract | quote }}
+            - name: testnet_zrc6_contract
+              value: {{ .Values.env.testnet_zrc6_contract | quote }}
+            - name: testnet_migrator_contract
+              value: {{ .Values.env.testnet_migrator_contract | quote }}
+            - name: testnet_rewards_contract
+              value: {{ .Values.env.testnet_rewards_contract | quote }}
+            - name: testnet_api_url
+              value: {{ .Values.env.testnet_api_url | quote }}
+
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu | quote }}
+              memory: {{ .Values.resources.limits.memory | quote }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu | quote }}
+              memory: {{ .Values.resources.requests.memory | quote }}

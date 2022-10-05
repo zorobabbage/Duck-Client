@@ -61,7 +61,7 @@ export default {
     },
     network () {
       if (process.browser) {
-        return process.env.ZILLIQA_NETWORK
+        return process.env.zilliqa_network
       }
     }
   },
