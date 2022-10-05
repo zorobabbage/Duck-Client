@@ -51,12 +51,12 @@ spec:
               value: {{ .Values.env.testnet_zrc1_contract | quote }}
             - name: testnet_zrc6_contract
               value: {{ .Values.env.testnet_zrc6_contract | quote }}
-            - name: testnet_migrator_contract
-              value: {{ .Values.env.testnet_migrator_contract | quote }}
-            - name: testnet_rewards_contract
-              value: {{ .Values.env.testnet_rewards_contract | quote }}
-            - name: testnet_api_url
-              value: {{ .Values.env.testnet_api_url | quote }}
+            - name: tesntet_migrator_contract 
+              value: {{ .Values.env.tesntet_migrator_contract  | quote }}
+            - name: testnet_rewards_contract 
+              value: {{ .Values.env.testnet_rewards_contract  | quote }}
+            - name: testnet_api_url 
+              value: {{ .Values.env.testnet_api_url  | quote }}
 
           resources:
             limits:

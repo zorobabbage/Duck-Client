@@ -3,7 +3,7 @@ export function getApiUrl () {
   const network = process.env.zilliqa_network
   switch (network) {
     case 'testnet': {
-      return process.env.TESTNET_API_URL
+      return process.env.testnet_api_url 
     }
     case 'mainnet': {
       return process.env.mainnet_api_url
@@ -33,13 +33,13 @@ export default {
     mainnet_ownership_contract: process.env.mainnet_ownership_contract,
 
     //testnet
-    TESTNET_TOKEN_CONTRACT: process.env.TESTNET_TOKEN_CONTRACT,
-    TESTNET_PROXY_CONTRACT: process.env.TESTNET_PROXY_CONTRACT,
-    TESTNET_ZRC1_CONTRACT: process.env.TESTNET_ZRC1_CONTRACT,
-    TESTNET_ZRC6_CONTRACT: process.env.TESTNET_ZRC6_CONTRACT,
-    TESTNET_MIGRATOR_CONTRACT: process.env.TESTNET_MIGRATOR_CONTRACT,
-    TESTNET_REWARDS_CONTRACT: process.env.TESTNET_REWARDS_CONTRACT,
-    TESTNET_API_URL: process.env.TESTNET_API_URL,
+    testnet_token_contract: process.env.testnet_token_contract,
+    testnet_proxy_contract: process.env.testnet_proxy_contract,
+    testnet_zrc1_contract: process.env.testnet_zrc1_contract,
+    testnet_zrc6_contract: process.env.testnet_zrc6_contract,
+    tesntet_migrator_contract : process.env.tesntet_migrator_contract ,
+    testnet_rewards_contract : process.env.testnet_rewards_contract ,
+    testnet_api_url : process.env.testnet_api_url ,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
