@@ -1,15 +1,5 @@
-
 export function getApiUrl () {
-  const network = process.env.current_network
-  switch (network) {
-    case 'testnet': {
-      return 'https://dev-api.zilliqa.com'
-    }
-    case 'mainnet': {
-      return 'https://api.zilliqa.com'
-    }
-    default: return 'https://api.zilliqa.com'
-  }
+  return 'https://api.duck.community'
 }
 
 export default {
