@@ -16,7 +16,8 @@ image:
     pullSecret: aws-registry
 
 ingress:
-  host: duck.community
+  # host: duck.community
+  host: duck.envizion.world
 
 replicas: 1
 
