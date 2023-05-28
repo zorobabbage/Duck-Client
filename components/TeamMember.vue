@@ -41,7 +41,7 @@ export default {
   async beforeMount () {
     if (this.id) {
       const { quick_resource } = await this.$axios.$get(`/duck/${this.id}`)
-      this.duckURL = quick_resource.replace('.png', '.webp')
+      this.duckURL = quick_resource
     }
   }
 }

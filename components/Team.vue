@@ -25,12 +25,12 @@
     >
       <TeamMember name="Nines" twitter="CryptoNines" :id="8" role="Developer" />
 
-      <TeamMember
+      <!-- <TeamMember
         name="Neeko"
         twitter="neeko_zilduck"
         :id="2374"
         role="Developer"
-      />
+      /> -->
 
       <TeamMember
         name="Buckaroo"

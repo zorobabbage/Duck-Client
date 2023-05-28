@@ -74,6 +74,7 @@ export default {
       }
     },
     handleClick () {
+      console.log('this.zilPay',this.zilPay);
       if (!this.zilPay) {
         this.zilpayModal = true
       } else {
