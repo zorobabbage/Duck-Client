@@ -16,12 +16,12 @@ export default {
     ...mapState({
       wallet: (state) => state.wallet.wallet
     }),
-    zilPay() {
-      if (process.browser) {
-        if (window.zilPay) return window.zilPay
-      }
-      return
-    },
+    // zilPay() {
+    //   if (process.browser) {
+    //     if (window.zilPay) return window.zilPay
+    //   }
+    //   return
+    // },
     network () {
       if (process.browser) {
         return process.env.current_network
@@ -31,7 +31,8 @@ export default {
   data() {
     return {
       showModal: false,
-      zilpayModal: false
+      zilpayModal: false,
+      zilPay:undefined
     }
   },
   mounted () {
@@ -51,10 +52,16 @@ export default {
       })
     }
     */
+   this.zilPayInit();
    console.log('mounted wallet component')
    this.checkIfWalletConnected()
   },
   methods: {
+    zilPayInit() {
+      if (process.browser) {
+        if (window.zilPay) this.zilPay=window.zilPay
+      }
+    },
     async checkIfWalletConnected() {
       if (this.zilPay) {
         const localStorageAddress = localStorage.getItem('wallet')
