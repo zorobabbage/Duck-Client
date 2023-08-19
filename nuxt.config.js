@@ -1,6 +1,6 @@
 export function getApiUrl() {
-  // return 'https://api.duck.community'
-  return "https://duck-api.envizion.world";
+  return "https://api.duck.community";
+  // return "https://duck-api.envizion.world";
 }
 export default {
   // Target: https://go.nuxtjs.dev/config-target
